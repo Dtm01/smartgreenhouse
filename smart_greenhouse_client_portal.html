@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMART Greenhouse - Client Proposal & Project Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: {
+                            50: '#f4f7f4',
+                            100: '#e5ebe5',
+                            200: '#c8d7c8',
+                            300: '#a3bda3',
+                            400: '#759b75',
+                            500: '#527952',
+                            600: '#3f5e3f',
+                            700: '#344c34',
+                            800: '#2b3e2b',
+                            900: '#243424',
+                        },
+                        earth: {
+                            50: '#fbf9f6',
+                            100: '#f4efe6',
+                            200: '#e6dbcc',
+                            800: '#594d3d',
+                            900: '#40372b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar for clean agritech look */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #f4f7f4; }
+        ::-webkit-scrollbar-thumb { background: #a3bda3; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #759b75; }
+    </style>
+</head>
+<body class="bg-sage-50 text-slate-800 h-full flex flex-col antialiased">
+
+    <!-- Notification Toast / Message Box -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-sage-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sage-500 to-sage-700 flex items-center justify-center text-white shadow-md shadow-sage-200">
+                    <i class="fa-solid fa-seedling text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-xl text-sage-900 tracking-tight">SMART Greenhouse</h1>
+                    <p class="text-xs font-medium text-sage-600">Client Proposal & Executive Portal</p>
+                </div>
+            </div>
+            
+            <!-- Desktop Quick Status -->
+            <div class="hidden lg:flex items-center space-x-6">
+                <div class="flex items-center space-x-2 bg-sage-50 px-3.5 py-1.5 rounded-full border border-sage-200 text-xs font-semibold text-sage-700">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>System Status: 100% Operational</span>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-sage-700 p-2 focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl" id="mobile-menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Tabs: All 12 Original Tabs -->
+        <div class="bg-white border-t border-sage-100 overflow-x-auto">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 py-2 no-scrollbar">
+                <button onclick="switchTab('home')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap bg-sage-600 text-white shadow-sm" data-tab="home">
+                    <i class="fa-solid fa-house-chimney mr-2"></i>Overview & Charter
+                </button>
+                <button onclick="switchTab('dashboard')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="dashboard">
+                    <i class="fa-solid fa-mobile-screen-button mr-2"></i>Mobile Dashboard
+                </button>
+                <button onclick="switchTab('irrigation')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="irrigation">
+                    <i class="fa-solid fa-droplet mr-2"></i>Automated Irrigation
+                </button>
+                <button onclick="switchTab('ai-monitoring')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="ai-monitoring">
+                    <i class="fa-solid fa-brain mr-2"></i>AI Plant Health
+                </button>
+                <button onclick="switchTab('solar')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="solar">
+                    <i class="fa-solid fa-solar-panel mr-2"></i>Solar Panels
+                </button>
+                <button onclick="switchTab('wbs')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="wbs">
+                    <i class="fa-solid fa-sitemap mr-2"></i>WBS
+                </button>
+                <button onclick="switchTab('gantt')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="gantt">
+                    <i class="fa-solid fa-chart-gantt mr-2"></i>Gantt Timeline
+                </button>
+                <button onclick="switchTab('network')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="network">
+                    <i class="fa-solid fa-diagram-project mr-2"></i>Network Diagram
+                </button>
+                <button onclick="switchTab('stakeholders')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="stakeholders">
+                    <i class="fa-solid fa-users-gear mr-2"></i>Stakeholder Matrix
+                </button>
+                <button onclick="switchTab('risks')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="risks">
+                    <i class="fa-solid fa-shield-halved mr-2"></i>Risk Register
+                </button>
+                <button onclick="switchTab('resources')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="resources">
+                    <i class="fa-solid fa-wallet mr-2"></i>Resource & Budget
+                </button>
+                <button onclick="switchTab('team')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="team">
+                    <i class="fa-solid fa-id-badge mr-2"></i>Team Directory
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-sage-200 px-4 py-4 space-y-2 shadow-lg">
+        <button onclick="switchTab('home'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Overview & Charter</button>
+        <button onclick="switchTab('dashboard'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Mobile Dashboard</button>
+        <button onclick="switchTab('irrigation'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Automated Irrigation</button>
+        <button onclick="switchTab('ai-monitoring'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">AI Plant Health</button>
+        <button onclick="switchTab('solar'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Solar Panels</button>
+        <button onclick="switchTab('wbs'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">WBS</button>
+        <button onclick="switchTab('gantt'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Gantt Timeline</button>
+        <button onclick="switchTab('network'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Network Diagram</button>
+        <button onclick="switchTab('stakeholders'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Stakeholder Matrix</button>
+        <button onclick="switchTab('risks'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Risk Register</button>
+        <button onclick="switchTab('resources'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Resource & Budget</button>
+        <button onclick="switchTab('team'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Team Directory</button>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ================= 1. HOME / OVERVIEW TAB ================= -->
+        <div id="tab-home" class="tab-content active space-y-8">
+            <div class="relative rounded-3xl bg-gradient-to-r from-sage-800 via-sage-700 to-sage-900 text-white overflow-hidden shadow-xl p-8 sm:p-12">
+                <div class="relative z-10 max-w-2xl space-y-6">
+                    <span class="inline-flex items-center space-x-2 bg-sage-600/60 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase text-sage-100 border border-sage-500/30">
+                        <i class="fa-solid fa-leaf text-sage-300"></i> Client Presentation & Proposal
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">SMART Greenhouse</h1>
+                    <p class="text-lg text-sage-100 font-light leading-relaxed">
+                        A Self-Regulating, Sustainable Horticultural Facility engineered for drought-prone regions, schools, and community organizations through AI, automation, and water-conservation technologies.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-2">
+                        <button onclick="switchTab('dashboard')" class="bg-white text-sage-800 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-sage-50 transition-all flex items-center space-x-2">
+                            <span>Explore Interactive Demo</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button onclick="switchTab('wbs')" class="bg-sage-700/80 hover:bg-sage-600 text-white font-semibold px-6 py-3 rounded-xl backdrop-blur-md border border-sage-500/40 transition-all">
+                            View Project Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Water Savings</p>
+                        <p class="text-2xl font-extrabold text-slate-800">30%+ Reduction</p>
+                        <p class="text-xs text-emerald-600 font-medium mt-0.5">vs. manual irrigation</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Project Duration</p>
+                        <p class="text-2xl font-extrabold text-slate-800">6 - 12 Months</p>
+                        <p class="text-xs text-blue-600 font-medium mt-0.5">Operational target</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-solar-panel"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Renewable Energy</p>
+                        <p class="text-2xl font-extrabold text-slate-800">Solar Powered</p>
+                        <p class="text-xs text-amber-600 font-medium mt-0.5">Self-sustaining grid</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl font-bold">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Smart Tech Integration</p>
+                        <p class="text-2xl font-extrabold text-slate-800">5 Core Systems</p>
+                        <p class="text-xs text-purple-600 font-medium mt-0.5">AI-driven diagnostics</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purpose, Vision & Objectives -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-sage-900">Purpose & Vision</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        The purpose of SMART Greenhouse is to enable sustainable crop production in drought-prone regions through the use of AI, automation, and water-conservation technologies. When completed, it will provide a self-regulating horticultural facility that minimizes water consumption, improves plant health, and serves as an educational resource for schools and community organizations.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-list-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-sage-900">SMART Objectives</h3>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span>Construct a small-scale greenhouse structure capable of supporting year-round crops.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span>Integrate 5 core smart technologies: Mobile App, Irrigation, AI Monitoring, Solar, and Website.</span>
+                        </li>
+                        <li class="flex items-start space-x-2">
+                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
+                            <span>Reduce water consumption by at least 30% compared to traditional manual methods.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-hands-holding-child"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-sage-900">Community & Education</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Serving communities in drought-prone regions, schools, and community organizations. The greenhouse serves as a hands-on STEM learning resource, demonstrating how artificial intelligence and sustainable farming practices work together to support growers without replacing human oversight.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Scope In / Out Table -->
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-8 space-y-6">
+                <h3 class="text-2xl font-bold text-sage-900">Project Scope Boundaries</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 space-y-3">
+                        <h4 class="font-bold text-emerald-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                            <span>In Scope</span>
+                        </h4>
+                        <ul class="space-y-2 text-sm text-emerald-800">
+                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Greenhouse design & construction</li>
+                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Contractor management & safety inspection</li>
+                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Mobile App Dashboard</li>
+                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Fully Automated Irrigation System</li>
+                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>AI Plant Health Monitoring</li>
+                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Solar Panels & Project Website</li>
+                        </ul>
+                    </div>
+                    <div class="bg-rose-50/50 p-6 rounded-xl border border-rose-200 space-y-3">
+                        <h4 class="font-bold text-rose-900 flex items-center space-x-2">
+                            <i class="fa-solid fa-circle-xmark text-rose-600"></i>
+                            <span>Out of Scope</span>
+                        </h4>
+                        <ul class="space-y-2 text-sm text-rose-800">
+                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Commercial farm-scale production & crop sale</li>
+                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Multi-greenhouse expansion</li>
+                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Advanced robotics for harvesting</li>
+                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Distribution of produce to commercial stores</li>
+                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Large-scale renewable energy generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 2. MOBILE APP DASHBOARD TAB ================= -->
+        <div id="tab-dashboard" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Stephanie Nguyen</span>
+                    <h2 class="text-3xl font-extrabold text-sage-900">Mobile App Dashboard</h2>
+                    <p class="text-slate-600 text-sm mt-1">Real-time telemetry, remote actuator controls, and instant alerts for greenhouse operators.</p>
+                </div>
+                <button onclick="triggerSimulatedAlert()" class="bg-sage-600 hover:bg-sage-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Test Push Notification</span>
+                </button>
+            </div>
+
+            <!-- Simulated Phone Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Phone Mockup Frame -->
+                <div class="lg:col-span-1 flex justify-center">
+                    <div class="w-full max-w-sm bg-slate-900 rounded-[40px] p-4 shadow-2xl border-4 border-slate-700 relative">
+                        <!-- Phone Screen -->
+                        <div class="bg-slate-950 text-white rounded-[32px] overflow-hidden flex flex-col h-[640px] border border-slate-800">
+                            <!-- Phone Status Bar -->
+                            <div class="bg-slate-900 px-6 py-3 flex justify-between items-center text-xs font-semibold text-slate-400">
+                                <span>9:41</span>
+                                <div class="flex space-x-2">
+                                    <i class="fa-solid fa-signal"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-battery-full text-emerald-400"></i>
+                                </div>
+                            </div>
+                            <!-- App Header -->
+                            <div class="px-6 py-4 bg-sage-900 border-b border-sage-800 flex justify-between items-center">
+                                <div>
+                                    <p class="text-[10px] text-sage-400 uppercase tracking-wider">Connected Facility</p>
+                                    <h4 class="font-bold text-sm">Greenhouse Zone A</h4>
+                                </div>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                            </div>
+                            <!-- App Body Scrollable -->
+                            <div class="p-4 space-y-4 overflow-y-auto flex-grow text-xs">
+                                <!-- Live Metrics Card -->
+                                <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 space-y-2">
+                                    <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                        <span>Environmental Telemetry</span>
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-slate-400 text-[10px]">Temperature</p>
+                                            <p class="text-base font-bold text-emerald-400" id="phone-temp">24.5°C</p>
+                                        </div>
+                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-slate-400 text-[10px]">Humidity</p>
+                                            <p class="text-base font-bold text-blue-400" id="phone-hum">68%</p>
+                                        </div>
+                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-slate-400 text-[10px]">Soil Moisture</p>
+                                            <p class="text-base font-bold text-amber-400" id="phone-soil">42%</p>
+                                        </div>
+                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                            <p class="text-slate-400 text-[10px]">Solar Gen</p>
+                                            <p class="text-base font-bold text-yellow-400" id="phone-solar">1.8 kW</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Remote Controls -->
+                                <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 space-y-2">
+                                    <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                        <span>Quick Actuators</span>
+                                        <i class="fa-solid fa-sliders"></i>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+                                            <span>Irrigation Pump</span>
+                                            <button onclick="toggleAppControl('pump')" id="btn-pump" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">AUTO</button>
+                                        </div>
+                                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+                                            <span>Roof Vents</span>
+                                            <button onclick="toggleAppControl('vents')" id="btn-vents" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">OPEN 30%</button>
+                                        </div>
+                                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+                                            <span>AI Diagnostics</span>
+                                            <span class="text-emerald-400 font-bold">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- AI Alerts Stream -->
+                                <div class="bg-emerald-950/40 p-3 rounded-xl border border-emerald-900/60 text-emerald-300">
+                                    <div class="flex items-center space-x-1.5 font-bold mb-1">
+                                        <i class="fa-solid fa-robot"></i>
+                                        <span>AI Assistant Note</span>
+                                    </div>
+                                    <p class="text-[11px] text-emerald-200">Tomato crop health score optimal (98%). No pest signatures detected in sector 2.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Feature Description -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
+                        <h3 class="text-2xl font-bold text-sage-900">Dashboard Capabilities</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed">
+                            The Mobile App Dashboard acts as the primary control nexus for operators, agricultural educators, and community members. Built with responsive cross-platform architecture, it aggregates multi-sensor telemetry in real-time and transmits push notifications directly to authorized users.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
+                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-bolt text-sage-600 mr-2"></i>Real-Time Telemetry</h4>
+                                <p class="text-xs text-slate-600">Monitors temperature, humidity, soil moisture, solar output, and tank water levels continuously.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
+                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-hand-pointer text-sage-600 mr-2"></i>Remote Override</h4>
+                                <p class="text-xs text-slate-600">Allows manual or automated toggling of irrigation valves, roof vents, and LED supplemental lighting.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
+                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-triangle-exclamation text-sage-600 mr-2"></i>Instant Push Alerts</h4>
+                                <p class="text-xs text-slate-600">Immediate warnings sent to stakeholders when thresholds (e.g., soil moisture &lt; 30%) are breached.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
+                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-graduation-cap text-sage-600 mr-2"></i>STEM Learning Mode</h4>
+                                <p class="text-xs text-slate-600">Simplified educational interface view designed specifically for student and community workshops.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 3. AUTOMATED IRRIGATION TAB ================= -->
+        <div id="tab-irrigation" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Alexander Wong</span>
+                    <h2 class="text-3xl font-extrabold text-sage-900">Fully Automated Irrigation System</h2>
+                    <p class="text-slate-600 text-sm mt-1">Moisture-based precision watering engineered to achieve at least 30% lower water use.</p>
+                </div>
+                <button onclick="runIrrigationCycle()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-water"></i>
+                    <span>Trigger Irrigation Cycle</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-1">
+                    <h3 class="text-xl font-bold text-sage-900">System Parameters</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm font-semibold mb-1">
+                                <span class="text-slate-600">Soil Moisture Threshold</span>
+                                <span class="text-sage-800" id="soil-threshold-val">40%</span>
+                            </div>
+                            <input type="range" min="20" max="70" value="40" oninput="updateSoilThreshold(this.value)" class="w-full accent-sage-600 cursor-pointer">
+                        </div>
+                        <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-2">
+                            <h4 class="font-bold text-blue-900 text-sm"><i class="fa-solid fa-chart-pie mr-2"></i>Water Conservation Goal</h4>
+                            <p class="text-xs text-blue-800">Target: &ge; 30% water reduction compared to traditional hand-watering methods.</p>
+                            <div class="w-full bg-blue-200 rounded-full h-2.5 mt-2">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 35%"></div>
+                            </div>
+                            <p class="text-[10px] text-blue-700 text-right font-bold mt-1">Current Savings: 35%</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-sage-900">Irrigation Logic & Drip Mechanics</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        The Fully Automated Irrigation System integrates soil moisture sensors placed strategically across the root zones. When moisture levels drop below the preset threshold (40%), solenoid valves open automatically, delivering targeted drip irrigation directly to plant roots. This prevents over-watering, minimizes evaporation loss in arid environments, and guarantees compliance with our 30% water savings success criteria.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 text-center space-y-1">
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Pump Status</p>
+                            <p class="text-lg font-extrabold text-emerald-600" id="irrigation-status-text">Standby (Auto)</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 text-center space-y-1">
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Tank Level</p>
+                            <p class="text-lg font-extrabold text-blue-600">85% Capacity</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 text-center space-y-1">
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Efficiency Rating</p>
+                            <p class="text-lg font-extrabold text-purple-600">Grade A+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 4. AI PLANT HEALTH MONITORING TAB ================= -->
+        <div id="tab-ai-monitoring" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Damita George</span>
+                    <h2 class="text-3xl font-extrabold text-sage-900">AI Plant Health Monitoring</h2>
+                    <p class="text-slate-600 text-sm mt-1">Computer vision and predictive algorithms identifying potential plant health problems early.</p>
+                </div>
+                <button onclick="runAiDiagnostic()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Run AI Diagnostic Scan</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-1">
+                    <h3 class="text-xl font-bold text-sage-900">Sensor Diagnostic Feed</h3>
+                    <div class="space-y-3">
+                        <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs text-purple-700 font-semibold">Overall Crop Vigor</p>
+                                <p class="text-lg font-extrabold text-purple-900">98.4% Optimal</p>
+                            </div>
+                            <i class="fa-solid fa-shield-heart text-2xl text-purple-600"></i>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs text-emerald-700 font-semibold">Pest Risk Index</p>
+                                <p class="text-lg font-extrabold text-emerald-900">Low (0.2%)</p>
+                            </div>
+                            <i class="fa-solid fa-bug-slash text-2xl text-emerald-600"></i>
+                        </div>
+                        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 flex justify-between items-center">
+                            <div>
+                                <p class="text-xs text-amber-700 font-semibold">Nutrient Balance</p>
+                                <p class="text-lg font-extrabold text-amber-900">Balanced (NPK)</p>
+                            </div>
+                            <i class="fa-solid fa-flask text-2xl text-amber-600"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-sage-900">How AI Supports Growers</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        The AI Plant Health monitoring system demonstrates how artificial intelligence can support sustainable agriculture by helping growers make better decisions, conserve resources, and improve crop health. Rather than replacing human farmers and gardeners, AI acts as an assistant tool that monitors environmental conditions, identifies potential problems early, and provides actionable recommendations.
+                    </p>
+                    
+                    <!-- 3 Cards Grid: Early Identification, Actionable Recommendations, PREDICTED HARVEST -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-2">
+                            <div class="w-8 h-8 rounded-lg bg-sage-200 text-sage-800 flex items-center justify-center font-bold">1</div>
+                            <h4 class="font-bold text-sage-900 text-sm">Early Problem Identification</h4>
+                            <p class="text-xs text-slate-600">Detects subtle chlorosis or leaf wilting days before visible to the naked eye.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-2">
+                            <div class="w-8 h-8 rounded-lg bg-sage-200 text-sage-800 flex items-center justify-center font-bold">2</div>
+                            <h4 class="font-bold text-sage-900 text-sm">Actionable Recommendations</h4>
+                            <p class="text-xs text-slate-600">Suggests precise fertilizer or humidity adjustments tailored to specific crop strains.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200 space-y-2">
+                            <div class="w-8 h-8 rounded-lg bg-emerald-200 text-emerald-800 flex items-center justify-center font-bold">3</div>
+                            <h4 class="font-bold text-emerald-900 text-sm">Predicted Harvest</h4>
+                            <p class="text-xs text-emerald-800">Estimates yield forecasts (~120 kg/cycle), optimal harvest windows (12-14 days), and crop readiness using predictive environmental models.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 5. SOLAR PANELS TAB ================= -->
+        <div id="tab-solar" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Aiden Lee</span>
+                    <h2 class="text-3xl font-extrabold text-sage-900">Solar Panels & Renewable Energy</h2>
+                    <p class="text-slate-600 text-sm mt-1">Self-sustaining green energy grid powering sensors, pumps, and automated roof vents.</p>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-800 font-bold text-sm flex items-center space-x-2">
+                    <i class="fa-solid fa-sun text-amber-500 animate-spin" style="animation-duration: 10s;"></i>
+                    <span>Active Generation: 2.4 kW</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-1">
+                    <h3 class="text-xl font-bold text-sage-900">Energy Distribution</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between items-center pb-2 border-b border-sage-100">
+                            <span class="text-slate-600">Irrigation Pumps</span>
+                            <span class="font-bold text-sage-900">0.8 kW</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-sage-100">
+                            <span class="text-slate-600">AI Edge Sensors</span>
+                            <span class="font-bold text-sage-900">0.4 kW</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-2 border-b border-sage-100">
+                            <span class="text-slate-600">Battery Storage (LiFePO4)</span>
+                            <span class="font-bold text-emerald-600">Charging (94%)</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-600">Roof Actuators</span>
+                            <span class="font-bold text-sage-900">0.2 kW</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-2">
+                    <h3 class="text-xl font-bold text-sage-900">Sustainable Power Architecture</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        The solar panel subsystem ensures the SMART Greenhouse operates entirely off-grid or semi-autonomously in remote drought-stricken communities. By harnessing renewable solar energy, the facility underscores its environmental commitment to sustainable food production without adding to local carbon footprints or drawing on fragile community power grids.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
+                            <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-battery-half text-amber-600 mr-2"></i>High-Capacity Storage</h4>
+                            <p class="text-xs text-slate-600">Stores excess daytime energy to maintain uninterrupted 24/7 sensor and pump operation.</p>
+                        </div>
+                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
+                            <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-leaf text-emerald-600 mr-2"></i>Zero Carbon Footprint</h4>
+                            <p class="text-xs text-slate-600">Demonstrates true renewable energy integration for educational community stakeholders.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 6. WBS TAB ================= -->
+        <div id="tab-wbs" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Project Planning</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Work Breakdown Structure (WBS)</h2>
+                <p class="text-slate-600 text-sm mt-1">Hierarchical breakdown of deliverables required to successfully deliver the SMART Greenhouse.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
+                                <th class="p-4">WBS ID</th>
+                                <th class="p-4">Work Package / Deliverable</th>
+                                <th class="p-4">Responsible Lead</th>
+                                <th class="p-4">Success Criteria</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-sage-100 text-slate-700">
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">1.0</td>
+                                <td class="p-4 font-semibold">Greenhouse Structure & Construction</td>
+                                <td class="p-4">Greenhouse Contractor / Nia Isom</td>
+                                <td class="p-4">Construction completed and passes final inspection.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">2.0</td>
+                                <td class="p-4 font-semibold">Fully Automated Irrigation System</td>
+                                <td class="p-4">Alexander Wong</td>
+                                <td class="p-4">Waters based on soil moisture; achieves &ge; 30% lower water use.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">3.0</td>
+                                <td class="p-4 font-semibold">AI Plant Health Monitoring</td>
+                                <td class="p-4">Damita George</td>
+                                <td class="p-4">Monitors health and identifies potential problems for review.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">4.0</td>
+                                <td class="p-4 font-semibold">Solar Panels Integration</td>
+                                <td class="p-4">Aiden Lee</td>
+                                <td class="p-4">Installed, operational, and powers designated systems.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">5.0</td>
+                                <td class="p-4 font-semibold">Mobile App Dashboard</td>
+                                <td class="p-4">Stephanie Nguyen</td>
+                                <td class="p-4">Successfully displays greenhouse conditions and status.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">6.0</td>
+                                <td class="p-4 font-semibold">Project Website & Documentation</td>
+                                <td class="p-4">Patti de Cruilles / Diya Mehta</td>
+                                <td class="p-4">Published website and complete operations user manual.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">7.0</td>
+                                <td class="p-4 font-semibold">Safety Inspection & Testing</td>
+                                <td class="p-4">Nia Isom & Diya Mehta</td>
+                                <td class="p-4">Meets applicable safety requirements and passes final inspection.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 7. GANTT TIMELINE TAB ================= -->
+        <div id="tab-gantt" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Schedule Management</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Gantt Chart Timeline (12 Months)</h2>
+                <p class="text-slate-600 text-sm mt-1">High-level project schedule mapping out 6-12 month execution phases.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-8 space-y-6">
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>Phase 1: Initiation & Site Permits (Months 1-2)</span>
+                            <span class="text-emerald-600">100% Complete</span>
+                        </div>
+                        <div class="w-full bg-sage-100 rounded-full h-4">
+                            <div class="bg-emerald-600 h-4 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>Phase 2: Contractor Procurement & Build (Months 3-6)</span>
+                            <span class="text-blue-600">In Progress (60%)</span>
+                        </div>
+                        <div class="w-full bg-sage-100 rounded-full h-4">
+                            <div class="bg-blue-600 h-4 rounded-full" style="width: 60%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>Phase 3: Smart Technology Integration (Months 7-9)</span>
+                            <span class="text-amber-600">Scheduled</span>
+                        </div>
+                        <div class="w-full bg-sage-100 rounded-full h-4">
+                            <div class="bg-amber-500 h-4 rounded-full" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>Phase 4: Testing, Safety Inspection & Launch (Months 10-12)</span>
+                            <span class="text-slate-400">Pending</span>
+                        </div>
+                        <div class="w-full bg-sage-100 rounded-full h-4">
+                            <div class="bg-slate-300 h-4 rounded-full" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 8. NETWORK DIAGRAM TAB ================= -->
+        <div id="tab-network" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Dependency Flow</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Project Network Diagram</h2>
+                <p class="text-slate-600 text-sm mt-1">Critical path and task dependencies leading to final operational handover.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-8 flex flex-col items-center justify-center space-y-6">
+                <div class="flex flex-wrap justify-center gap-4">
+                    <div class="p-4 rounded-xl bg-sage-100 border border-sage-300 text-center shadow-sm w-48">
+                        <p class="text-[10px] text-sage-600 font-bold uppercase">Task A</p>
+                        <p class="text-xs font-bold text-sage-900 mt-1">Permits & Site Prep</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-sage-400 self-center hidden md:block"></i>
+                    <div class="p-4 rounded-xl bg-sage-100 border border-sage-300 text-center shadow-sm w-48">
+                        <p class="text-[10px] text-sage-600 font-bold uppercase">Task B</p>
+                        <p class="text-xs font-bold text-sage-900 mt-1">Greenhouse Construction</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-sage-400 self-center hidden md:block"></i>
+                    <div class="p-4 rounded-xl bg-sage-100 border border-sage-300 text-center shadow-sm w-48">
+                        <p class="text-[10px] text-sage-600 font-bold uppercase">Task C</p>
+                        <p class="text-xs font-bold text-sage-900 mt-1">Tech Integration (AI/Solar)</p>
+                    </div>
+                    <i class="fa-solid fa-arrow-right text-sage-400 self-center hidden md:block"></i>
+                    <div class="p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-center shadow-sm w-48">
+                        <p class="text-[10px] text-emerald-700 font-bold uppercase">Task D (Critical Path)</p>
+                        <p class="text-xs font-bold text-emerald-900 mt-1">Safety Inspection & Handover</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 9. STAKEHOLDER MATRIX TAB ================= -->
+        <div id="tab-stakeholders" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Stakeholder Management</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Stakeholder Chart</h2>
+                <p class="text-slate-600 text-sm mt-1">Depicting stakeholder wants, needs, interests, and project positions.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
+                                <th class="p-4">Stakeholder</th>
+                                <th class="p-4">Category</th>
+                                <th class="p-4">Wants & Needs</th>
+                                <th class="p-4">Interests & Position</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-sage-100 text-slate-700">
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">County Sponsors & Govt Agencies</td>
+                                <td class="p-4">Who Pays / Funder</td>
+                                <td class="p-4">Compliance with local codes, water conservation metrics.</td>
+                                <td class="p-4">High interest in community sustainability and drought relief.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">Schools & Educators</td>
+                                <td class="p-4">Who Uses</td>
+                                <td class="p-4">Hands-on STEM learning resources, safety inspection clearance.</td>
+                                <td class="p-4">Educational curriculum integration and student engagement.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">Community Gardeners & Residents</td>
+                                <td class="p-4">Affected / Users</td>
+                                <td class="p-4">Reliable fresh produce access, low-maintenance technology.</td>
+                                <td class="p-4">Food security in drought-prone regions.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">Greenhouse Construction Contractor</td>
+                                <td class="p-4">Involved in Building</td>
+                                <td class="p-4">Clear architectural blueprints, timely permit approvals.</td>
+                                <td class="p-4">Adhering to the 25% contracting limit constraint.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 10. RISK REGISTER TAB ================= -->
+        <div id="tab-risks" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Risk Management</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Risk Register</h2>
+                <p class="text-slate-600 text-sm mt-1">Identifying possible risks, impact levels, and proactive mitigation strategies.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead>
+                            <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
+                                <th class="p-4">Risk Event</th>
+                                <th class="p-4">Probability</th>
+                                <th class="p-4">Impact</th>
+                                <th class="p-4">Mitigation Strategy</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-sage-100 text-slate-700">
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">Permit Approval Delays</td>
+                                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Medium</span></td>
+                                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-rose-100 text-rose-800">High</span></td>
+                                <td class="p-4">Submit documentation early in Phase 1 and maintain active dialogue with local building authorities.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">Contractor Resource Unavailability</td>
+                                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Medium</span></td>
+                                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Medium</span></td>
+                                <td class="p-4">Pre-vet multiple certified local contractors and secure agreements complying with the 25% contracting limit constraint.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <td class="p-4 font-bold text-sage-800">Sensor / IoT Connectivity Failure</td>
+                                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">Low</span></td>
+                                <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">Medium</span></td>
+                                <td class="p-4">Implement redundant local offline data logging and automatic failover protocols.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 11. RESOURCE & BUDGET TAB ================= -->
+        <div id="tab-resources" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Resource Planning</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Resource Plan & Budget Description</h2>
+                <p class="text-slate-600 text-sm mt-1">Labor requirements, contractor allocation limits (25% max), and budget allocation.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
+                    <h3 class="text-xl font-bold text-sage-900"><i class="fa-solid fa-hard-hat text-sage-600 mr-2"></i>Labor & Contractor Plan</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        The project utilizes both internal core team members and specialized external contractors. In strict adherence to project constraints, **only 25% of project work may be contracted out**. Contractors are strictly retained for specialized structural design and heavy greenhouse assembly, while our core team manages software development, AI monitoring integration, and stakeholder education.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
+                    <h3 class="text-xl font-bold text-sage-900"><i class="fa-solid fa-wallet text-sage-600 mr-2"></i>Budget Description</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        The total capital budget is allocated across structural materials (40%), smart sensor hardware & AI integration (25%), solar renewable energy systems (15%), contractor fees (20%, adhering to the 25% work limit), and community contingency reserves. Funding is supported by county grants and environmental organization sponsorships.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 12. TEAM DIRECTORY TAB ================= -->
+        <div id="tab-team" class="tab-content space-y-8">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
+                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Leadership & Roles</span>
+                <h2 class="text-3xl font-extrabold text-sage-900">Project Team Directory</h2>
+                <p class="text-slate-600 text-sm mt-1">Dedicated domain leads driving the success of the SMART Greenhouse.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">DM</div>
+                    <h4 class="font-bold text-sage-900">Diya Mehta</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Project Manager (PM)</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">NI</div>
+                    <h4 class="font-bold text-sage-900">Nia Isom</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Engineering Director</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">AL</div>
+                    <h4 class="font-bold text-sage-900">Aiden Lee</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Lead for Solar Panels</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">AW</div>
+                    <h4 class="font-bold text-sage-900">Alexander Wong</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Lead for Irrigation System</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">DG</div>
+                    <h4 class="font-bold text-sage-900">Damita George</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Lead for AI Health Monitoring</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">PD</div>
+                    <h4 class="font-bold text-sage-900">Patti de Cruilles</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Lead for Website</span>
+                </div>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm text-center space-y-3">
+                    <div class="w-16 h-16 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xl font-bold mx-auto">SN</div>
+                    <h4 class="font-bold text-sage-900">Stephanie Nguyen</h4>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-sage-100 text-sage-800">Lead for Mobile App Dashboard</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-sage-200 mt-12 py-8 text-center text-xs text-slate-500">
+        <p>© 2026 SMART Greenhouse Project Team. Prepared for Client Presentation & Review.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-sage-600', 'text-white', 'shadow-sm');
+                btn.classList.add('text-sage-700', 'hover:bg-sage-100');
+            });
+            const targetTab = document.getElementById('tab-' + tabId);
+            if (targetTab) targetTab.classList.add('active');
+            const targetBtn = document.querySelector(`[data-tab="${tabId}"]`);
+            if (targetBtn) {
+                targetBtn.classList.remove('text-sage-700', 'hover:bg-sage-100');
+                targetBtn.classList.add('bg-sage-600', 'text-white', 'shadow-sm');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto px-4 py-3 rounded-xl shadow-lg text-white text-xs font-bold flex items-center space-x-2 transition-all transform translate-y-2 opacity-0 ${type === 'success' ? 'bg-emerald-600' : 'bg-sage-800'}`;
+            toast.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.classList.remove('translate-y-2', 'opacity-0'); }, 10);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function triggerSimulatedAlert() {
+            showToast('Push Notification Sent: Soil moisture nominal in Sector A.');
+        }
+
+        function toggleAppControl(control) {
+            const btn = document.getElementById('btn-' + control);
+            if (btn.innerText === 'AUTO') {
+                btn.innerText = 'MANUAL ON';
+                btn.classList.remove('bg-emerald-600');
+                btn.classList.add('bg-amber-600');
+                showToast(control.toUpperCase() + ' switched to Manual Override.');
+            } else {
+                btn.innerText = 'AUTO';
+                btn.classList.remove('bg-amber-600');
+                btn.classList.add('bg-emerald-600');
+                showToast(control.toUpperCase() + ' returned to AI Auto mode.');
+            }
+        }
+
+        function runIrrigationCycle() {
+            const statusText = document.getElementById('irrigation-status-text');
+            statusText.innerText = 'Watering Active...';
+            statusText.className = 'text-lg font-extrabold text-blue-600 animate-pulse';
+            showToast('Irrigation cycle initiated successfully.');
+            setTimeout(() => {
+                statusText.innerText = 'Standby (Auto)';
+                statusText.className = 'text-lg font-extrabold text-emerald-600';
+            }, 4000);
+        }
+
+        function updateSoilThreshold(val) {
+            document.getElementById('soil-threshold-val').innerText = val + '%';
+        }
+
+        function runAiDiagnostic() {
+            showToast('AI Diagnostic Scan complete. Vigor 98.4%. Harvest window predicted in 12-14 days.');
+        }
+    </script>
+</body>
+</html>
