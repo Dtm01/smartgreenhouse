@@ -87,48 +87,44 @@
             </button>
         </div>
 
-        <!-- Navigation Tabs: All 12 Original Tabs -->
-        <div class="bg-white border-t border-sage-100 overflow-x-auto">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 py-2 no-scrollbar">
-                <button onclick="switchTab('home')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap bg-sage-600 text-white shadow-sm" data-tab="home">
-                    <i class="fa-solid fa-house-chimney mr-2"></i>Overview & Charter
-                </button>
-                <button onclick="switchTab('dashboard')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="dashboard">
-                    <i class="fa-solid fa-mobile-screen-button mr-2"></i>Mobile Dashboard
-                </button>
-                <button onclick="switchTab('irrigation')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="irrigation">
-                    <i class="fa-solid fa-droplet mr-2"></i>Automated Irrigation
-                </button>
-                <button onclick="switchTab('ai-monitoring')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="ai-monitoring">
-                    <i class="fa-solid fa-brain mr-2"></i>AI Plant Health
-                </button>
-                <button onclick="switchTab('solar')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="solar">
-                    <i class="fa-solid fa-solar-panel mr-2"></i>Solar Panels
-                </button>
-                <button onclick="switchTab('wbs')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="wbs">
-                    <i class="fa-solid fa-sitemap mr-2"></i>WBS
-                </button>
-                <button onclick="switchTab('gantt')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="gantt">
-                    <i class="fa-solid fa-chart-gantt mr-2"></i>Gantt Timeline
-                </button>
-                <button onclick="switchTab('network')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="network">
-                    <i class="fa-solid fa-diagram-project mr-2"></i>Network Diagram
-                </button>
-                <button onclick="switchTab('stakeholders')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="stakeholders">
-                    <i class="fa-solid fa-users-gear mr-2"></i>Stakeholder Matrix
-                </button>
-                <button onclick="switchTab('risks')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="risks">
-                    <i class="fa-solid fa-shield-halved mr-2"></i>Risk Register
-                </button>
-                <button onclick="switchTab('resources')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="resources">
-                    <i class="fa-solid fa-wallet mr-2"></i>Resource & Budget
-                </button>
-                <button onclick="switchTab('team')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="team">
-                    <i class="fa-solid fa-id-badge mr-2"></i>Team Directory
-                </button>
-            </div>
-        </div>
-    </header>
+        
+<!-- Navigation Tabs: 10 Original Tabs -->
+<div class="bg-white border-t border-sage-100 overflow-x-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 py-2 no-scrollbar">
+        <button onclick="switchTab('home')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap bg-sage-600 text-white shadow-sm" data-tab="home">
+            <i class="fa-solid fa-house-chimney mr-2"></i>Overview & Charter
+        </button>
+        <button onclick="switchTab('dashboard')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="dashboard">
+            <i class="fa-solid fa-mobile-screen-button mr-2"></i>Mobile Dashboard
+        </button>
+        <button onclick="switchTab('irrigation')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="irrigation">
+            <i class="fa-solid fa-droplet mr-2"></i>Automated Irrigation
+        </button>
+        <button onclick="switchTab('ai-monitoring')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="ai-monitoring">
+            <i class="fa-solid fa-brain mr-2"></i>AI Plant Health
+        </button>
+        <button onclick="switchTab('solar')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="solar">
+            <i class="fa-solid fa-solar-panel mr-2"></i>Solar Panels
+        </button>
+        <button onclick="switchTab('gantt')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="gantt">
+            <i class="fa-solid fa-chart-gantt mr-2"></i>Gantt Timeline
+        </button>
+        <button onclick="switchTab('stakeholders')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="stakeholders">
+            <i class="fa-solid fa-users-gear mr-2"></i>Stakeholder Matrix
+        </button>
+        <button onclick="switchTab('risks')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="risks">
+            <i class="fa-solid fa-shield-halved mr-2"></i>Risks
+        </button>
+        <button onclick="switchTab('resources')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="resources">
+            <i class="fa-solid fa-wallet mr-2"></i>Resource & Budget
+        </button>
+        <button onclick="switchTab('team')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="team">
+            <i class="fa-solid fa-id-badge mr-2"></i>Team Directory
+        </button>
+    </div>
+</div>
+</header>
+
 
     <!-- Mobile Dropdown Menu -->
     <div id="mobile-menu" class="hidden lg:hidden bg-white border-b border-sage-200 px-4 py-4 space-y-2 shadow-lg">
@@ -137,11 +133,9 @@
         <button onclick="switchTab('irrigation'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Automated Irrigation</button>
         <button onclick="switchTab('ai-monitoring'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">AI Plant Health</button>
         <button onclick="switchTab('solar'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Solar Panels</button>
-        <button onclick="switchTab('wbs'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">WBS</button>
         <button onclick="switchTab('gantt'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Gantt Timeline</button>
-        <button onclick="switchTab('network'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Network Diagram</button>
         <button onclick="switchTab('stakeholders'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Stakeholder Matrix</button>
-        <button onclick="switchTab('risks'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Risk Register</button>
+        <button onclick="switchTab('risks'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Risks</button>
         <button onclick="switchTab('resources'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Resource & Budget</button>
         <button onclick="switchTab('team'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Team Directory</button>
     </div>
@@ -165,9 +159,7 @@
                             <span>Explore Interactive Demo</span>
                             <i class="fa-solid fa-arrow-right"></i>
                         </button>
-                        <button onclick="switchTab('wbs')" class="bg-sage-700/80 hover:bg-sage-600 text-white font-semibold px-6 py-3 rounded-xl backdrop-blur-md border border-sage-500/40 transition-all">
-                            View Project Plan
-                        </button>
+                        
                     </div>
                 </div>
             </div>
@@ -609,74 +601,6 @@
             </div>
         </div>
 
-        <!-- ================= 6. WBS TAB ================= -->
-        <div id="tab-wbs" class="tab-content space-y-8">
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
-                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Project Planning</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Work Breakdown Structure (WBS)</h2>
-                <p class="text-slate-600 text-sm mt-1">Hierarchical breakdown of deliverables required to successfully deliver the SMART Greenhouse.</p>
-            </div>
-
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
-                                <th class="p-4">WBS ID</th>
-                                <th class="p-4">Work Package / Deliverable</th>
-                                <th class="p-4">Responsible Lead</th>
-                                <th class="p-4">Success Criteria</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-sage-100 text-slate-700">
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">1.0</td>
-                                <td class="p-4 font-semibold">Greenhouse Structure & Construction</td>
-                                <td class="p-4">Greenhouse Contractor / Nia Isom</td>
-                                <td class="p-4">Construction completed and passes final inspection.</td>
-                            </tr>
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">2.0</td>
-                                <td class="p-4 font-semibold">Fully Automated Irrigation System</td>
-                                <td class="p-4">Alexander Wong</td>
-                                <td class="p-4">Waters based on soil moisture; achieves &ge; 30% lower water use.</td>
-                            </tr>
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">3.0</td>
-                                <td class="p-4 font-semibold">AI Plant Health Monitoring</td>
-                                <td class="p-4">Damita George</td>
-                                <td class="p-4">Monitors health and identifies potential problems for review.</td>
-                            </tr>
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">4.0</td>
-                                <td class="p-4 font-semibold">Solar Panels Integration</td>
-                                <td class="p-4">Aiden Lee</td>
-                                <td class="p-4">Installed, operational, and powers designated systems.</td>
-                            </tr>
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">5.0</td>
-                                <td class="p-4 font-semibold">Mobile App Dashboard</td>
-                                <td class="p-4">Stephanie Nguyen</td>
-                                <td class="p-4">Successfully displays greenhouse conditions and status.</td>
-                            </tr>
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">6.0</td>
-                                <td class="p-4 font-semibold">Project Website & Documentation</td>
-                                <td class="p-4">Patti de Cruilles / Diya Mehta</td>
-                                <td class="p-4">Published website and complete operations user manual.</td>
-                            </tr>
-                            <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">7.0</td>
-                                <td class="p-4 font-semibold">Safety Inspection & Testing</td>
-                                <td class="p-4">Nia Isom & Diya Mehta</td>
-                                <td class="p-4">Meets applicable safety requirements and passes final inspection.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
         <!-- ================= 7. GANTT TIMELINE TAB ================= -->
         <div id="tab-gantt" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
@@ -727,40 +651,9 @@
             </div>
         </div>
 
-        <!-- ================= 8. NETWORK DIAGRAM TAB ================= -->
-        <div id="tab-network" class="tab-content space-y-8">
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
-                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Dependency Flow</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Project Network Diagram</h2>
-                <p class="text-slate-600 text-sm mt-1">Critical path and task dependencies leading to final operational handover.</p>
-            </div>
+        
 
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-8 flex flex-col items-center justify-center space-y-6">
-                <div class="flex flex-wrap justify-center gap-4">
-                    <div class="p-4 rounded-xl bg-sage-100 border border-sage-300 text-center shadow-sm w-48">
-                        <p class="text-[10px] text-sage-600 font-bold uppercase">Task A</p>
-                        <p class="text-xs font-bold text-sage-900 mt-1">Permits & Site Prep</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-sage-400 self-center hidden md:block"></i>
-                    <div class="p-4 rounded-xl bg-sage-100 border border-sage-300 text-center shadow-sm w-48">
-                        <p class="text-[10px] text-sage-600 font-bold uppercase">Task B</p>
-                        <p class="text-xs font-bold text-sage-900 mt-1">Greenhouse Construction</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-sage-400 self-center hidden md:block"></i>
-                    <div class="p-4 rounded-xl bg-sage-100 border border-sage-300 text-center shadow-sm w-48">
-                        <p class="text-[10px] text-sage-600 font-bold uppercase">Task C</p>
-                        <p class="text-xs font-bold text-sage-900 mt-1">Tech Integration (AI/Solar)</p>
-                    </div>
-                    <i class="fa-solid fa-arrow-right text-sage-400 self-center hidden md:block"></i>
-                    <div class="p-4 rounded-xl bg-emerald-100 border border-emerald-300 text-center shadow-sm w-48">
-                        <p class="text-[10px] text-emerald-700 font-bold uppercase">Task D (Critical Path)</p>
-                        <p class="text-xs font-bold text-emerald-900 mt-1">Safety Inspection & Handover</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ================= 9. STAKEHOLDER MATRIX TAB ================= -->
+        <!-- ================= 8. STAKEHOLDER MATRIX TAB ================= -->
         <div id="tab-stakeholders" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Stakeholder Management</span>
@@ -814,7 +707,7 @@
         <div id="tab-risks" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Risk Management</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Risk Register</h2>
+                <h2 class="text-3xl font-extrabold text-sage-900">Risks</h2>
                 <p class="text-slate-600 text-sm mt-1">Identifying possible risks, impact levels, and proactive mitigation strategies.</p>
             </div>
 
