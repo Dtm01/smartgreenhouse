@@ -88,8 +88,8 @@
         </div>
 
         
-<!-- Navigation Tabs: 10 Original Tabs -->
-<div class="bg-white border-t border-sage-100 overflow-x-auto">
+<!-- Navigation Tabs -->
+<div class="bg-white border-t border-sage-100 overflow-x-auto lg:overflow-visible">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-1 py-2 no-scrollbar">
         <button onclick="switchTab('home')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap bg-sage-600 text-white shadow-sm" data-tab="home">
             <i class="fa-solid fa-house-chimney mr-2"></i>Overview & Charter
@@ -106,18 +106,25 @@
         <button onclick="switchTab('solar')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="solar">
             <i class="fa-solid fa-solar-panel mr-2"></i>Solar Panels
         </button>
-        <button onclick="switchTab('gantt')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="gantt">
-            <i class="fa-solid fa-chart-gantt mr-2"></i>Gantt Timeline
-        </button>
-        <button onclick="switchTab('stakeholders')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="stakeholders">
-            <i class="fa-solid fa-users-gear mr-2"></i>Stakeholder Matrix
-        </button>
-        <button onclick="switchTab('risks')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="risks">
-            <i class="fa-solid fa-shield-halved mr-2"></i>Risks
-        </button>
-        <button onclick="switchTab('resources')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="resources">
-            <i class="fa-solid fa-wallet mr-2"></i>Resource & Budget
-        </button>
+        <div class="relative group">
+            <button id="project-specifics-nav" type="button" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" aria-haspopup="true" aria-controls="project-specifics-menu">
+                <i class="fa-solid fa-list-check mr-2"></i>Project Specifics<i class="fa-solid fa-chevron-down ml-2 text-xs"></i>
+            </button>
+            <div id="project-specifics-menu" class="hidden lg:group-hover:block lg:group-focus-within:block absolute left-0 top-full z-50 min-w-56 rounded-xl border border-sage-200 bg-white p-2 shadow-lg">
+                <button onclick="switchTab('gantt')" class="nav-btn block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="gantt">
+                    <i class="fa-solid fa-chart-gantt mr-2"></i>Timeline
+                </button>
+                <button onclick="switchTab('stakeholders')" class="nav-btn block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="stakeholders">
+                    <i class="fa-solid fa-users-gear mr-2"></i>Stakeholder Matrix
+                </button>
+                <button onclick="switchTab('risks')" class="nav-btn block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="risks">
+                    <i class="fa-solid fa-shield-halved mr-2"></i>Risks
+                </button>
+                <button onclick="switchTab('resources')" class="nav-btn block w-full text-left px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="resources">
+                    <i class="fa-solid fa-wallet mr-2"></i>Resource & Budget
+                </button>
+            </div>
+        </div>
         <button onclick="switchTab('team')" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 whitespace-nowrap text-sage-700 hover:bg-sage-100" data-tab="team">
             <i class="fa-solid fa-id-badge mr-2"></i>Team Directory
         </button>
@@ -133,10 +140,18 @@
         <button onclick="switchTab('irrigation'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Automated Irrigation</button>
         <button onclick="switchTab('ai-monitoring'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">AI Plant Health</button>
         <button onclick="switchTab('solar'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Solar Panels</button>
-        <button onclick="switchTab('gantt'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Gantt Timeline</button>
-        <button onclick="switchTab('stakeholders'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Stakeholder Matrix</button>
-        <button onclick="switchTab('risks'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Risks</button>
-        <button onclick="switchTab('resources'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Resource & Budget</button>
+        <div>
+            <button id="mobile-project-specifics-toggle" type="button" onclick="toggleProjectSpecificsMenu()" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100 flex items-center justify-between" aria-expanded="false" aria-controls="mobile-project-specifics">
+                <span><i class="fa-solid fa-list-check mr-2"></i>Project Specifics</span>
+                <i class="fa-solid fa-chevron-down text-xs"></i>
+            </button>
+            <div id="mobile-project-specifics" class="hidden pl-4 pt-1 space-y-1">
+                <button onclick="switchTab('gantt'); toggleMobileMenu();" class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-700 hover:bg-sage-100" data-tab="gantt">Timeline</button>
+                <button onclick="switchTab('stakeholders'); toggleMobileMenu();" class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-700 hover:bg-sage-100" data-tab="stakeholders">Stakeholder Matrix</button>
+                <button onclick="switchTab('risks'); toggleMobileMenu();" class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-700 hover:bg-sage-100" data-tab="risks">Risks</button>
+                <button onclick="switchTab('resources'); toggleMobileMenu();" class="nav-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-700 hover:bg-sage-100" data-tab="resources">Resource & Budget</button>
+            </div>
+        </div>
         <button onclick="switchTab('team'); toggleMobileMenu();" class="w-full text-left px-3 py-2 rounded-lg text-sm font-semibold text-sage-800 hover:bg-sage-100">Team Directory</button>
     </div>
 
@@ -601,11 +616,11 @@
             </div>
         </div>
 
-        <!-- ================= 7. GANTT TIMELINE TAB ================= -->
+        <!-- ================= 7.  TIMELINE TAB ================= -->
         <div id="tab-gantt" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Schedule Management</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Gantt Chart Timeline (12 Months)</h2>
+                <h2 class="text-3xl font-extrabold text-sage-900">Timeline (12 Months)</h2>
                 <p class="text-slate-600 text-sm mt-1">High-level project schedule mapping out 6-12 month execution phases.</p>
             </div>
 
@@ -835,17 +850,42 @@
             });
             const targetTab = document.getElementById('tab-' + tabId);
             if (targetTab) targetTab.classList.add('active');
-            const targetBtn = document.querySelector(`[data-tab="${tabId}"]`);
-            if (targetBtn) {
+            document.querySelectorAll(`[data-tab="${tabId}"]`).forEach(targetBtn => {
                 targetBtn.classList.remove('text-sage-700', 'hover:bg-sage-100');
                 targetBtn.classList.add('bg-sage-600', 'text-white', 'shadow-sm');
+            });
+            const projectSpecificTabs = ['gantt', 'stakeholders', 'risks', 'resources'];
+            const projectSpecificsNav = document.getElementById('project-specifics-nav');
+            const isProjectSpecificTab = projectSpecificTabs.includes(tabId);
+            projectSpecificsNav.classList.toggle('bg-sage-600', isProjectSpecificTab);
+            projectSpecificsNav.classList.toggle('text-white', isProjectSpecificTab);
+            projectSpecificsNav.classList.toggle('shadow-sm', isProjectSpecificTab);
+            projectSpecificsNav.classList.toggle('text-sage-700', !isProjectSpecificTab);
+            projectSpecificsNav.classList.toggle('hover:bg-sage-100', !isProjectSpecificTab);
+            if (isProjectSpecificTab) {
+                projectSpecificsNav.setAttribute('aria-current', 'page');
+            } else {
+                projectSpecificsNav.removeAttribute('aria-current');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function toggleProjectSpecificsMenu() {
+            const menu = document.getElementById('mobile-project-specifics');
+            const toggle = document.getElementById('mobile-project-specifics-toggle');
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            menu.classList.toggle('hidden', isExpanded);
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+        }
+
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
+            const isClosing = !menu.classList.contains('hidden');
             menu.classList.toggle('hidden');
+            if (isClosing) {
+                document.getElementById('mobile-project-specifics').classList.add('hidden');
+                document.getElementById('mobile-project-specifics-toggle').setAttribute('aria-expanded', 'false');
+            }
         }
 
         function showToast(message, type = 'success') {
