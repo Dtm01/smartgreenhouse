@@ -817,49 +817,40 @@
         <div id="tab-gantt" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Schedule Management</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Timeline (12 Months)</h2>
-                <p class="text-slate-600 text-sm mt-1">High-level project schedule mapping out 6-12 month execution phases.</p>
+                <h2 class="text-3xl font-extrabold text-sage-900">Project Timeline & Gantt Chart</h2>
+                <p class="text-slate-600 text-sm mt-1">Explore the eight project phases and expand any phase to see its scheduled tasks.</p>
             </div>
 
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-8 space-y-6">
-                <div class="space-y-4">
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-5 sm:p-7 space-y-4">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
-                            <span>Phase 1: Initiation & Site Permits (Months 1-2)</span>
-                            <span class="text-emerald-600">100% Complete</span>
-                        </div>
-                        <div class="w-full bg-sage-100 rounded-full h-4">
-                            <div class="bg-emerald-600 h-4 rounded-full" style="width: 100%"></div>
-                        </div>
+                        <h3 class="font-bold text-sage-900">Schedule overview</h3>
+                        <p id="gantt-date-range" class="text-xs text-slate-500 mt-1"></p>
                     </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
-                            <span>Phase 2: Contractor Procurement & Build (Months 3-6)</span>
-                            <span class="text-blue-600">In Progress (60%)</span>
-                        </div>
-                        <div class="w-full bg-sage-100 rounded-full h-4">
-                            <div class="bg-blue-600 h-4 rounded-full" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
-                            <span>Phase 3: Smart Technology Integration (Months 7-9)</span>
-                            <span class="text-amber-600">Scheduled</span>
-                        </div>
-                        <div class="w-full bg-sage-100 rounded-full h-4">
-                            <div class="bg-amber-500 h-4 rounded-full" style="width: 20%"></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
-                            <span>Phase 4: Testing, Safety Inspection & Launch (Months 10-12)</span>
-                            <span class="text-slate-400">Pending</span>
-                        </div>
-                        <div class="w-full bg-sage-100 rounded-full h-4">
-                            <div class="bg-slate-300 h-4 rounded-full" style="width: 0%"></div>
-                        </div>
+                    <div class="flex items-center gap-2">
+                        <button type="button" onclick="scrollGanttTimeline(-1)" aria-label="Scroll timeline left" class="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sage-700 hover:bg-sage-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-600">
+                            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" onclick="scrollGanttTimeline(1)" aria-label="Scroll timeline right" class="rounded-lg border border-sage-200 bg-white px-3 py-2 text-sage-700 hover:bg-sage-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-600">
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
                     </div>
                 </div>
+                <div id="gantt-scroll-region" role="region" aria-label="Horizontally scrollable project Gantt chart" tabindex="0" class="overflow-x-auto rounded-xl border border-sage-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-600">
+                    <div id="gantt-chart" class="min-w-max"></div>
+                </div>
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-600">
+                    <span class="inline-flex items-center gap-2"><span class="h-3 w-6 rounded-full bg-sage-700"></span>Major project phase</span>
+                    <span class="inline-flex items-center gap-2"><span class="h-3 w-6 rounded-full bg-emerald-400"></span>Task detail</span>
+                    <span class="inline-flex items-center gap-2">
+                        <span class="relative h-3 w-7">
+                            <span class="absolute left-0 right-1 top-1/2 h-0.5 -translate-y-1/2 bg-emerald-400"></span>
+                            <span class="absolute right-0 top-0 h-3 w-0.5 bg-emerald-400"></span>
+                        </span>
+                        Float to next linked task
+                    </span>
+                </div>
+                <p class="text-xs text-slate-500">Float is calculated to the next linked task’s start; the end marker shows when its predecessor must be complete. Day counts exclude weekends; no holiday calendar is applied.</p>
             </div>
         </div>
 
@@ -1204,6 +1195,84 @@
             ]}
         ];
 
+        const ganttSchedule = [
+            { start: "2027-01-01", finish: "2027-02-17", tasks: [
+                ["2027-01-01", "2027-01-08"],
+                ["2027-01-11", "2027-01-18"],
+                ["2027-01-19", "2027-01-28", "2027-02-08", "Establish project budget"],
+                ["2027-02-08", "2027-02-17"]
+            ]},
+            { start: "2027-02-17", finish: "2027-03-17", tasks: [
+                ["2027-02-17", "2027-02-24"],
+                ["2027-02-24", "2027-03-03"],
+                ["2027-03-03", "2027-03-10"],
+                ["2027-03-10", "2027-03-17"]
+            ]},
+            { start: "2027-03-03", finish: "2027-07-28", tasks: [
+                ["2027-03-03", "2027-03-15"],
+                ["2027-03-15", "2027-03-25"],
+                ["2027-03-25", "2027-04-15"],
+                ["2027-04-15", "2027-05-05"],
+                ["2027-05-05", "2027-05-26"],
+                ["2027-05-26", "2027-06-15"],
+                ["2027-06-16", "2027-07-06"],
+                ["2027-07-06", "2027-07-16"],
+                ["2027-07-16", "2027-07-28"]
+            ]},
+            { start: "2027-01-01", finish: "2027-09-20", tasks: [
+                ["2027-01-01", "2027-01-04", "2027-09-02", "Develop"],
+                ["2027-09-02", "2027-09-07"],
+                ["2027-09-07", "2027-09-08", "2027-09-15", "Launch app"],
+                ["2027-09-15", "2027-09-16"],
+                ["2027-09-17", "2027-09-20"]
+            ]},
+            { start: "2027-01-01", finish: "2027-08-18", tasks: [
+                ["2027-01-07", "2027-01-07"],
+                ["2027-01-08", "2027-01-14"],
+                ["2027-01-15", "2027-01-21"],
+                ["2027-01-01", "2027-01-07", "2027-07-28", "Green House Integration and Test"],
+                ["2027-07-28", "2027-08-11"],
+                ["2027-08-11", "2027-08-18"]
+            ]},
+            { start: "2027-01-01", finish: "2027-08-16", tasks: [
+                ["2027-01-01", "2027-01-04"],
+                ["2027-01-04", "2027-01-06", "2027-07-28", "Install and position cameras"],
+                ["2027-07-28", "2027-07-29"],
+                ["2027-07-29", "2027-07-30"],
+                ["2027-07-30", "2027-08-04"],
+                ["2027-08-05", "2027-08-09"],
+                ["2027-08-09", "2027-08-10"],
+                ["2027-08-10", "2027-08-12"],
+                ["2027-08-12", "2027-08-16"]
+            ]},
+            { start: "2027-01-01", finish: "2027-08-31", tasks: [
+                ["2027-01-01", "2027-01-04"],
+                ["2027-01-05", "2027-01-07"],
+                ["2027-01-08", "2027-01-12"],
+                ["2027-01-13", "2027-01-18"],
+                ["2027-01-19", "2027-01-21"],
+                ["2027-01-22", "2027-01-28"],
+                ["2027-07-28", "2027-08-04"],
+                ["2027-08-04", "2027-08-09"],
+                ["2027-08-09", "2027-08-12"],
+                ["2027-08-12", "2027-08-18"],
+                ["2027-08-18", "2027-08-24"],
+                ["2027-08-24", "2027-08-31"]
+            ]},
+            { start: "2027-01-01", finish: "2027-09-24", tasks: [
+                ["2027-01-01", "2027-01-04"],
+                ["2027-01-05", "2027-01-06"],
+                ["2027-01-07", "2027-01-08"],
+                ["2027-01-11", "2027-01-13"],
+                ["2027-08-12", "2027-08-16", "2027-08-31", "W6 Build Solar Panel System tab"],
+                ["2027-08-31", "2027-09-02"],
+                ["2027-09-02", "2027-09-06", "2027-09-17", "W8 Build Mobile App Dashboard tab"],
+                ["2027-09-17", "2027-09-20"],
+                ["2027-09-21", "2027-09-23"],
+                ["2027-09-24", "2027-09-24"]
+            ]}
+        ];
+
         function escapeBudgetText(value) {
             return String(value).replace(/[&<>"']/g, character => ({
                 '&': '&amp;',
@@ -1224,6 +1293,177 @@
 
         function formatBudgetDays(value) {
             return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value)} days`;
+        }
+
+        function parseGanttDate(value) {
+            return Date.parse(`${value}T00:00:00Z`);
+        }
+
+        function formatGanttDate(value) {
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric',
+                timeZone: 'UTC'
+            }).format(new Date(parseGanttDate(value)));
+        }
+
+        function formatGanttTaskDate(value) {
+            return new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                day: 'numeric',
+                timeZone: 'UTC'
+            }).format(new Date(parseGanttDate(value)));
+        }
+
+        function countWeekdayFloat(taskFinish, successorStart) {
+            let date = parseGanttDate(taskFinish) + 86400000;
+            const end = parseGanttDate(successorStart);
+            let weekdays = 0;
+
+            while (date < end) {
+                const day = new Date(date).getUTCDay();
+                if (day !== 0 && day !== 6) weekdays++;
+                date += 86400000;
+            }
+
+            return weekdays;
+        }
+
+        function cleanGanttTaskName(value) {
+            return String(value).replace(/^\s*\d+\s*-\s*/, '').replace(/^W\d+\s*/i, '');
+        }
+
+        function scrollGanttTimeline(direction) {
+            const scrollRegion = document.getElementById('gantt-scroll-region');
+            scrollRegion.scrollBy({
+                left: direction * scrollRegion.clientWidth * 0.75,
+                behavior: 'smooth'
+            });
+        }
+
+        function renderGantt() {
+            const chart = document.getElementById('gantt-chart');
+            const scrollRegion = document.getElementById('gantt-scroll-region');
+            const openPhases = Array.from(chart.querySelectorAll('details'), details => details.open);
+            const previousScrollLeft = scrollRegion.scrollLeft;
+            const allDates = ganttSchedule.flatMap(phase => [phase.start, phase.finish]);
+            const startTime = Math.min(...allDates.map(parseGanttDate));
+            const lastFinishTime = Math.max(...ganttSchedule.map(phase => parseGanttDate(phase.finish)));
+            const endTime = lastFinishTime + 86400000;
+            const totalDays = (endTime - startTime) / 86400000;
+            const labelWidth = Math.max(180, Math.min(400, Math.round(window.innerWidth * 0.32)));
+            const trackWidth = Math.max(1500, totalDays * 5.5);
+            const contentWidth = labelWidth + trackWidth;
+            const startDate = new Date(startTime);
+            const monthTicks = [];
+
+            for (let month = new Date(Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), 1));
+                month.getTime() < endTime;
+                month.setUTCMonth(month.getUTCMonth() + 1)) {
+                const monthTime = month.getTime();
+                monthTicks.push({
+                    label: new Intl.DateTimeFormat('en-US', {
+                        month: 'short',
+                        year: 'numeric',
+                        timeZone: 'UTC'
+                    }).format(month),
+                    left: ((monthTime - startTime) / (endTime - startTime)) * trackWidth
+                });
+            }
+
+            const monthLines = monthTicks.slice(1).map(tick =>
+                `<span class="absolute inset-y-0 border-l border-sage-200" style="left:${tick.left}px"></span>`
+            ).join('');
+            const weekWidth = trackWidth * 7 / totalDays;
+            const rowTrackStyle = `width:${trackWidth}px;flex:0 0 ${trackWidth}px;background-image:repeating-linear-gradient(to right,#e5ebe5 0,#e5ebe5 1px,transparent 1px,transparent ${weekWidth}px)`;
+            const labelStyle = `width:${labelWidth}px;flex:0 0 ${labelWidth}px;left:0`;
+
+            function makeBar(start, finish, color, description, floatUntil, floatDays, floatSuccessor) {
+                const left = Math.max(0, ((parseGanttDate(start) - startTime) / 86400000) * (trackWidth / totalDays));
+                const right = Math.min(trackWidth, ((parseGanttDate(finish) + 86400000 - startTime) / 86400000) * (trackWidth / totalDays));
+                const width = Math.max(5, right - left);
+                const title = `${description}: ${formatGanttDate(start)} – ${formatGanttDate(finish)}`;
+                const taskBar = `<span class="absolute top-1/2 z-10 h-5 -translate-y-1/2 rounded-full ${color} shadow-sm" style="left:${left}px;width:${width}px" title="${escapeBudgetText(title)}" aria-hidden="true"></span>`;
+                if (!floatUntil || floatDays < 1) return taskBar;
+
+                const floatEnd = Math.min(trackWidth, ((parseGanttDate(floatUntil) - startTime) / 86400000) * (trackWidth / totalDays));
+                const floatWidth = Math.max(0, floatEnd - right);
+                if (floatWidth === 0) return taskBar;
+                const floatLabel = `${floatDays} weekdays of float before ${cleanGanttTaskName(floatSuccessor)} starts ${formatGanttDate(floatUntil)}. Finish before the marker to avoid delaying the next task.`;
+                return `${taskBar}
+                    <span class="absolute z-10 h-0.5 ${color}" style="left:${right}px;width:${floatWidth}px;top:50%;transform:translateY(-50%)" title="${escapeBudgetText(floatLabel)}" role="img" aria-label="${escapeBudgetText(floatLabel)}"></span>
+                    <span class="absolute z-10 w-0.5 ${color}" style="left:${floatEnd - 1}px;top:calc(50% - 12px);height:24px" title="${escapeBudgetText(floatLabel)}" aria-hidden="true"></span>`;
+            }
+
+            function makeTrack(start, finish, color, description, rowHeight, floatUntil, floatDays, floatSuccessor) {
+                return `<div class="relative border-b border-sage-100" style="${rowTrackStyle};height:${rowHeight}px">${monthLines}${makeBar(start, finish, color, description, floatUntil, floatDays, floatSuccessor)}</div>`;
+            }
+
+            const headerMonths = monthTicks.map(tick =>
+                `<span class="absolute bottom-1 whitespace-nowrap border-l border-sage-300 pl-2 text-xs font-bold text-slate-600" style="left:${tick.left}px">${tick.label}</span>`
+            ).join('');
+            const header = `
+                <div class="flex border-b border-sage-200 bg-sage-50" style="width:${contentWidth}px">
+                    <div class="sticky z-20 flex items-end bg-sage-50 px-4 pb-3 text-xs font-bold uppercase tracking-wide text-slate-600" style="${labelStyle}">Project phase / task</div>
+                    <div class="relative h-12" style="width:${trackWidth}px;flex:0 0 ${trackWidth}px;background-image:repeating-linear-gradient(to right,#e5ebe5 0,#e5ebe5 1px,transparent 1px,transparent ${weekWidth}px)">
+                        ${monthLines}${headerMonths}
+                    </div>
+                </div>`;
+
+            const phases = resourceBudget.map((phase, index) => {
+                const schedule = ganttSchedule[index];
+                if (!schedule || schedule.tasks.length !== phase.tasks.length) {
+                    throw new Error(`Gantt schedule data does not match ${phase.title}.`);
+                }
+
+                const phaseRange = `${formatGanttDate(schedule.start)} – ${formatGanttDate(schedule.finish)}`;
+                const taskRows = phase.tasks.map((task, taskIndex) => {
+                    const [taskStart, taskFinish, floatUntil, floatSuccessor] = schedule.tasks[taskIndex];
+                    const floatDays = floatUntil ? countWeekdayFloat(taskFinish, floatUntil) : 0;
+                    const taskName = cleanGanttTaskName(task[0]);
+                    const taskDescription = `${phase.title}: ${taskName}`;
+                    const rowHeight = floatDays > 0 ? 80 : 56;
+                    const floatSummary = floatDays > 0
+                        ? `<span class="mt-1 block text-[10px] font-semibold text-amber-700">Float: ${floatDays} weekdays · finish before ${formatGanttTaskDate(floatUntil)}</span>`
+                        : '';
+                    return `
+                        <div class="flex border-b border-sage-100 bg-white hover:bg-sage-50">
+                            <div class="sticky z-30 flex items-center bg-white px-4 pl-11" style="${labelStyle};min-height:${rowHeight}px">
+                                <span class="min-w-0">
+                                    <span class="block text-xs leading-snug text-slate-700" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden" title="${escapeBudgetText(taskName)}">${escapeBudgetText(taskName)}</span>
+                                    <span class="mt-1 block text-[10px] text-slate-500">${formatGanttTaskDate(taskStart)} – ${formatGanttTaskDate(taskFinish)}</span>
+                                    ${floatSummary}
+                                </span>
+                            </div>
+                            ${makeTrack(taskStart, taskFinish, 'bg-emerald-400', taskDescription, rowHeight, floatUntil, floatDays, floatSuccessor)}
+                        </div>`;
+                }).join('');
+
+                return `
+                    <details class="group border-b border-sage-200">
+                        <summary class="flex cursor-pointer list-none border-b border-sage-100 bg-white hover:bg-sage-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-600">
+                            <div class="sticky z-30 flex min-h-14 items-center gap-3 bg-white px-4" style="${labelStyle}">
+                                <i class="fa-solid fa-chevron-right w-3 text-xs text-sage-600 transition-transform group-open:rotate-90" aria-hidden="true"></i>
+                                <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sage-100 text-xs font-extrabold text-sage-700">${index + 1}</span>
+                                <span class="min-w-0 flex-1">
+                                    <span class="block truncate text-sm font-bold text-sage-900">${escapeBudgetText(phase.title)}</span>
+                                    <span class="block text-[10px] text-slate-500">${phase.tasks.length} tasks · ${phaseRange}</span>
+                                </span>
+                            </div>
+                            ${makeTrack(schedule.start, schedule.finish, 'bg-sage-700', phase.title, 56)}
+                        </summary>
+                        ${taskRows}
+                    </details>`;
+            }).join('');
+
+            document.getElementById('gantt-date-range').textContent =
+                `${formatGanttDate(ganttSchedule[0].start)} – ${formatGanttDate(ganttSchedule[ganttSchedule.length - 1].finish)}`;
+            chart.innerHTML = `${header}${phases}`;
+            chart.querySelectorAll('details').forEach((details, index) => {
+                details.open = openPhases[index] || false;
+            });
+            scrollRegion.scrollLeft = previousScrollLeft;
         }
 
         function renderResourceBudget() {
@@ -1303,6 +1543,8 @@
         }
 
         renderResourceBudget();
+        renderGantt();
+        window.addEventListener('resize', renderGantt);
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
