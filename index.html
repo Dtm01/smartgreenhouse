@@ -979,23 +979,32 @@
         <div id="tab-resources" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Resource Planning</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Resource Plan & Budget Description</h2>
-                <p class="text-slate-600 text-sm mt-1">Labor requirements, contractor allocation limits (25% max), and budget allocation.</p>
+                <h2 class="text-3xl font-extrabold text-sage-900">Resource & Budget Overview</h2>
+                <p class="text-slate-600 text-sm mt-1">Expand a project area to review task-level expected effort and estimated costs.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
-                    <h3 class="text-xl font-bold text-sage-900"><i class="fa-solid fa-hard-hat text-sage-600 mr-2"></i>Labor & Contractor Plan</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        The project utilizes both internal core team members and specialized external contractors. In strict adherence to project constraints, **only 25% of project work may be contracted out**. Contractors are strictly retained for specialized structural design and heavy greenhouse assembly, while our core team manages software development, AI monitoring integration, and stakeholder education.
-                    </p>
+            <section aria-label="Budget summary" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Estimated Total Budget</p>
+                    <p id="resource-budget-total" class="mt-2 text-2xl font-extrabold text-sage-900">$0</p>
+                    <p class="mt-1 text-xs text-slate-500">Labor, contractors, and materials</p>
                 </div>
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
-                    <h3 class="text-xl font-bold text-sage-900"><i class="fa-solid fa-wallet text-sage-600 mr-2"></i>Budget Description</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        The total capital budget is allocated across structural materials (40%), smart sensor hardware & AI integration (25%), solar renewable energy systems (15%), contractor fees (20%, adhering to the 25% work limit), and community contingency reserves. Funding is supported by county grants and environmental organization sponsorships.
-                    </p>
+                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Expected Task Effort</p>
+                    <p id="resource-budget-days" class="mt-2 text-2xl font-extrabold text-sage-900">0 days</p>
+                    <p class="mt-1 text-xs text-slate-500">Sum of task estimates, not calendar duration</p>
                 </div>
+            </section>
+
+            <section id="resource-budget-sections" class="space-y-4" aria-label="Expandable project budget details"></section>
+
+            <p class="text-xs text-slate-500">Only the workbook’s expected-time estimates are shown; optimistic, plan, and pessimistic estimates are omitted. Cost figures are estimates from the workbook.</p>
+
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-sage-200 shadow-sm space-y-3">
+                <h3 class="text-xl font-bold text-sage-900"><i class="fa-solid fa-hard-hat text-sage-600 mr-2"></i>Labor & Contractor Plan</h3>
+                <p class="text-slate-600 text-sm leading-relaxed">
+                    The project uses internal team labor and specialized external contractors. Contractor work is planned for construction and other specialized tasks, while the core team leads software development, system integration, and stakeholder education.
+                </p>
             </div>
         </div>
 
@@ -1102,6 +1111,180 @@
             ["SAF-047","Budget formulas miss new or revised WBS tasks",2,4,2400,"Reconcile budget rows to WBS IDs, check formula ranges after inserting rows, and have a second teammate verify totals.","Check team labor, contractor labor, and materials totals separately."],
             ["SAF-048","Committed costs are recorded late",3,4,3000,"Record purchase commitments when approved and reconcile committed and actual costs against the forecast each week.","Include open orders in the weekly cost review."]
         ];
+
+        const resourceBudget = [
+            { title: "Define Greenhouse Requirements", expectedDays: 27.67, tasks: [
+                ["2 - Define environmental requirements",6,1440,0,0,1440],
+                ["3 - Identify target crops the greenhouse will support",6,1440,0,0,1440],
+                ["4 - Determine greenhouse size and location",7.83,1880,0,0,1880],
+                ["5 - Establish project budget",7.83,1880,0,0,1880]
+            ]},
+            { title: "Design Greenhouse", expectedDays: 20, tasks: [
+                ["7 - Create conceptual greenhouse design",5,1200,0,0,1200],
+                ["8 - Develop greenhouse floor plan",5,1200,0,500,1700],
+                ["9 - Select greenhouse materials",5,1200,0,0,1200],
+                ["10 - Review and approve design",5,1200,0,0,1200]
+            ]},
+            { title: "Greenhouse Construction", expectedDays: 104.33, tasks: [
+                ["12 - Contractor Procurement",7.83,1880,1880,0,3760],
+                ["13 - Site Preparation (select, survey, and prepare)",7.5,0,3600,500,4100],
+                ["14 - Construct greenhouse foundation",15,0,7200,3500,10700],
+                ["15 - Assemble greenhouse frame",14.33,0,6880,4000,10880],
+                ["16 - Install greenhouse panels and entry doors",14.5,0,6960,2500,9460],
+                ["17 - Install electrical service",14.83,0,7120,1200,8320],
+                ["18 - Install water connections",14.67,0,7040,800,7840],
+                ["19 - Final inspections",7.83,0,3760,0,3760],
+                ["20 - Approve greenhouse for system installation",7.83,0,3760,0,3760]
+            ]},
+            { title: "Mobile App Dashboard", expectedDays: 11, tasks: [
+                ["22 - Design",2,480,0,150,630],
+                ["23 - Develop",3,720,0,400,1120],
+                ["24 - Test",2,480,0,500,980],
+                ["25 - Launch app",2,480,0,225,705],
+                ["26 - Bug fixes",2,480,0,150,630]
+            ]},
+            { title: "Automated Irrigation System", expectedDays: 35, tasks: [
+                ["28 - Botanical research- Plant needs",5,1200,0,0,1200],
+                ["29 - HW/SW Design",5,1200,0,0,1200],
+                ["30 - Irrigation HW selection",5,1200,0,1500,2700],
+                ["31 - Sensor selection",5,1200,0,600,1800],
+                ["32 - Green House Integration and Test",10,2400,0,0,2400],
+                ["33 - System Design Final Approval and release",5,1200,0,0,1200]
+            ]},
+            { title: "AI Plant Health Monitoring", expectedDays: 16.33, tasks: [
+                ["35 - Define requirements & plant types",1.17,280,0,0,280],
+                ["36 - Select camera hardware",2,480,0,900,1380],
+                ["37 - Install and position cameras",1.17,280,0,250,530],
+                ["38 - Set up daily photo capture and storage",1.33,320,0,150,470],
+                ["39 - Configure AI image analysis (pre-trained model or API)",3.17,760,0,300,1060],
+                ["40 - Test model accuracy",2.17,520,0,100,620],
+                ["41 - Design alert rules",1.17,280,0,0,280],
+                ["42 - Integrate alerts with the dashboard",2.17,520,0,0,520],
+                ["43 - Testing and handoff",2,480,0,0,480]
+            ]},
+            { title: "Solar Panels", expectedDays: 44, tasks: [
+                ["45 - Define solar power system requirements",2,480,0,0,480],
+                ["46 - Estimate greenhouse energy consumption",3,720,0,0,720],
+                ["47 - Determine solar panel and battery capacity",3,720,0,0,720],
+                ["48 - Design solar panel layout and electrical system",4,960,0,0,960],
+                ["49 - Research and select solar panels, power system, control systems",3,720,0,0,720],
+                ["50 - Procure solar panels and electrical components",5,1200,0,5000,6200],
+                ["51 - Install solar panel mounting structures",5,1200,0,1000,2200],
+                ["52 - Install and connect solar panels",3,720,0,0,720],
+                ["53 - Install battery storage and charge controller",3,720,0,2500,3220],
+                ["54 - Connect solar power to greenhouse sensors and control systems",4,960,0,0,960],
+                ["55 - Integrate energy generation and consumption data with dashboard",4,960,0,0,960],
+                ["56 - Test solar power generation, battery charging, and system performance",5,1200,0,0,1200]
+            ]},
+            { title: "Website", expectedDays: 21, tasks: [
+                ["58 - W1 Define stakeholder requirements and website acceptance",2,480,0,500,980],
+                ["59 - W2 Design site structure and responsive wireframes",2,480,0,100,580],
+                ["60 - W3 Set up website platform and document publishing workflow",2,480,0,250,730],
+                ["61 - W4 Build construction progress and project plan page",3,720,0,150,870],
+                ["62 - W5 Build AI Plant Monitoring tab",2,480,0,100,580],
+                ["63 - W6 Build Solar Panel System tab",2,480,0,150,630],
+                ["64 - W7 Build Irrigation System tab",2,480,0,100,580],
+                ["65 - W8 Build Mobile App Dashboard tab",2,480,0,100,580],
+                ["66 - W9 Test website and obtain stakeholder approval",3,720,0,50,770],
+                ["67 - W10 Publish website and hand off maintenance guide",1,240,0,100,340]
+            ]}
+        ];
+
+        function escapeBudgetText(value) {
+            return String(value).replace(/[&<>"']/g, character => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#39;'
+            })[character]);
+        }
+
+        function formatBudgetCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                maximumFractionDigits: 0
+            }).format(value);
+        }
+
+        function formatBudgetDays(value) {
+            return `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value)} days`;
+        }
+
+        function renderResourceBudget() {
+            const sectionsContainer = document.getElementById('resource-budget-sections');
+            const overall = resourceBudget.reduce((summary, section) => {
+                section.summary = section.tasks.reduce((totals, task) => {
+                    totals.budget += task[5];
+                    return totals;
+                }, { days: section.expectedDays, budget: 0 });
+                summary.days += section.summary.days;
+                summary.budget += section.summary.budget;
+                summary.tasks += section.tasks.length;
+                return summary;
+            }, { days: 0, budget: 0, tasks: 0 });
+
+            document.getElementById('resource-budget-total').textContent = formatBudgetCurrency(overall.budget);
+            document.getElementById('resource-budget-days').textContent = formatBudgetDays(overall.days);
+
+            sectionsContainer.innerHTML = resourceBudget.map((section, index) => `
+                <details class="group overflow-hidden rounded-2xl border border-sage-200 bg-white shadow-sm">
+                    <summary class="cursor-pointer list-none bg-sage-100 px-5 py-5 sm:px-7 hover:bg-sage-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-600">
+                        <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                            <div class="flex items-start gap-3">
+                                <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-sm font-extrabold text-sage-700 shadow-sm">${index + 1}</span>
+                                <div>
+                                    <h3 class="font-bold text-sage-900">${escapeBudgetText(section.title)}</h3>
+                                    <p class="mt-1 text-xs text-slate-600">${section.tasks.length} tasks</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-x-6 gap-y-2 pl-12 sm:pl-0">
+                                <span class="text-sm"><span class="text-slate-600">Expected effort</span> <strong class="ml-1 text-sage-900">${formatBudgetDays(section.summary.days)}</strong></span>
+                                <span class="text-sm"><span class="text-slate-600">Estimated budget</span> <strong class="ml-1 text-sage-900">${formatBudgetCurrency(section.summary.budget)}</strong></span>
+                                <i class="fa-solid fa-chevron-down text-sage-600 transition-transform group-open:rotate-180" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </summary>
+                    <div class="border-t border-sage-200 p-4 sm:p-6">
+                        <div class="overflow-x-auto">
+                            <table class="w-full min-w-[760px] text-left text-sm">
+                                <thead>
+                                    <tr class="border-b border-sage-200 text-xs uppercase tracking-wide text-slate-500">
+                                        <th class="px-3 py-3 font-bold">Task</th>
+                                        <th class="px-3 py-3 text-right font-bold">Expected days</th>
+                                        <th class="px-3 py-3 text-right font-bold">Team labor</th>
+                                        <th class="px-3 py-3 text-right font-bold">Contractor</th>
+                                        <th class="px-3 py-3 text-right font-bold">Materials</th>
+                                        <th class="px-3 py-3 text-right font-bold">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-sage-100">
+                                    ${section.tasks.map(task => `
+                                        <tr class="hover:bg-sage-50">
+                                            <th scope="row" class="px-3 py-3 font-medium text-slate-700">${escapeBudgetText(task[0].replace(/^\s*\d+\s*-\s*/, '').replace(/^W\d+\s*/i, ''))}</th>
+                                            <td class="px-3 py-3 text-right text-slate-600">${new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(task[1])}</td>
+                                            <td class="px-3 py-3 text-right text-slate-600">${formatBudgetCurrency(task[2])}</td>
+                                            <td class="px-3 py-3 text-right text-slate-600">${formatBudgetCurrency(task[3])}</td>
+                                            <td class="px-3 py-3 text-right text-slate-600">${formatBudgetCurrency(task[4])}</td>
+                                            <td class="px-3 py-3 text-right font-bold text-sage-900">${formatBudgetCurrency(task[5])}</td>
+                                        </tr>`).join('')}
+                                </tbody>
+                                <tfoot>
+                                    <tr class="border-t-2 border-sage-200 bg-sage-50 font-bold text-sage-900">
+                                        <th scope="row" class="px-3 py-3">Section total</th>
+                                        <td class="px-3 py-3 text-right">${new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(section.summary.days)}</td>
+                                        <td colspan="3" class="px-3 py-3 text-right text-slate-600">Estimated budget</td>
+                                        <td class="px-3 py-3 text-right">${formatBudgetCurrency(section.summary.budget)}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </details>`).join('');
+        }
+
+        renderResourceBudget();
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
