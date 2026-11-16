@@ -432,62 +432,259 @@
         </div>
 
         <!-- ================= 3. AUTOMATED IRRIGATION TAB ================= -->
-        <div id="tab-irrigation" class="tab-content space-y-8">
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Alexander Wong</span>
-                    <h2 class="text-3xl font-extrabold text-sage-900">Fully Automated Irrigation System</h2>
-                    <p class="text-slate-600 text-sm mt-1">Moisture-based precision watering engineered to achieve at least 30% lower water use.</p>
-                </div>
-                <button onclick="runIrrigationCycle()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-water"></i>
-                    <span>Trigger Irrigation Cycle</span>
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-1">
-                    <h3 class="text-xl font-bold text-sage-900">System Parameters</h3>
-                    <div class="space-y-4">
-                        <div>
-                            <div class="flex justify-between text-sm font-semibold mb-1">
-                                <span class="text-slate-600">Soil Moisture Threshold</span>
-                                <span class="text-sage-800" id="soil-threshold-val">40%</span>
-                            </div>
-                            <input type="range" min="20" max="70" value="40" oninput="updateSoilThreshold(this.value)" class="w-full accent-sage-600 cursor-pointer">
-                        </div>
-                        <div class="p-4 rounded-xl bg-blue-50 border border-blue-200 space-y-2">
-                            <h4 class="font-bold text-blue-900 text-sm"><i class="fa-solid fa-chart-pie mr-2"></i>Water Conservation Goal</h4>
-                            <p class="text-xs text-blue-800">Target: &ge; 30% water reduction compared to traditional hand-watering methods.</p>
-                            <div class="w-full bg-blue-200 rounded-full h-2.5 mt-2">
-                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 35%"></div>
-                            </div>
-                            <p class="text-[10px] text-blue-700 text-right font-bold mt-1">Current Savings: 35%</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-2">
-                    <h3 class="text-xl font-bold text-sage-900">Irrigation Logic & Drip Mechanics</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        The Fully Automated Irrigation System integrates soil moisture sensors placed strategically across the root zones. When moisture levels drop below the preset threshold (40%), solenoid valves open automatically, delivering targeted drip irrigation directly to plant roots. This prevents over-watering, minimizes evaporation loss in arid environments, and guarantees compliance with our 30% water savings success criteria.
+        <div id="tab-irrigation" class="tab-content space-y-10">
+            <section class="relative isolate overflow-hidden rounded-3xl bg-sage-900 shadow-xl min-h-[440px] flex items-center">
+                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&amp;fit=crop&amp;w=1600&amp;q=75" alt="" fetchpriority="high" decoding="async" class="absolute inset-0 -z-20 w-full h-full object-cover">
+                <div class="absolute inset-0 -z-10 bg-gradient-to-r from-sage-900/95 via-sage-900/80 to-sage-900/30"></div>
+                <div class="w-full max-w-3xl p-8 sm:p-12 lg:p-14 space-y-6 text-white">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-sage-100">
+                        <i class="fa-solid fa-seedling"></i> Automated Irrigation
+                    </span>
+                    <h2 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">Smarter Watering. Healthier Plants. Less Work.</h2>
+                    <p class="max-w-2xl text-base sm:text-lg leading-relaxed text-sage-50">
+                        Our Fully Automated Irrigation System takes the guesswork out of watering. Using intelligent soil moisture sensors and automated water valves, the Smart Greenhouse continuously monitors plant conditions and delivers water exactly where and when it is needed.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 text-center space-y-1">
-                            <p class="text-xs text-slate-500 font-semibold uppercase">Pump Status</p>
-                            <p class="text-lg font-extrabold text-emerald-600" id="irrigation-status-text">Standby (Auto)</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4">
+                            <i class="fa-solid fa-droplet text-sage-200"></i>
+                            <h3 class="mt-2 font-bold">Water Efficiency</h3>
+                            <p class="mt-1 text-sm text-sage-100">Reduce unnecessary water consumption.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 text-center space-y-1">
-                            <p class="text-xs text-slate-500 font-semibold uppercase">Tank Level</p>
-                            <p class="text-lg font-extrabold text-blue-600">85% Capacity</p>
+                        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4">
+                            <i class="fa-solid fa-leaf text-sage-200"></i>
+                            <h3 class="mt-2 font-bold">Healthier Plants</h3>
+                            <p class="mt-1 text-sm text-sage-100">Maintain optimal soil moisture levels.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 text-center space-y-1">
-                            <p class="text-xs text-slate-500 font-semibold uppercase">Efficiency Rating</p>
-                            <p class="text-lg font-extrabold text-purple-600">Grade A+</p>
+                        <div class="rounded-xl border border-white/20 bg-white/10 backdrop-blur-sm p-4">
+                            <i class="fa-solid fa-clock text-sage-200"></i>
+                            <h3 class="mt-2 font-bold">Less Maintenance</h3>
+                            <p class="mt-1 text-sm text-sage-100">Spend less time manually watering plants.</p>
+                        </div>
+                    </div>
+                    <a href="#irrigation-how-it-works" class="inline-flex items-center gap-2 font-bold text-white hover:text-sage-200 transition-colors">
+                        See how it works <i class="fa-solid fa-arrow-down text-sm"></i>
+                    </a>
+                </div>
+                <span class="absolute bottom-4 right-5 text-[10px] text-white/75">Photo: Unsplash</span>
+            </section>
+
+            <section id="irrigation-how-it-works" class="space-y-6 scroll-mt-32">
+                <div class="max-w-3xl">
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Simple by design</span>
+                    <h2 class="mt-2 text-3xl font-extrabold text-sage-900">How Our Technology Works</h2>
+                    <p class="mt-2 text-slate-600">A straightforward loop: sense what the soil needs, send water where it is needed, and keep an eye on usage.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <article class="group bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl"><i class="fa-solid fa-gauge-high"></i></div>
+                        <p class="mt-5 text-xs font-bold uppercase tracking-widest text-sage-600">Step 1</p>
+                        <h3 class="mt-1 text-xl font-bold text-sage-900">Monitor Soil Conditions</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Moisture sensors check the soil around plants. Readings help indicate when moisture falls below the selected watering threshold.</p>
+                    </article>
+                    <article class="group bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl"><i class="fa-solid fa-faucet-drip"></i></div>
+                        <p class="mt-5 text-xs font-bold uppercase tracking-widest text-sage-600">Step 2</p>
+                        <h3 class="mt-1 text-xl font-bold text-sage-900">Automatically Deliver Water</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Smart valves direct water to the plants or zones that need it, rather than watering every plant on the same fixed schedule.</p>
+                    </article>
+                    <article class="group bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl"><i class="fa-solid fa-chart-column"></i></div>
+                        <p class="mt-5 text-xs font-bold uppercase tracking-widest text-sage-600">Step 3</p>
+                        <h3 class="mt-1 text-xl font-bold text-sage-900">Track Water Consumption</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Water-use monitoring can help owners understand their greenhouse’s irrigation needs and how consumption changes over time.</p>
+                    </article>
+                </div>
+                <div class="rounded-2xl border border-sage-200 bg-white p-5 sm:p-7 shadow-sm">
+                    <p class="text-sm font-bold text-sage-900 text-center mb-5">The watering process at a glance</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-7 items-center gap-3 text-center">
+                        <div class="rounded-xl bg-sage-50 p-4">
+                            <i class="fa-solid fa-droplet text-2xl text-sage-600"></i>
+                            <p class="mt-2 text-sm font-bold text-sage-900">Soil Moisture Sensor</p>
+                        </div>
+                        <i class="hidden sm:block sm:col-span-1 fa-solid fa-arrow-right text-sage-400" aria-hidden="true"></i>
+                        <div class="rounded-xl bg-sage-50 p-4">
+                            <i class="fa-solid fa-sliders text-2xl text-sage-600"></i>
+                            <p class="mt-2 text-sm font-bold text-sage-900">Irrigation Controller</p>
+                        </div>
+                        <i class="hidden sm:block sm:col-span-1 fa-solid fa-arrow-right text-sage-400" aria-hidden="true"></i>
+                        <div class="rounded-xl bg-sage-50 p-4">
+                            <i class="fa-solid fa-faucet-drip text-2xl text-sage-600"></i>
+                            <p class="mt-2 text-sm font-bold text-sage-900">Smart Valve</p>
+                        </div>
+                        <i class="hidden sm:block sm:col-span-1 fa-solid fa-arrow-right text-sage-400" aria-hidden="true"></i>
+                        <div class="rounded-xl bg-sage-50 p-4">
+                            <i class="fa-solid fa-seedling text-2xl text-sage-600"></i>
+                            <p class="mt-2 text-sm font-bold text-sage-900">Plant</p>
                         </div>
                     </div>
                 </div>
-            </div>
+                <p class="text-xs text-slate-500">This is the proposed system flow. Live sensor and valve telemetry is not connected to this presentation page.</p>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+                <div class="lg:col-span-2 rounded-2xl bg-sage-800 text-white p-7 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-6 shadow-sm">
+                    <div class="space-y-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-sage-200">Interactive demonstration</span>
+                        <h2 class="text-2xl font-extrabold">See the watering flow</h2>
+                        <p class="text-sm text-sage-100 max-w-xl">Adjust the example moisture threshold, then preview a cycle. These controls are illustrative and are not connected to greenhouse hardware.</p>
+                        <p class="text-sm font-bold text-white" id="irrigation-status-text" aria-live="polite">Demo ready</p>
+                    </div>
+                    <button onclick="runIrrigationCycle()" class="shrink-0 rounded-xl bg-white hover:bg-sage-100 text-sage-800 font-bold px-5 py-3 text-sm shadow-sm transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i><span>Preview a Cycle</span>
+                    </button>
+                </div>
+                <div class="rounded-2xl border border-sage-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col justify-center">
+                    <label for="irrigation-threshold" class="flex items-center justify-between gap-3 text-sm font-bold text-slate-700">
+                        <span>Example soil-moisture threshold</span>
+                        <span class="text-sage-800" id="soil-threshold-val">40%</span>
+                    </label>
+                    <input id="irrigation-threshold" type="range" min="20" max="70" value="40" oninput="updateSoilThreshold(this.value)" class="mt-5 w-full accent-sage-600 cursor-pointer">
+                    <div class="mt-2 flex justify-between text-xs text-slate-500"><span>20%</span><span>70%</span></div>
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Designed around your growing space</span>
+                    <h2 class="mt-2 text-3xl font-extrabold text-sage-900">Key Benefits</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+                    <article class="group bg-white rounded-2xl border border-sage-200 p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-xl"><i class="fa-solid fa-seedling"></i></div>
+                        <h3 class="mt-4 font-bold text-lg text-sage-900">Healthier Plant Growth</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Consistent moisture levels help prevent underwatering and overwatering.</p>
+                    </article>
+                    <article class="group bg-white rounded-2xl border border-sage-200 p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-700 flex items-center justify-center text-xl"><i class="fa-solid fa-droplet"></i></div>
+                        <h3 class="mt-4 font-bold text-lg text-sage-900">Reduced Water Waste</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Water is delivered based on soil conditions instead of unnecessary scheduled watering.</p>
+                    </article>
+                    <article class="group bg-white rounded-2xl border border-sage-200 p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center text-xl"><i class="fa-solid fa-clock"></i></div>
+                        <h3 class="mt-4 font-bold text-lg text-sage-900">Convenience & Automation</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Minimize daily maintenance and reduce the need to manually water every plant.</p>
+                    </article>
+                    <article class="group bg-white rounded-2xl border border-sage-200 p-6 shadow-sm transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-700 flex items-center justify-center text-xl"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3 class="mt-4 font-bold text-lg text-sage-900">Water Usage Visibility</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed">Understand your greenhouse’s water consumption and irrigation needs.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4">
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">A different way to water</span>
+                    <h2 class="text-3xl font-extrabold text-sage-900">Not Just Automated. Intelligent.</h2>
+                    <p class="text-slate-600 leading-relaxed">Unlike traditional irrigation systems that rely on preset watering schedules, our Smart Greenhouse responds to real-time soil conditions. This allows plants to receive water based on their individual needs, creating a more efficient and convenient growing environment.</p>
+                    <p class="text-xs text-slate-500">This describes the proposed system approach, not measured performance or a guarantee of savings.</p>
+                </div>
+                <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
+                    <div class="grid grid-cols-2">
+                        <h3 class="p-4 sm:p-5 bg-slate-100 text-slate-700 font-bold text-sm sm:text-base">Traditional Irrigation</h3>
+                        <h3 class="p-4 sm:p-5 bg-sage-700 text-white font-bold text-sm sm:text-base"><i class="fa-solid fa-leaf mr-2"></i>Our Smart Greenhouse</h3>
+                    </div>
+                    <div class="divide-y divide-sage-100">
+                        <div class="grid grid-cols-2">
+                            <p class="p-4 text-sm text-slate-600">Waters on a fixed schedule</p>
+                            <p class="p-4 text-sm font-semibold text-sage-800"><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Waters based on soil moisture</p>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <p class="p-4 text-sm text-slate-600">Often waters every plant equally</p>
+                            <p class="p-4 text-sm font-semibold text-sage-800"><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Targets plants that need water</p>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <p class="p-4 text-sm text-slate-600">Limited water-use visibility</p>
+                            <p class="p-4 text-sm font-semibold text-sage-800"><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Tracks water consumption</p>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <p class="p-4 text-sm text-slate-600">Requires manual adjustments</p>
+                            <p class="p-4 text-sm font-semibold text-sage-800"><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Automatically controls smart valves</p>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <p class="p-4 text-sm text-slate-600">Can water when it is not needed</p>
+                            <p class="p-4 text-sm font-semibold text-sage-800"><i class="fa-solid fa-check text-emerald-600 mr-2"></i>Delivers water based on need</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-6">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">System overview</span>
+                    <h2 class="mt-2 text-3xl font-extrabold text-sage-900">The Components Behind the Flow</h2>
+                    <p class="mt-2 text-slate-600">A conceptual look at the parts described in the project. Specific product models and specifications have not been selected.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+                    <article class="bg-white rounded-2xl border border-sage-200 p-6 shadow-sm">
+                        <div class="h-28 rounded-xl bg-gradient-to-br from-sage-100 to-emerald-50 flex items-center justify-center"><i class="fa-solid fa-droplet text-4xl text-sage-600"></i></div>
+                        <h3 class="mt-4 font-bold text-sage-900">Soil Moisture Sensors</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Detect moisture levels in the soil around plants.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 p-6 shadow-sm">
+                        <div class="h-28 rounded-xl bg-gradient-to-br from-sage-100 to-blue-50 flex items-center justify-center"><i class="fa-solid fa-faucet-drip text-4xl text-sage-600"></i></div>
+                        <h3 class="mt-4 font-bold text-sage-900">Smart Irrigation Valves</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Control water distribution to the plants or zones that need it.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 p-6 shadow-sm">
+                        <div class="h-28 rounded-xl bg-gradient-to-br from-sage-100 to-cyan-50 flex items-center justify-center"><i class="fa-solid fa-water text-4xl text-sage-600"></i></div>
+                        <h3 class="mt-4 font-bold text-sage-900">Tubing & Emitters</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Carry water through the greenhouse and deliver it near plant roots.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 p-6 shadow-sm">
+                        <div class="h-28 rounded-xl bg-gradient-to-br from-sage-100 to-purple-50 flex items-center justify-center"><i class="fa-solid fa-chart-simple text-4xl text-sage-600"></i></div>
+                        <h3 class="mt-4 font-bold text-sage-900">Water Monitoring Interface</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">A planned view of water consumption and irrigation activity; live meter data is not connected in this demo.</p>
+                    </article>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-1">
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Good to know</span>
+                    <h2 class="mt-2 text-3xl font-extrabold text-sage-900">Frequently Asked Questions</h2>
+                    <p class="mt-2 text-slate-600">Answers reflect the project design and the functionality currently shown in this presentation.</p>
+                </div>
+                <div id="irrigation-faq" class="lg:col-span-2 space-y-3 scroll-mt-32">
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Does the system automatically determine when plants need water?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">The proposed design uses soil-moisture readings and a selected threshold to guide watering. This web page does not connect to live sensors.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Can different plants receive different amounts of water?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">The project describes directing water to plants or zones that need it. Separate plant-specific amounts or profiles are not implemented or confirmed yet.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Can I monitor how much water my greenhouse uses?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Water-use visibility is part of the project concept. Live consumption readings are not connected to this presentation page.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Does the irrigation system require manual operation?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">The proposed system is designed to automate watering based on soil conditions. The cycle button on this page is only a demonstration; it does not operate a physical pump or valve.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">What happens if a moisture sensor stops working?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Sensor-failure alerts and backup watering behavior are not specified in the current project demo, so the system’s response has not yet been confirmed.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Can the system operate without an internet connection?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Offline operation for the irrigation controller has not been specified or tested in the project files, so we cannot confirm its behavior without internet.</p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="relative isolate overflow-hidden rounded-3xl bg-sage-900 shadow-xl">
+                <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&amp;fit=crop&amp;w=1200&amp;q=70" alt="" loading="lazy" decoding="async" class="absolute inset-0 -z-20 w-full h-full object-cover">
+                <div class="absolute inset-0 -z-10 bg-gradient-to-r from-sage-900/95 via-sage-900/80 to-sage-900/35"></div>
+                <div class="max-w-3xl p-8 sm:p-12 text-white space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-sage-200">SMART Greenhouse</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold">Grow Smarter. Water Better.</h2>
+                    <p class="text-sage-100 text-base sm:text-lg">Let your greenhouse take care of the watering, so you can focus on growing.</p>
+                    <!-- <a href="#irrigation-how-it-works" class="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-sage-800 transition-colors hover:bg-sage-100">
+                        Explore the system <i class="fa-solid fa-arrow-right"></i>
+                    </a> -->
+                </div>
+            </section>
         </div>
 
         <!-- ================= 4. AI PLANT HEALTH MONITORING TAB ================= -->
@@ -981,12 +1178,12 @@
 
         function runIrrigationCycle() {
             const statusText = document.getElementById('irrigation-status-text');
-            statusText.innerText = 'Watering Active...';
-            statusText.className = 'text-lg font-extrabold text-blue-600 animate-pulse';
-            showToast('Irrigation cycle initiated successfully.');
+            statusText.innerText = 'Demo cycle running...';
+            statusText.className = 'text-sm font-bold text-sage-100 animate-pulse';
+            showToast('Demo cycle simulated; no physical irrigation hardware is connected.');
             setTimeout(() => {
-                statusText.innerText = 'Standby (Auto)';
-                statusText.className = 'text-lg font-extrabold text-emerald-600';
+                statusText.innerText = 'Demo ready';
+                statusText.className = 'text-sm font-bold text-white';
             }, 4000);
         }
 
