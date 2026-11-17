@@ -42,6 +42,9 @@
     </script>
     <link rel="stylesheet" href="assets/overview.css">
     <link rel="stylesheet" href="assets/solar.css">
+    <link rel="stylesheet" href="assets/timeline-network.css">
+    <script defer src="assets/network-data.js"></script>
+    <script defer src="assets/project-network.js"></script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .tab-content { display: none; }
@@ -876,14 +879,14 @@
         <div id="tab-gantt" class="tab-content space-y-8">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Schedule Management</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Project Timeline & Gantt Chart</h2>
+                <h2 class="text-3xl font-extrabold text-sage-900">Project Timeline</h2>
                 <p class="text-slate-600 text-sm mt-1">Explore the eight project phases and expand any phase to see its scheduled tasks.</p>
             </div>
 
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-5 sm:p-7 space-y-4">
                 <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <h3 class="font-bold text-sage-900">Schedule overview</h3>
+                        <h3 class="font-bold text-sage-900">Gantt Chart</h3>
                         <p id="gantt-date-range" class="text-xs text-slate-500 mt-1"></p>
                     </div>
                     <div class="flex items-center gap-2">
@@ -911,6 +914,28 @@
                 </div>
                 <p class="text-xs text-slate-500">Float is calculated to the next linked task’s start; the end marker shows when its predecessor must be complete. Day counts exclude weekends; no holiday calendar is applied.</p>
             </div>
+
+        <section id="project-network-section" class="card" aria-labelledby="simple-network-title">
+            <div class="section-heading">
+                <h2 id="simple-network-title">Project Network Diagram</h2>
+            </div>
+            <div class="legend">
+                <span><i class="swatch critical" aria-hidden="true"></i>Contains critical activities</span>
+                <span><i class="swatch" aria-hidden="true"></i>Noncritical workstream</span>
+                <span><i class="critical-line" aria-hidden="true"></i>Contains a critical driving link</span>
+            </div>
+            <div class="toolbar no-print">
+                <div class="zoom-controls">
+                    <button type="button" data-zoom="out" aria-label="Zoom network out">−</button>
+                    <output id="zoom-value" aria-live="polite">...</output>
+                    <button type="button" data-zoom="in" aria-label="Zoom network in">+</button>
+                </div>
+            </div>
+            <div id="network-viewport" class="network-viewport" tabindex="0" role="region" aria-label="Simplified workstream network; scroll or zoom for details">
+                <div id="network-canvas" class="network-canvas"></div>
+            </div>
+            <aside id="phase-inspector" class="inspector" aria-live="polite"><h3>Explore a handoff</h3><p>Select a workstream box to see which specific activities connect it to the rest of the project.</p></aside>
+        </section>
         </div>
 
         
