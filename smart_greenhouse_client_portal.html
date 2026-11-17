@@ -41,6 +41,7 @@
         }
     </script>
     <link rel="stylesheet" href="assets/overview.css">
+    <link rel="stylesheet" href="assets/solar.css">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .tab-content { display: none; }
@@ -538,59 +539,140 @@
         </div>
 
         <!-- ================= 5. SOLAR PANELS TAB ================= -->
-        <div id="tab-solar" class="tab-content space-y-8">
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div id="tab-solar" class="tab-content">
+            <svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <symbol id="solar-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v2M12 21v2M1 12h2M21 12h2M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2"/></symbol>
+                        <symbol id="solar-leaf" viewBox="0 0 24 24"><path d="M4 21c0-7 6-13 13-15M5 17C0 4 12 2 21 3c0 11-2 17-11 17"/></symbol>
+                        <symbol id="solar-battery" viewBox="0 0 24 24"><rect x="2" y="6" width="18" height="12" rx="2"/><path d="M22 10v4M6 9v6M10 9v6M14 9v6"/></symbol>
+                        <symbol id="solar-house" viewBox="0 0 24 24"><path d="m2 11 10-9 10 9M4 9v12h16V9M9 21V11h6v10M4 15h5M15 15h5"/></symbol>
+                        <symbol id="solar-signal" viewBox="0 0 24 24"><path d="M3 21v-4M9 21V12M15 21V7M21 21V2"/></symbol>
+                        <symbol id="solar-book" viewBox="0 0 24 24"><path d="M12 5C8 2 4 3 2 4v15c3-1 6-1 10 1 4-2 7-2 10-1V4c-2-1-6-2-10 1ZM12 5v15"/></symbol>
+                    </defs>
+                </svg>
+            <section class="hero" aria-labelledby="solar-title">
+                <div class="hero-copy">
+                    <p class="lead">Lead: Aiden Lee</p>
+                    <h1 id="solar-title">Solar Panels &amp; Renewable Energy</h1>
+                    <p>Solar panels help power <strong>irrigation, plant-health monitoring, and ventilation</strong></p>
+                    <span class="solar-pill"><svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>Active Generation: 2.4 kW</span>
+                </div>
+                <figure class="solar-photo">
+                    <img src="assets/solar-panels-concept.png" alt="Concept illustration of solar panels in the foreground with a small crop-filled greenhouse behind them." width="1536" height="1024" fetchpriority="high">
+                </figure>
+            </section>
+
+            <div class="demo-toolbar">
                 <div>
-                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Aiden Lee</span>
-                    <h2 class="text-3xl font-extrabold text-sage-900">Solar Panels & Renewable Energy</h2>
-                    <p class="text-slate-600 text-sm mt-1">Self-sustaining green energy grid powering sensors, pumps, and automated roof vents.</p>
-                </div>
-                <div class="bg-amber-50 border border-amber-200 px-4 py-2 rounded-xl text-amber-800 font-bold text-sm flex items-center space-x-2">
-                    <i class="fa-solid fa-sun text-amber-500 animate-spin" style="animation-duration: 10s;"></i>
-                    <span>Active Generation: 2.4 kW</span>
+                    <h2>Your greenhouse energy, at a glance.</h2>
+                    <p>A sample solar app home screen showing generation and greenhouse energy use on a sunny day.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-1">
-                    <h3 class="text-xl font-bold text-sage-900">Energy Distribution</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex justify-between items-center pb-2 border-b border-sage-100">
-                            <span class="text-slate-600">Irrigation Pumps</span>
-                            <span class="font-bold text-sage-900">0.8 kW</span>
+            <div class="dashboard">
+                <div class="phone-column">
+                    <section class="phone" aria-label="Solar app phone mockup">
+                        <div class="phone-screen">
+                            <div class="phone-status" aria-hidden="true">
+                                <span id="solar-phone-time">12:30</span>
+                                <span class="status-icons"><svg class="icon"><use href="#solar-signal"/></svg><svg class="icon"><use href="#solar-battery"/></svg></span>
+                            </div>
+                            <div class="app-header">
+                                <div><h3>Greenhouse Solar</h3><p>Greenhouse Zone A &middot; Sample data</p></div>
+                                <svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>
+                            </div>
+                            <div class="phone-body">
+                                <div class="generation">
+                                    <span class="generation-label"><span class="dot" aria-hidden="true"></span><span id="solar-generation-status">Generating solar power</span></span>
+                                    <div class="power-ring" id="solar-power-ring">
+                                        <div class="power-ring-inner">
+                                            <svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>
+                                            <strong><span id="solar-phone-generation" style="font: inherit; color: inherit;">2.4</span> <span>kW</span></strong>
+                                            <small>Solar generation now</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="phone-mini-grid">
+                                    <div class="phone-mini">
+                                        <span>Greenhouse using</span><strong>1.4 kW</strong><small id="solar-load-source">Supplied by solar</small>
+                                    </div>
+                                    <div class="phone-mini">
+                                        <span>Battery level</span><strong id="solar-phone-battery">94%</strong><small id="solar-battery-mode">Charging &middot; 1.0 kW</small>
+                                        <div class="battery-track" aria-hidden="true"><span id="solar-battery-fill"></span></div>
+                                    </div>
+                                </div>
+                                <div class="phone-chart">
+                                    <h4>Typical solar output <span style="font-weight: 400;">(kW)</span></h4>
+                                    <svg viewBox="0 0 260 78" role="img" aria-labelledby="solar-chart-title solar-chart-desc">
+                                        <title id="solar-chart-title">Illustrative daily solar generation</title>
+                                        <desc id="solar-chart-desc">Solar output rises from zero in the morning, peaks around midday, and returns to zero at sunset. This is a sample curve, not measured data.</desc>
+                                        <defs><linearGradient id="solar-chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#edc76e" stop-opacity=".3"/><stop offset="100%" stop-color="#edc76e" stop-opacity="0"/></linearGradient></defs>
+                                        <path d="M0 74H260M0 39H260M0 4H260" stroke="#304734" stroke-width="1"/>
+                                        <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74V78H0Z" fill="url(#solar-chart-fill)"/>
+                                        <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74" fill="none" stroke="#edc76e" stroke-width="2.5" stroke-linejoin="round"/>
+                                    </svg>
+                                    <div class="axis-labels" aria-hidden="true"><span>6 AM</span><span>Noon</span><span>6 PM</span></div>
+                                </div>
+                                <div class="app-note">
+                                    <svg class="icon" aria-hidden="true"><use href="#solar-leaf"/></svg>
+                                    <p id="solar-app-insight">Solar is meeting the greenhouse's current demand. Extra energy is charging the battery.</p>
+                                </div>
+                            </div>
+                            <div class="app-footer">Solar overview &middot; Illustrative app home screen</div>
                         </div>
-                        <div class="flex justify-between items-center pb-2 border-b border-sage-100">
-                            <span class="text-slate-600">AI Edge Sensors</span>
-                            <span class="font-bold text-sage-900">0.4 kW</span>
-                        </div>
-                        <div class="flex justify-between items-center pb-2 border-b border-sage-100">
-                            <span class="text-slate-600">Battery Storage (LiFePO4)</span>
-                            <span class="font-bold text-emerald-600">Charging (94%)</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-600">Roof Actuators</span>
-                            <span class="font-bold text-sage-900">0.2 kW</span>
-                        </div>
-                    </div>
+                    </section>
+                    <p class="phone-caption">A proposed view within the greenhouse app&mdash;designed to help operators understand energy at a glance.</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-2">
-                    <h3 class="text-xl font-bold text-sage-900">Sustainable Power Architecture</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        The solar panel subsystem ensures the SMART Greenhouse operates entirely off-grid or semi-autonomously in remote drought-stricken communities. By harnessing renewable solar energy, the facility underscores its environmental commitment to sustainable food production without adding to local carbon footprints or drawing on fragile community power grids.
-                    </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
-                            <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-battery-half text-amber-600 mr-2"></i>High-Capacity Storage</h4>
-                            <p class="text-xs text-slate-600">Stores excess daytime energy to maintain uninterrupted 24/7 sensor and pump operation.</p>
+                <div class="right-column">
+                    <section class="card" aria-labelledby="solar-flow-title">
+                        <div class="card-heading">
+                            <h2 id="solar-flow-title">Where the power goes</h2>
+                            <span id="solar-scenario-badge" class="scenario-badge">Sunny day &middot; Sample</span>
                         </div>
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
-                            <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-leaf text-emerald-600 mr-2"></i>Zero Carbon Footprint</h4>
-                            <p class="text-xs text-slate-600">Demonstrates true renewable energy integration for educational community stakeholders.</p>
+                        <div class="energy-flow" role="group" aria-label="Sample energy balance">
+                            <div class="energy-node"><svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg><div><strong id="solar-flow-generation">2.4 kW</strong><span>Solar generation</span></div></div>
+                            <span class="flow-arrow" aria-hidden="true">&rarr;</span>
+                            <div class="energy-node"><svg class="icon" aria-hidden="true"><use href="#solar-house"/></svg><div><strong>1.4 kW</strong><span>Greenhouse use</span></div></div>
+                            <span class="flow-arrow" aria-hidden="true" id="solar-battery-arrow">&rarr;</span>
+                            <div class="energy-node"><svg class="icon" aria-hidden="true"><use href="#solar-battery"/></svg><div><strong id="solar-flow-battery">1.0 kW</strong><span id="solar-flow-battery-label">To battery</span></div></div>
                         </div>
+                        <p class="flow-explainer" id="solar-flow-explainer">2.4 kW generated = 1.4 kW for greenhouse systems + 1.0 kW to battery storage.</p>
+                    </section>
+
+                    <section class="card" aria-labelledby="solar-loads-title">
+                        <div class="card-heading"><h2 id="solar-loads-title">Powering the greenhouse</h2></div>
+                        <div class="load-row">
+                            <div class="load-label"><span>Irrigation pumps</span><strong>0.8 kW</strong></div>
+                            <div class="load-track" aria-hidden="true"><span style="width: 57.1429%;"></span></div>
+                        </div>
+                        <div class="load-row">
+                            <div class="load-label"><span>AI monitoring &amp; sensors</span><strong>0.4 kW</strong></div>
+                            <div class="load-track" aria-hidden="true"><span style="width: 28.5714%;"></span></div>
+                        </div>
+                        <div class="load-row">
+                            <div class="load-label"><span>Ventilation &amp; roof actuators</span><strong>0.2 kW</strong></div>
+                            <div class="load-track" aria-hidden="true"><span style="width: 14.2857%;"></span></div>
+                        </div>
+                        <div class="load-total"><span>Total system demand</span><span>1.4 kW</span></div>
+                        <p class="load-footnote">Illustrative snapshot with all three loads active. Actual demand varies with watering schedules and environmental conditions.</p>
+                    </section>
+
+                    <div class="benefits">
+                        <article class="benefit">
+                            <svg class="icon" aria-hidden="true"><use href="#solar-battery"/></svg>
+                            <h3>Store energy for later</h3>
+                            <p>Battery storage could save surplus solar energy for use after sunset. Runtime depends on battery capacity and greenhouse demand.</p>
+                        </article>
+                        <article class="benefit">
+                            <svg class="icon" aria-hidden="true"><use href="#solar-book"/></svg>
+                            <h3>Make energy a learning opportunity</h3>
+                            <p>Help students and community members see how sunlight can support irrigation, AI monitoring, and sustainable agriculture.</p>
+                        </article>
                     </div>
                 </div>
             </div>
+            <p class="concept-note">Design concept only. All readings are simulated, not live telemetry. The image is an AI-generated concept. Battery storage is shown as a proposed capability; final capacity and power coverage would require engineering validation.</p>
         </div>
 
         <!-- ================= 7. TIMELINE TAB ================= -->
