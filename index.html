@@ -1027,28 +1027,7 @@
                         <p id="resource-budget-materials-share" class="mt-1 text-xs font-semibold text-sage-700">0% of base estimate</p>
                     </article>
                 </div>
-                <div class="rounded-xl border border-sage-300 bg-sage-100 p-5 space-y-4">
-                    <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
-                        <div>
-                            <h4 class="font-bold text-sage-900">Labor Time Split</h4>
-                            <p class="mt-1 text-xs text-slate-600">Percentages are shares of total estimated labor hours, not cost.</p>
-                        </div>
-                        <p id="resource-budget-total-labor-hours" class="text-sm font-bold text-sage-800">0 total hours</p>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <article class="rounded-lg border border-sage-200 bg-white p-4">
-                            <h5 class="text-sm font-semibold text-slate-600">Team labor time</h5>
-                            <p id="resource-budget-team-hours" class="mt-2 text-xl font-extrabold text-sage-900">0 hours</p>
-                            <p id="resource-budget-team-time-share" class="mt-1 text-xs font-semibold text-sage-700">0% of estimated labor time</p>
-                        </article>
-                        <article class="rounded-lg border border-sage-200 bg-white p-4">
-                            <h5 class="text-sm font-semibold text-slate-600">External contractor labor time</h5>
-                            <p id="resource-budget-contractor-hours" class="mt-2 text-xl font-extrabold text-sage-900">0 hours</p>
-                            <p id="resource-budget-contractor-time-share" class="mt-1 text-xs font-semibold text-sage-700">0% of estimated labor time</p>
-                        </article>
-                    </div>
-                </div>
-                <p class="text-xs text-slate-500">Percentages are rounded to two decimal places and may not total exactly 100%.</p>
+                <p class="text-xs text-slate-500">Cost percentages are rounded to two decimal places and may not total exactly 100%.</p>
             </section>
 
             <section aria-labelledby="budget-method-heading" class="bg-white p-6 sm:p-8 rounded-2xl border border-sage-200 shadow-sm space-y-3">
@@ -1557,16 +1536,6 @@
             document.getElementById('resource-budget-team-share').textContent = `${(overall.teamLabor / overall.budget * 100).toFixed(2)}% of base estimate`;
             document.getElementById('resource-budget-contractor-share').textContent = `${(overall.contractorLabor / overall.budget * 100).toFixed(2)}% of base estimate`;
             document.getElementById('resource-budget-materials-share').textContent = `${(overall.materials / overall.budget * 100).toFixed(2)}% of base estimate`;
-            const teamLaborHours = overall.teamLabor / 30;
-            const contractorLaborHours = overall.contractorLabor / 60;
-            const totalLaborHours = teamLaborHours + contractorLaborHours;
-            const formatLaborHours = value => `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value)} hours`;
-            document.getElementById('resource-budget-total-labor-hours').textContent = `${new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(totalLaborHours)} total hours`;
-            document.getElementById('resource-budget-team-hours').textContent = formatLaborHours(teamLaborHours);
-            document.getElementById('resource-budget-contractor-hours').textContent = formatLaborHours(contractorLaborHours);
-            document.getElementById('resource-budget-team-time-share').textContent = `${(teamLaborHours / totalLaborHours * 100).toFixed(2)}% of estimated labor time`;
-            document.getElementById('resource-budget-contractor-time-share').textContent = `${(contractorLaborHours / totalLaborHours * 100).toFixed(2)}% of estimated labor time`;
-
             sectionsContainer.innerHTML = resourceBudget.map((section, index) => `
                 <details class="group overflow-hidden rounded-2xl border border-sage-200 bg-white shadow-sm">
                     <summary class="cursor-pointer list-none bg-sage-100 px-5 py-5 sm:px-7 hover:bg-sage-200 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-600">
