@@ -1,0 +1,117 @@
+#tab-solar { color: var(--forest); line-height: 1.6; --forest: #243d30; --green: #44674b; --muted: #59695f; --line: #d7e1d7; --paper: #f4f7f4; --amber: #a85b08; }
+#tab-solar h1, #tab-solar h2, #tab-solar h3 { font-weight: 700; }
+#tab-solar .icon { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+#tab-solar h1, #tab-solar h2, #tab-solar h3, #tab-solar p { margin: 0; }
+#tab-solar h1 { font-size: 30px; line-height: 1.25; letter-spacing: -1px; margin-bottom: 6px; }
+#tab-solar h2 { font-size: 21px; line-height: 1.35; letter-spacing: -.6px; }
+#tab-solar h3 { font-size: 14px; letter-spacing: -.2px; }
+#tab-solar .hero { display: grid; grid-template-columns: 1fr 1.12fr; min-height: 310px; background: white; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+#tab-solar .hero-copy { padding: 32px; align-self: center; }
+#tab-solar .hero-copy > p { font-size: 13px; color: var(--muted); }
+#tab-solar .hero-copy .lead { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--green); margin-bottom: 5px; font-weight: 600; }
+#tab-solar .hero-copy strong { color: var(--forest); }
+#tab-solar .solar-pill { display: inline-flex; gap: 7px; align-items: center; margin-top: 20px; padding: 8px 12px; border: 1px solid #f1d8a5; color: #88500c; background: #fffaed; border-radius: 10px; font-size: 11px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+#tab-solar .solar-pill .icon { width: 15px; height: 15px; }
+#tab-solar .solar-photo { position: relative; margin: 0; min-height: 100%; }
+#tab-solar .solar-photo img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: 70% center; }
+#tab-solar .demo-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 22px; margin: 27px 0 22px; }
+#tab-solar .demo-toolbar p { color: var(--muted); font-size: 12px; margin-top: 5px; }
+#tab-solar .dashboard { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 28px; align-items: start; }
+#tab-solar .phone-column { display: flex; flex-direction: column; align-items: center; }
+#tab-solar .phone { width: 100%; max-width: 350px; padding: 11px; border: 3px solid #35443b; border-radius: 43px; background: #16231c; box-shadow: 0 15px 32px #243d3021; }
+#tab-solar .phone-screen { border: 1px solid #32443a; border-radius: 30px; background: #0e1e16; color: #f4f8f2; overflow: hidden; }
+#tab-solar .phone-status { display: flex; justify-content: space-between; align-items: center; height: 34px; padding: 0 20px; background: #172a1e; color: #d1dfd1; font-size: 9px; font-weight: 600; }
+#tab-solar .status-icons { display: flex; gap: 6px; }
+#tab-solar .status-icons .icon { width: 12px; height: 12px; }
+#tab-solar .app-header { padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #2a4031; }
+#tab-solar .app-header h3 { font-size: 14px; }
+#tab-solar .app-header p { color: #adc3b1; font-size: 10px; margin-top: 3px; }
+#tab-solar .app-header > .icon { width: 25px; height: 25px; color: #e4be6c; }
+#tab-solar .phone-body { padding: 15px; }
+#tab-solar .generation { text-align: center; padding: 3px 0 12px; }
+#tab-solar .generation-label { display: inline-flex; align-items: center; gap: 6px; color: #d0e0d0; font-size: 10px; }
+#tab-solar .dot { width: 6px; height: 6px; border-radius: 50%; background: #e8c773; display: inline-block; flex-shrink: 0; }
+#tab-solar .power-ring { width: 150px; height: 150px; padding: 7px; border-radius: 50%; background: conic-gradient(from 220deg, #edc76e 0deg 255deg, #2b3f30 255deg 360deg); margin: 13px auto 10px; }
+#tab-solar .power-ring-inner { display: flex; align-items: center; justify-content: center; flex-direction: column; width: 100%; height: 100%; background: #0e1e16; border-radius: 50%; }
+#tab-solar .power-ring-inner .icon { color: #edc76e; width: 22px; height: 22px; margin-bottom: 5px; }
+#tab-solar .power-ring strong { font-size: 34px; letter-spacing: -1.5px; line-height: 1.2; }
+#tab-solar .power-ring strong span { font-size: 14px; letter-spacing: 0; color: #d4dfd1; }
+#tab-solar .power-ring small { margin-top: 4px; color: #acc0ad; font-size: 9px; }
+#tab-solar .phone-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 0 0 13px; }
+#tab-solar .phone-mini { padding: 11px; background: #1b3022; border: 1px solid #304734; border-radius: 10px; }
+#tab-solar .phone-mini span { display: block; color: #b6cab8; font-size: 9px; }
+#tab-solar .phone-mini strong { display: block; font-size: 18px; margin-top: 3px; letter-spacing: -.4px; }
+#tab-solar .phone-mini small { color: #b4dbb8; font-size: 9px; }
+#tab-solar .battery-track { height: 4px; background: #364d3c; margin-top: 7px; border-radius: 3px; overflow: hidden; }
+#tab-solar .battery-track span { height: 100%; background: #8fc8a0; width: 94%; }
+#tab-solar .phone-chart { padding: 13px; border-radius: 11px; background: #172a1e; border: 1px solid #2d4432; }
+#tab-solar .phone-chart h4 { margin: 0; color: #d3e2d2; font-size: 10px; font-weight: 600; }
+#tab-solar .phone-chart svg { display: block; width: 100%; height: 73px; margin-top: 8px; overflow: visible; }
+#tab-solar .axis-labels { display: flex; justify-content: space-between; color: #a3b8a5; font-size: 8px; margin-top: 5px; }
+#tab-solar .app-note { display: flex; align-items: start; gap: 8px; padding: 12px 0 0; color: #c3dbc5; font-size: 10px; line-height: 1.6; }
+#tab-solar .app-note .icon { width: 16px; height: 16px; margin-top: 1px; color: #b8d5a5; }
+#tab-solar .app-footer { border-top: 1px solid #2a4031; text-align: center; font-size: 9px; padding: 11px; color: #adc3b1; }
+#tab-solar .phone-caption { margin: 15px 10px 0; text-align: center; max-width: 310px; font-size: 10px; color: var(--muted); }
+#tab-solar .right-column { display: grid; gap: 20px; }
+#tab-solar .card { padding: 25px; border: 1px solid var(--line); border-radius: 16px; background: white; box-shadow: 0 1px 2px #243d300a; }
+#tab-solar .card-heading { display: flex; justify-content: space-between; align-items: center; gap: 15px; margin-bottom: 18px; }
+#tab-solar .card-heading h2 { font-size: 18px; }
+#tab-solar .scenario-badge { font-size: 10px; font-weight: 600; color: #825110; background: #fff7e4; border: 1px solid #f1dfb8; border-radius: 20px; padding: 4px 10px; white-space: nowrap; }
+#tab-solar .energy-flow { display: grid; grid-template-columns: 1fr 20px 1fr 20px 1fr; gap: 7px; align-items: center; }
+#tab-solar .energy-node { text-align: center; padding: 16px 8px; background: #f4f7f1; border: 1px solid #e0e7dc; border-radius: 11px; }
+#tab-solar .energy-node:first-child { background: #fff9eb; border-color: #efdfb9; }
+#tab-solar .energy-node > .icon { display: block; margin: 0 auto 8px; color: var(--green); }
+#tab-solar .energy-node:first-child > .icon { color: #b17216; }
+#tab-solar .energy-node strong { display: block; font-size: 21px; letter-spacing: -.6px; }
+#tab-solar .energy-node span { display: block; font-size: 10px; color: var(--muted); margin-top: 4px; }
+#tab-solar .flow-arrow { color: #81947c; font-size: 17px; text-align: center; }
+#tab-solar .flow-explainer { font-size: 11px; color: var(--muted); background: #f6f8f4; border-radius: 7px; padding: 11px 13px; margin-top: 16px; }
+#tab-solar .load-row + .load-row { margin-top: 17px; }
+#tab-solar .load-label { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12px; }
+#tab-solar .load-label strong { font-size: 12px; white-space: nowrap; }
+#tab-solar .load-label span { color: var(--muted); }
+#tab-solar .load-track { height: 6px; background: #eef2ea; border-radius: 4px; margin-top: 7px; overflow: hidden; }
+#tab-solar .load-track span { display: block; height: 100%; border-radius: inherit; background: #628466; }
+#tab-solar .load-row:nth-of-type(3) .load-track span { background: #8ca980; }
+#tab-solar .load-row:nth-of-type(4) .load-track span { background: #b5c8a9; }
+#tab-solar .load-total { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
+#tab-solar .load-footnote { margin-top: 10px; color: var(--muted); font-size: 10px; }
+#tab-solar .benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+#tab-solar .benefit { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #edf2e8; }
+#tab-solar .benefit .icon { color: var(--green); margin-bottom: 8px; }
+#tab-solar .benefit p { color: var(--muted); font-size: 11px; margin-top: 7px; }
+#tab-solar .concept-note { font-size: 10px; color: var(--muted); margin-top: 23px; padding-top: 16px; border-top: 1px solid var(--line); }
+#tab-solar .icon-definitions { position: absolute; width: 0; height: 0; overflow: hidden; }
+@media (max-width: 1000px) {
+    #tab-solar .dashboard { grid-template-columns: 320px minmax(0, 1fr); gap: 20px; }
+    #tab-solar .card { padding: 20px; }
+    #tab-solar .energy-flow { grid-template-columns: 1fr; gap: 8px; }
+    #tab-solar .energy-node { display: flex; text-align: left; align-items: center; gap: 12px; padding: 12px; }
+    #tab-solar .energy-node > .icon { margin: 0; }
+    #tab-solar .energy-node strong { font-size: 18px; }
+    #tab-solar .energy-node span { margin-top: 0; }
+    #tab-solar .flow-arrow { display: none; }
+    #tab-solar .benefits { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+    #tab-solar .hero { grid-template-columns: 1fr; }
+    #tab-solar .hero-copy { padding: 27px; }
+    #tab-solar .solar-photo { min-height: 245px; }
+    #tab-solar .demo-toolbar { align-items: start; flex-direction: column; gap: 16px; }
+    #tab-solar .dashboard { grid-template-columns: 1fr; gap: 25px; }
+    #tab-solar .phone { max-width: 350px; }
+    #tab-solar .energy-flow { grid-template-columns: 1fr 16px 1fr 16px 1fr; gap: 4px; }
+    #tab-solar .energy-node { display: block; padding: 14px 5px; text-align: center; }
+    #tab-solar .energy-node > .icon { margin: 0 auto 7px; }
+    #tab-solar .energy-node span { font-size: 9px; }
+    #tab-solar .flow-arrow { display: block; }
+    #tab-solar .benefits { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+    #tab-solar .hero-copy { padding: 23px; }
+    #tab-solar .phone-body { padding: 12px; }
+    #tab-solar .card-heading { align-items: start; flex-direction: column; gap: 10px; }
+    #tab-solar .benefits { grid-template-columns: 1fr; }
+    #tab-solar .energy-node strong { font-size: 16px; }
+    #tab-solar .energy-node span { font-size: 8px; }
+}
