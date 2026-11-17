@@ -40,6 +40,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="assets/overview.css">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .tab-content { display: none; }
@@ -159,145 +160,121 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- ================= 1. HOME / OVERVIEW TAB ================= -->
-        <div id="tab-home" class="tab-content active space-y-8">
-            <div class="relative rounded-3xl bg-gradient-to-r from-sage-800 via-sage-700 to-sage-900 text-white overflow-hidden shadow-xl p-8 sm:p-12">
-                <div class="relative z-10 max-w-2xl space-y-6">
-                    <span class="inline-flex items-center space-x-2 bg-sage-600/60 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase text-sage-100 border border-sage-500/30">
-                        <i class="fa-solid fa-leaf text-sage-300"></i> Client Presentation & Proposal
-                    </span>
-                    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">SMART Greenhouse</h1>
-                    <p class="text-lg text-sage-100 font-light leading-relaxed">
-                        A Self-Regulating, Sustainable Horticultural Facility engineered for drought-prone regions, schools, and community organizations through AI, automation, and water-conservation technologies.
-                    </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <button onclick="switchTab('dashboard')" class="bg-white text-sage-800 font-bold px-6 py-3 rounded-xl shadow-lg hover:bg-sage-50 transition-all flex items-center space-x-2">
-                            <span>Explore Interactive Demo</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                        
-                    </div>
-                </div>
+        <div id="tab-home" class="tab-content active">
+            <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <h1 id="hero-title">SMART<br><em>Greenhouse</em></h1>
+                <p>SMART Greenhouse combines <strong>AI, automated irrigation, and solar energy</strong> to help a community grow crops while using less water.</p>
+                <button type="button" class="hero-action" onclick="switchTab('dashboard')">See our interactive demo <span aria-hidden="true">&rarr;</span></button>
+            </div>
+            <figure class="hero-image">
+                <img src="assets/overview-greenhouse-concept.png" alt="Concept illustration of a small glass greenhouse filled with crops, with ground-mounted solar panels beside it in a dry rural landscape." width="1672" height="941" fetchpriority="high">
+            </figure>
+        </section>
+
+        <section class="challenge" aria-labelledby="challenge-title">
+            <div>
+                <h2 id="challenge-title">The problem</h2>
+                <h3>Water is under pressure.<br>The ability to grow shouldn't be.</h3>
+            </div>
+            <p>Local water supplies are under growing pressure from drought and rising temperatures. In some areas, data centers add to the demand. <strong>Communities still need to grow food.</strong> SMART Greenhouse uses AI and automated irrigation to help local growers conserve water. It also gives the community a hands-on way to learn how technology supports agriculture.</p>
+        </section>
+
+        <section id="charter" aria-label="Project charter">
+            <div class="story-grid">
+                <article class="story-card">
+                    <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-bullseye"></i></span>
+                    <h3>Purpose &amp; Vision</h3>
+                    <p>Build <strong>one SMART Greenhouse</strong> for a water-limited county. Use <strong>AI and automation</strong> to conserve water, support healthy crops, and demonstrate how technology can support agriculture.</p>
+                </article>
+                <article class="story-card">
+                    <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></span>
+                    <h3>SMART Objectives</h3>
+                    <ul>
+                        <li>Build for <strong>year-round crops</strong> within <strong>10 months.</strong></li>
+                        <li>Integrate <strong>4 core technologies:</strong> mobile dashboard, automated irrigation, AI plant monitor, and solar panels.</li>
+                        <li>Target <strong>at least 30% less water</strong> than manual irrigation.</li>
+                    </ul>
+                </article>
+                <article class="story-card">
+                    <span class="card-icon" aria-hidden="true"><i class="fa-solid fa-hands-holding-child"></i></span>
+                    <h3>Community &amp; Education</h3>
+                    <p>A <strong>hands-on STEM resource</strong> for schools and community groups. Explore AI and sustainable growing while keeping <strong>people in control.</strong></p>
+                </article>
             </div>
 
-            <!-- Key Metrics Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl font-bold">
-                        <i class="fa-solid fa-droplet"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Water Savings</p>
-                        <p class="text-2xl font-extrabold text-slate-800">30%+ Reduction</p>
-                        <p class="text-xs text-emerald-600 font-medium mt-0.5">vs. manual irrigation</p>
-                    </div>
+            <div class="metrics" role="group" aria-label="Project targets and planned capabilities">
+                <div class="metric">
+                    <span class="metric-icon" aria-hidden="true"><i class="fa-solid fa-droplet"></i></span>
+                    <dl><dt>30%+ Less Water</dt><dd><span>Target reduction vs. manual irrigation</span></dd></dl>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold">
-                        <i class="fa-solid fa-calendar-days"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Project Duration</p>
-                        <p class="text-2xl font-extrabold text-slate-800">6 - 12 Months</p>
-                        <p class="text-xs text-blue-600 font-medium mt-0.5">Operational target</p>
-                    </div>
+                <div class="metric">
+                    <span class="metric-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
+                    <dl><dt>AI-Assisted Growing</dt><dd><span>Monitor plant health and support growers</span></dd></dl>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
-                    <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl font-bold">
-                        <i class="fa-solid fa-solar-panel"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Renewable Energy</p>
-                        <p class="text-2xl font-extrabold text-slate-800">Solar Powered</p>
-                        <p class="text-xs text-amber-600 font-medium mt-0.5">Self-sustaining grid</p>
-                    </div>
+                <div class="metric">
+                    <span class="metric-icon" aria-hidden="true"><i class="fa-solid fa-hands-holding-child"></i></span>
+                    <dl><dt>Community Learning</dt><dd><span>Explore how technology supports agriculture</span></dd></dl>
                 </div>
-                <div class="bg-white p-6 rounded-2xl border border-sage-200 shadow-sm flex items-center space-x-4">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl font-bold">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <div>
-                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Smart Tech Integration</p>
-                        <p class="text-2xl font-extrabold text-slate-800">5 Core Systems</p>
-                        <p class="text-xs text-purple-600 font-medium mt-0.5">AI-driven diagnostics</p>
-                    </div>
+                <div class="metric">
+                    <span class="metric-icon" aria-hidden="true"><i class="fa-solid fa-calendar-days"></i></span>
+                    <dl><dt>10-Month Project</dt><dd><span>Target: a fully operational greenhouse</span></dd></dl>
                 </div>
             </div>
+        </section>
 
-            <!-- Purpose, Vision & Objectives -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-bullseye"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-sage-900">Purpose & Vision</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        The purpose of SMART Greenhouse is to enable sustainable crop production in drought-prone regions through the use of AI, automation, and water-conservation technologies. When completed, it will provide a self-regulating horticultural facility that minimizes water consumption, improves plant health, and serves as an educational resource for schools and community organizations.
-                    </p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-list-check"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-sage-900">SMART Objectives</h3>
-                    <ul class="space-y-2 text-sm text-slate-600">
-                        <li class="flex items-start space-x-2">
-                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
-                            <span>Construct a small-scale greenhouse structure capable of supporting year-round crops.</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
-                            <span>Integrate 5 core smart technologies: Mobile App, Irrigation, AI Monitoring, Solar, and Website.</span>
-                        </li>
-                        <li class="flex items-start space-x-2">
-                            <i class="fa-solid fa-check text-emerald-600 mt-1"></i>
-                            <span>Reduce water consumption by at least 30% compared to traditional manual methods.</span>
-                        </li>
+        <section class="scope" aria-labelledby="scope-title">
+            <h2 id="scope-title">Project Scope Boundaries</h2>
+            <div class="scope-columns">
+                <div class="scope-panel">
+                    <h3>What we will deliver</h3>
+                    <ul>
+                        <li>Greenhouse design &amp; construction</li>
+                        <li>Contractor management &amp; safety inspection report</li>
+                        <li>Mobile App Dashboard</li>
+                        <li>Fully Automated Irrigation System</li>
+                        <li>AI Plant Health Monitoring</li>
+                        <li>Solar Panels &amp; Project Website</li>
+                        <li>Project documentation &amp; user manual</li>
                     </ul>
                 </div>
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
-                    <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl font-bold">
-                        <i class="fa-solid fa-hands-holding-child"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-sage-900">Community & Education</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Serving communities in drought-prone regions, schools, and community organizations. The greenhouse serves as a hands-on STEM learning resource, demonstrating how artificial intelligence and sustainable farming practices work together to support growers without replacing human oversight.
-                    </p>
+                <div class="scope-panel excluded">
+                    <h3>Out of Scope</h3>
+                    <ul>
+                        <li>Commercial farm-scale production or crop sales</li>
+                        <li>Additional greenhouses or expansion into other communities</li>
+                        <li>Advanced robotics for harvesting</li>
+                        <li>Distribution of produce to commercial stores</li>
+                        <li>Large-scale renewable energy generation</li>
+                    </ul>
                 </div>
             </div>
-
-            <!-- Scope In / Out Table -->
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-8 space-y-6">
-                <h3 class="text-2xl font-bold text-sage-900">Project Scope Boundaries</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-emerald-50/50 p-6 rounded-xl border border-emerald-200 space-y-3">
-                        <h4 class="font-bold text-emerald-900 flex items-center space-x-2">
-                            <i class="fa-solid fa-circle-check text-emerald-600"></i>
-                            <span>In Scope</span>
-                        </h4>
-                        <ul class="space-y-2 text-sm text-emerald-800">
-                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Greenhouse design & construction</li>
-                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Contractor management & safety inspection</li>
-                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Mobile App Dashboard</li>
-                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Fully Automated Irrigation System</li>
-                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>AI Plant Health Monitoring</li>
-                            <li><i class="fa-solid fa-check mr-2 text-emerald-600"></i>Solar Panels & Project Website</li>
+            <details>
+                <summary>Charter details: success measures, constraints &amp; assumptions</summary>
+                <div class="charter-details">
+                    <div>
+                        <h3>How we will define success</h3>
+                        <ul>
+                            <li>Construction and installed systems pass applicable safety tests and final inspection.</li>
+                            <li>The dashboard displays connected sensor data and system status.</li>
+                            <li>Moisture-based irrigation demonstrates at least 30% lower water use against a manual-watering baseline.</li>
+                            <li>AI identifies potential plant-health concerns for review; solar provides power to designated systems.</li>
+                            <li>The website is published and operating / maintenance instructions are handed over.</li>
                         </ul>
                     </div>
-                    <div class="bg-rose-50/50 p-6 rounded-xl border border-rose-200 space-y-3">
-                        <h4 class="font-bold text-rose-900 flex items-center space-x-2">
-                            <i class="fa-solid fa-circle-xmark text-rose-600"></i>
-                            <span>Out of Scope</span>
-                        </h4>
-                        <ul class="space-y-2 text-sm text-rose-800">
-                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Commercial farm-scale production & crop sale</li>
-                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Multi-greenhouse expansion</li>
-                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Advanced robotics for harvesting</li>
-                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Distribution of produce to commercial stores</li>
-                            <li><i class="fa-solid fa-xmark mr-2 text-rose-600"></i>Large-scale renewable energy generation</li>
+                    <div>
+                        <h3>Project constraints</h3>
+                        <ul>
+                            <li>10-month project timeline, targeting an operational greenhouse by completion.</li>
+                            <li>No more than 25% of project work may be contracted out.</li>
+                            <li>Compliance with local building regulations and applicable safety requirements.</li>
                         </ul>
+                        <h3>Planning assumptions</h3>
+                        <p>Budget and land will be available; permits will be approved on time; contractors and technology components will be available; and the selected community will have a need for the project.</p>
                     </div>
                 </div>
-            </div>
+            </details>
+        </section>
         </div>
 
         <!-- ================= 2. MOBILE APP DASHBOARD TAB ================= -->
