@@ -861,44 +861,157 @@
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
                 <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Stakeholder Management</span>
                 <h2 class="text-3xl font-extrabold text-sage-900">Stakeholder Chart</h2>
-                <p class="text-slate-600 text-sm mt-1">Depicting stakeholder wants, needs, interests, and project positions.</p>
+                <p class="text-slate-600 text-sm mt-1">Stakeholder power, interests, communication preferences, relationship actions, and success criteria.</p>
             </div>
 
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
+                <div class="overflow-x-auto" role="region" aria-label="Stakeholder management chart" tabindex="0">
+                    <table class="w-full min-w-[2400px] text-left border-separate border-spacing-0 text-sm">
                         <thead>
                             <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
-                                <th class="p-4">Stakeholder</th>
-                                <th class="p-4">Category</th>
-                                <th class="p-4">Wants & Needs</th>
-                                <th class="p-4">Interests & Position</th>
+                                <th scope="col" class="sticky left-0 z-20 w-[220px] min-w-[220px] border-r border-sage-200 bg-sage-100 p-4 align-top">Stakeholder Name</th>
+                                <th scope="col" class="p-4 align-top">Power</th>
+                                <th scope="col" class="p-4 align-top">Interest</th>
+                                <th scope="col" class="p-4 align-top">Position</th>
+                                <th scope="col" class="p-4 align-top">Role</th>
+                                <th scope="col" class="p-4 align-top">Objectives, Goals &amp; Interests</th>
+                                <th scope="col" class="p-4 align-top">Facts, Passions &amp; Areas of Interest</th>
+                                <th scope="col" class="p-4 align-top">Preferred Communication</th>
+                                <th scope="col" class="p-4 align-top">Relationship-Building Strategies</th>
+                                <th scope="col" class="p-4 align-top">Actions to Improve/Maintain Relationship</th>
+                                <th scope="col" class="p-4 align-top">Success Criteria</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-sage-100 text-slate-700">
                             <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">County Sponsors & Govt Agencies</td>
-                                <td class="p-4">Who Pays / Funder</td>
-                                <td class="p-4">Compliance with local codes, water conservation metrics.</td>
-                                <td class="p-4">High interest in community sustainability and drought relief.</td>
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Land Owner</th>
+                                <td class="p-4 align-top">Controls land availability and can negotiate its price or sale terms.</td>
+                                <td class="p-4 align-top">Primarily financial; may have limited interest in the project.</td>
+                                <td class="p-4 align-top">Likely supportive.</td>
+                                <td class="p-4 align-top">Provide or lease the project site.</td>
+                                <td class="p-4 align-top">Sell the land at the best price or lease it for consistent income.</td>
+                                <td class="p-4 align-top">Interests are not yet known and should be explored.</td>
+                                <td class="p-4 align-top">In-person discussions and formal contracts.</td>
+                                <td class="p-4 align-top">Explore community involvement and emphasize the planned use of the land when discussing price.</td>
+                                <td class="p-4 align-top">Identify a local landowner who is actively involved in the community.</td>
+                                <td class="p-4 align-top">Secure land at or below comparable local rates.</td>
                             </tr>
                             <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">Schools & Educators</td>
-                                <td class="p-4">Who Uses</td>
-                                <td class="p-4">Hands-on STEM learning resources, safety inspection clearance.</td>
-                                <td class="p-4">Educational curriculum integration and student engagement.</td>
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Local Community</th>
+                                <td class="p-4 align-top">Can support or block the program.</td>
+                                <td class="p-4 align-top">High; the project directly affects community members.</td>
+                                <td class="p-4 align-top">Unknown; likely supportive.</td>
+                                <td class="p-4 align-top">Provide community support and potentially help secure funding.</td>
+                                <td class="p-4 align-top">Provide youth education, local produce, healthy-eating opportunities, and a gathering place.</td>
+                                <td class="p-4 align-top">Values learning, community, and outreach. Some communities may oppose AI because of data-center construction and water use.</td>
+                                <td class="p-4 align-top">In-person engagement and media.</td>
+                                <td class="p-4 align-top">Build support for youth education and emphasize healthy eating.</td>
+                                <td class="p-4 align-top">Introduce the program throughout the community, prioritizing parents.</td>
+                                <td class="p-4 align-top">A majority of community members support the project.</td>
                             </tr>
                             <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">Community Gardeners & Residents</td>
-                                <td class="p-4">Affected / Users</td>
-                                <td class="p-4">Reliable fresh produce access, low-maintenance technology.</td>
-                                <td class="p-4">Food security in drought-prone regions.</td>
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Grocery Store</th>
+                                <td class="p-4 align-top">May sell similar crops at lower prices.</td>
+                                <td class="p-4 align-top">Likely low.</td>
+                                <td class="p-4 align-top">Unknown; potentially negative.</td>
+                                <td class="p-4 align-top">Potential competitor or alliance partner.</td>
+                                <td class="p-4 align-top">Increase profit.</td>
+                                <td class="p-4 align-top">Primarily motivated by financial considerations.</td>
+                                <td class="p-4 align-top">Local contacts: in person and contracts. Corporate contacts: email.</td>
+                                <td class="p-4 align-top">Build rapport with decision-makers and present a partnership as mutually beneficial.</td>
+                                <td class="p-4 align-top">Be transparent early and explore an alliance.</td>
+                                <td class="p-4 align-top">Avoid direct competition through an alliance or mutual-respect agreement.</td>
                             </tr>
                             <tr class="hover:bg-sage-50/50">
-                                <td class="p-4 font-bold text-sage-800">Greenhouse Construction Contractor</td>
-                                <td class="p-4">Involved in Building</td>
-                                <td class="p-4">Clear architectural blueprints, timely permit approvals.</td>
-                                <td class="p-4">Adhering to the 25% contracting limit constraint.</td>
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">AI Company</th>
+                                <td class="p-4 align-top">Can restrict how its service is used.</td>
+                                <td class="p-4 align-top">Potentially low for a small community-benefit program.</td>
+                                <td class="p-4 align-top">Unknown.</td>
+                                <td class="p-4 align-top">Provide AI services.</td>
+                                <td class="p-4 align-top">Sell its product.</td>
+                                <td class="p-4 align-top">AI may improve task efficiency.</td>
+                                <td class="p-4 align-top">Email for support or issues.</td>
+                                <td class="p-4 align-top">Show how AI will be used to benefit the community.</td>
+                                <td class="p-4 align-top">Explain intended AI use and define efficient support channels.</td>
+                                <td class="p-4 align-top">Have a designated contact for resolving issues.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Funder (government)</th>
+                                <td class="p-4 align-top">Decides whether to fund the project.</td>
+                                <td class="p-4 align-top">High.</td>
+                                <td class="p-4 align-top">Unknown; likely supportive.</td>
+                                <td class="p-4 align-top">Provide project funding.</td>
+                                <td class="p-4 align-top">Ensure the investment delivers value and benefits the community.</td>
+                                <td class="p-4 align-top">Prioritizes high-impact community improvements.</td>
+                                <td class="p-4 align-top">In-person meetings, email, and required paperwork.</td>
+                                <td class="p-4 align-top">Lead with community impact and demonstrate future cost savings where feasible.</td>
+                                <td class="p-4 align-top">Use community support to strengthen funding requests and provide timely updates.</td>
+                                <td class="p-4 align-top">Secure project funding.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Funder (private)</th>
+                                <td class="p-4 align-top">Can influence project design and outcomes.</td>
+                                <td class="p-4 align-top">High.</td>
+                                <td class="p-4 align-top">Supportive.</td>
+                                <td class="p-4 align-top">Provide project funding.</td>
+                                <td class="p-4 align-top">May seek influence over the process or outcomes, alongside broader goals.</td>
+                                <td class="p-4 align-top">Interests vary by funder.</td>
+                                <td class="p-4 align-top">Adapt communication to the funder's preferences.</td>
+                                <td class="p-4 align-top">Emphasize impact and project longevity; offer personal acknowledgement where appropriate.</td>
+                                <td class="p-4 align-top">Share full project plans and provide progress updates.</td>
+                                <td class="p-4 align-top">Secure funding and establish a long-term relationship.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Local Farms</th>
+                                <td class="p-4 align-top">Provide expertise on crops and local growing conditions.</td>
+                                <td class="p-4 align-top">May want to participate, share expertise, and support the project.</td>
+                                <td class="p-4 align-top">Likely supportive.</td>
+                                <td class="p-4 align-top">Advise on crop selection and greenhouse decisions; support student education.</td>
+                                <td class="p-4 align-top">Share knowledge and provide advice.</td>
+                                <td class="p-4 align-top">Potential involvement is low-cost and low-impact.</td>
+                                <td class="p-4 align-top">In-person discussions.</td>
+                                <td class="p-4 align-top">Invite farmers to share input throughout project planning.</td>
+                                <td class="p-4 align-top">Meet with a local coalition or farmers' group.</td>
+                                <td class="p-4 align-top">Farmers report satisfaction, and their input is reflected in decisions (survey).</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Water Utility</th>
+                                <td class="p-4 align-top">Regulates water access and usage.</td>
+                                <td class="p-4 align-top">Water conservation and potential revenue.</td>
+                                <td class="p-4 align-top">Unknown; likely neutral.</td>
+                                <td class="p-4 align-top">Approve water access, set usage guidelines, and verify compliance.</td>
+                                <td class="p-4 align-top">Conserve water while generating revenue from service.</td>
+                                <td class="p-4 align-top">Interested in revenue and water conservation.</td>
+                                <td class="p-4 align-top">Email or the utility's online payment portal.</td>
+                                <td class="p-4 align-top">Open a service account, explain the project's purpose, and explore sponsorship.</td>
+                                <td class="p-4 align-top">Meet with field staff and leadership to review the plan and discuss sponsorship.</td>
+                                <td class="p-4 align-top">Secure reliable, approved water access for the greenhouse.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Government</th>
+                                <td class="p-4 align-top">Controls building permits.</td>
+                                <td class="p-4 align-top">Moderate; may require detailed plans.</td>
+                                <td class="p-4 align-top">Unknown; likely neutral.</td>
+                                <td class="p-4 align-top">Issue permits and authorize construction.</td>
+                                <td class="p-4 align-top">Ensure the building is safe and nonhazardous.</td>
+                                <td class="p-4 align-top">Can halt construction if approval is denied.</td>
+                                <td class="p-4 align-top">In-person meetings, forms, and online submissions.</td>
+                                <td class="p-4 align-top">Communicate requirements clearly and consistently without overcommunicating.</td>
+                                <td class="p-4 align-top">Prepare all required materials before meetings.</td>
+                                <td class="p-4 align-top">Obtain approval and complete construction.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 w-[220px] min-w-[220px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Local Schools</th>
+                                <td class="p-4 align-top">Influence student participation and engagement.</td>
+                                <td class="p-4 align-top">High.</td>
+                                <td class="p-4 align-top">Likely supportive.</td>
+                                <td class="p-4 align-top">Use the greenhouse for biology or health education and field trips.</td>
+                                <td class="p-4 align-top">Support the next generation.</td>
+                                <td class="p-4 align-top">Value diverse learning opportunities.</td>
+                                <td class="p-4 align-top">In-person meetings.</td>
+                                <td class="p-4 align-top">Present the project to school leaders and show them the completed greenhouse.</td>
+                                <td class="p-4 align-top">Email principals and deans, then meet with them once the project is complete.</td>
+                                <td class="p-4 align-top">Students participate in the program and visit the greenhouse.</td>
                             </tr>
                         </tbody>
                     </table>
