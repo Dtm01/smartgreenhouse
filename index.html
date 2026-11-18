@@ -58,6 +58,7 @@
         ::-webkit-scrollbar-track { background: #f4f7f4; }
         ::-webkit-scrollbar-thumb { background: #a3bda3; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #759b75; }
+        #ai-demo-dialog::backdrop { background: rgb(15 23 42 / 0.65); }
     </style>
 </head>
 <body class="bg-sage-50 text-slate-800 h-full flex flex-col antialiased">
@@ -74,7 +75,7 @@
                 </div>
                 <div>
                     <h1 class="font-extrabold text-xl text-sage-900 tracking-tight">SMART Greenhouse</h1>
-                    <p class="text-xs font-medium text-sage-600">Client Proposal & Executive Portal</p>
+                    <p class="text-xs font-medium text-sage-600">A smarter way to grow green.</p>
                 </div>
             </div>
             
@@ -676,7 +677,7 @@
                     <h2 class="text-3xl font-extrabold text-sage-900">AI Plant Health Monitoring</h2>
                     <p class="text-slate-600 text-sm mt-1">Camera-based visual review can help flag possible signs of plant stress for a grower to assess.</p>
                 </div>
-                <button onclick="runAiDiagnostic()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
+                <button type="button" onclick="runAiDiagnostic()" aria-haspopup="dialog" aria-controls="ai-demo-dialog" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     <span>Preview AI Demo</span>
                 </button>
@@ -747,6 +748,7 @@
                         <symbol id="solar-battery" viewBox="0 0 24 24"><rect x="2" y="6" width="18" height="12" rx="2"/><path d="M22 10v4M6 9v6M10 9v6M14 9v6"/></symbol>
                         <symbol id="solar-house" viewBox="0 0 24 24"><path d="m2 11 10-9 10 9M4 9v12h16V9M9 21V11h6v10M4 15h5M15 15h5"/></symbol>
                         <symbol id="solar-signal" viewBox="0 0 24 24"><path d="M3 21v-4M9 21V12M15 21V7M21 21V2"/></symbol>
+                        <symbol id="solar-panel" viewBox="0 0 24 24"><path d="M4 3h16l2 13H2L4 3ZM7 7h10M6 11h12M9 3 7 16M15 3l2 13M12 16v5M8 21h8"/></symbol>
                         <symbol id="solar-book" viewBox="0 0 24 24"><path d="M12 5C8 2 4 3 2 4v15c3-1 6-1 10 1 4-2 7-2 10-1V4c-2-1-6-2-10 1ZM12 5v15"/></symbol>
                     </defs>
                 </svg>
@@ -771,57 +773,95 @@
 
             <div class="dashboard">
                 <div class="phone-column">
-                    <section class="phone" aria-label="Solar app phone mockup">
+                    <section id="solar-phone" class="phone" aria-label="Solar app phone mockup">
                         <div class="phone-screen">
                             <div class="phone-status" aria-hidden="true">
                                 <span id="solar-phone-time">12:30</span>
                                 <span class="status-icons"><svg class="icon"><use href="#solar-signal"/></svg><svg class="icon"><use href="#solar-battery"/></svg></span>
                             </div>
-                            <div class="app-header">
-                                <div><h3>Greenhouse Solar</h3><p>Greenhouse Zone A &middot; Sample data</p></div>
-                                <svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>
-                            </div>
-                            <div class="phone-body">
-                                <div class="generation">
-                                    <span class="generation-label"><span class="dot" aria-hidden="true"></span><span id="solar-generation-status">Generating solar power</span></span>
-                                    <div class="power-ring" id="solar-power-ring">
-                                        <div class="power-ring-inner">
-                                            <svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>
-                                            <strong><span id="solar-phone-generation" style="font: inherit; color: inherit;">2.4</span> <span>kW</span></strong>
-                                            <small>Solar generation now</small>
+                            <div id="solar-phone-page-overview" class="phone-page">
+                                <div class="app-header">
+                                    <div><h3>Greenhouse Solar</h3><p>Greenhouse Zone A &middot; Sample data</p></div>
+                                    <svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>
+                                </div>
+                                <div class="phone-body">
+                                    <div class="generation">
+                                        <span class="generation-label"><span class="dot" aria-hidden="true"></span><span id="solar-generation-status">Generating solar power</span></span>
+                                        <div class="power-ring" id="solar-power-ring">
+                                            <div class="power-ring-inner">
+                                                <svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>
+                                                <strong><span id="solar-phone-generation" style="font: inherit; color: inherit;">2.4</span> <span>kW</span></strong>
+                                                <small>Solar generation now</small>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="phone-mini-grid">
-                                    <div class="phone-mini">
-                                        <span>Greenhouse using</span><strong>1.4 kW</strong><small id="solar-load-source">Supplied by solar</small>
+                                    <div class="phone-mini-grid">
+                                        <div class="phone-mini">
+                                            <span>Greenhouse using</span><strong>1.4 kW</strong><small id="solar-load-source">Supplied by solar</small>
+                                        </div>
+                                        <div class="phone-mini">
+                                            <span>Battery level</span><strong id="solar-phone-battery">94%</strong><small id="solar-battery-mode">Charging &middot; 1.0 kW</small>
+                                            <div class="battery-track" aria-hidden="true"><span id="solar-battery-fill"></span></div>
+                                        </div>
                                     </div>
-                                    <div class="phone-mini">
-                                        <span>Battery level</span><strong id="solar-phone-battery">94%</strong><small id="solar-battery-mode">Charging &middot; 1.0 kW</small>
-                                        <div class="battery-track" aria-hidden="true"><span id="solar-battery-fill"></span></div>
+                                    <div class="phone-chart">
+                                        <h4>Typical solar output <span style="font-weight: 400;">(kW)</span></h4>
+                                        <svg viewBox="0 0 260 78" role="img" aria-labelledby="solar-chart-title solar-chart-desc">
+                                            <title id="solar-chart-title">Illustrative daily solar generation</title>
+                                            <desc id="solar-chart-desc">Solar output rises from zero in the morning, peaks around midday, and returns to zero at sunset. This is a sample curve, not measured data.</desc>
+                                            <defs><linearGradient id="solar-chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#edc76e" stop-opacity=".3"/><stop offset="100%" stop-color="#edc76e" stop-opacity="0"/></linearGradient></defs>
+                                            <path d="M0 74H260M0 39H260M0 4H260" stroke="#304734" stroke-width="1"/>
+                                            <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74V78H0Z" fill="url(#solar-chart-fill)"/>
+                                            <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74" fill="none" stroke="#edc76e" stroke-width="2.5" stroke-linejoin="round"/>
+                                        </svg>
+                                        <div class="axis-labels" aria-hidden="true"><span>6 AM</span><span>Noon</span><span>6 PM</span></div>
                                     </div>
-                                </div>
-                                <div class="phone-chart">
-                                    <h4>Typical solar output <span style="font-weight: 400;">(kW)</span></h4>
-                                    <svg viewBox="0 0 260 78" role="img" aria-labelledby="solar-chart-title solar-chart-desc">
-                                        <title id="solar-chart-title">Illustrative daily solar generation</title>
-                                        <desc id="solar-chart-desc">Solar output rises from zero in the morning, peaks around midday, and returns to zero at sunset. This is a sample curve, not measured data.</desc>
-                                        <defs><linearGradient id="solar-chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#edc76e" stop-opacity=".3"/><stop offset="100%" stop-color="#edc76e" stop-opacity="0"/></linearGradient></defs>
-                                        <path d="M0 74H260M0 39H260M0 4H260" stroke="#304734" stroke-width="1"/>
-                                        <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74V78H0Z" fill="url(#solar-chart-fill)"/>
-                                        <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74" fill="none" stroke="#edc76e" stroke-width="2.5" stroke-linejoin="round"/>
-                                    </svg>
-                                    <div class="axis-labels" aria-hidden="true"><span>6 AM</span><span>Noon</span><span>6 PM</span></div>
-                                </div>
-                                <div class="app-note">
-                                    <svg class="icon" aria-hidden="true"><use href="#solar-leaf"/></svg>
-                                    <p id="solar-app-insight">Solar is meeting the greenhouse's current demand. Extra energy is charging the battery.</p>
+                                    <div class="app-note">
+                                        <svg class="icon" aria-hidden="true"><use href="#solar-leaf"/></svg>
+                                        <p id="solar-app-insight">Solar is meeting the greenhouse's current demand. Extra energy is charging the battery.</p>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="app-footer">Solar overview &middot; Illustrative app home screen</div>
+                            <div id="solar-phone-page-connections" class="phone-page" hidden>
+                                <div class="app-header">
+                                    <div><h3>Panel Connections</h3><p>12-panel array &middot; Sample data</p></div>
+                                    <svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg>
+                                </div>
+                                <div class="panel-page-body">
+                                    <div class="panel-summary">
+                                        <span>Connection status</span>
+                                        <strong>10 working &middot; 1 warning &middot; 1 offline</strong>
+                                    </div>
+                                    <div id="solar-panel-grid" class="solar-panel-grid" role="group" aria-label="Solar panel connection status">
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 1" data-status="working" aria-label="Panel 1, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>01</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 2" data-status="working" aria-label="Panel 2, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>02</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 3" data-status="working" aria-label="Panel 3, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>03</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 4" data-status="working" aria-label="Panel 4, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>04</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 5" data-status="working" aria-label="Panel 5, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>05</span></button>
+                                        <button type="button" class="solar-panel-tile is-warning" data-panel-name="Panel 6" data-status="warning" aria-label="Panel 6, warning" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>06</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 7" data-status="working" aria-label="Panel 7, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>07</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 8" data-status="working" aria-label="Panel 8, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>08</span></button>
+                                        <button type="button" class="solar-panel-tile is-offline" data-panel-name="Panel 9" data-status="offline" aria-label="Panel 9, not working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>09</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 10" data-status="working" aria-label="Panel 10, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>10</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 11" data-status="working" aria-label="Panel 11, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>11</span></button>
+                                        <button type="button" class="solar-panel-tile is-working" data-panel-name="Panel 12" data-status="working" aria-label="Panel 12, working" aria-pressed="false" onclick="showSolarPanelStatus(this)"><svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg><span>12</span></button>
+                                    </div>
+                                    <div class="panel-grid-legend" aria-label="Panel status legend">
+                                        <span><i class="panel-legend-dot is-working" aria-hidden="true"></i>Working</span>
+                                        <span><i class="panel-legend-dot is-warning" aria-hidden="true"></i>Warning</span>
+                                        <span><i class="panel-legend-dot is-offline" aria-hidden="true"></i>Offline</span>
+                                    </div>
+                                    <div id="solar-panel-status" class="panel-status-bubble" role="status" aria-live="polite" hidden>
+                                        <i id="solar-panel-status-icon" class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                                        <span id="solar-panel-status-message"></span>
+                                        <button type="button" onclick="dismissSolarPanelStatus()" aria-label="Dismiss panel status"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        <button type="button" id="solar-phone-page-arrow" class="phone-page-arrow" onclick="toggleSolarPhonePage()" aria-label="Open panel connection sensing" title="Open panel connection sensing"><i id="solar-phone-page-arrow-icon" class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
                     </section>
-                    <p class="phone-caption">A proposed view within the greenhouse app&mdash;designed to help operators understand energy at a glance.</p>
+                    <p class="phone-caption">A proposed solar app view with energy data and panel connection status.</p>
                 </div>
 
                 <div class="right-column">
@@ -858,6 +898,18 @@
                         <p class="load-footnote">Illustrative snapshot with all three loads active. Actual demand varies with watering schedules and environmental conditions.</p>
                     </section>
 
+                    <section class="card" aria-labelledby="solar-panel-sensing-title">
+                        <div class="card-heading">
+                            <h2 id="solar-panel-sensing-title">Solar panel connection sensing</h2>
+                            <span class="scenario-badge">Phone demo</span>
+                        </div>
+                        <p class="connection-sensing-copy">Monitor each panel's connection to spot offline panels or unstable connections quickly.</p>
+                        <button type="button" class="connection-sensing-button" onclick="showSolarPhonePage('connections', true)">
+                            <svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg>
+                            View panel connections
+                        </button>
+                    </section>
+
                     <div class="benefits">
                         <article class="benefit">
                             <svg class="icon" aria-hidden="true"><use href="#solar-battery"/></svg>
@@ -872,7 +924,7 @@
                     </div>
                 </div>
             </div>
-            <p class="concept-note">Design concept only. All readings are simulated, not live telemetry. The image is an AI-generated concept. Battery storage is shown as a proposed capability; final capacity and power coverage would require engineering validation.</p>
+            <p class="concept-note">Design concept only. All readings are simulated, not live telemetry. Battery storage is shown as a proposed capability; final capacity and power coverage would require engineering validation.</p>
         </div>
 
         <!-- ================= 7.  TIMELINE TAB ================= -->
@@ -1297,9 +1349,58 @@
 
     </main>
 
+    <dialog id="ai-demo-dialog" aria-labelledby="ai-demo-title" class="w-[min(96vw,1100px)] max-h-[90vh] overflow-y-auto rounded-2xl border border-sage-200 p-0 text-slate-800 shadow-2xl">
+        <div class="flex items-start justify-between gap-4 border-b border-sage-200 bg-white p-5 sm:p-7">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-sage-600">Plant Health Demo</span>
+                <h2 id="ai-demo-title" class="mt-1 text-2xl font-extrabold text-sage-900">AI Plant Monitoring: Healthy vs. Stress</h2>
+                <p class="mt-1 text-sm text-slate-600">AI monitoring can track plant changes over time and flag signs that may need a grower’s attention.</p>
+            </div>
+            <button type="button" onclick="document.getElementById('ai-demo-dialog').close()" aria-label="Close plant health demo" class="shrink-0 rounded-lg p-2 text-slate-500 hover:bg-sage-100 hover:text-sage-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-600">
+                <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="space-y-5 bg-sage-50 p-5 sm:p-7">
+            <p class="text-xs text-slate-600 lg:hidden">On smaller screens, the photos are stacked vertically. Scroll down to view both examples.</p>
+            <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
+                <section class="overflow-hidden rounded-xl border border-emerald-200 bg-white" aria-labelledby="healthy-plant-heading">
+                    <div class="border-b border-emerald-100 bg-emerald-50 px-4 py-3">
+                        <h3 id="healthy-plant-heading" class="font-bold text-emerald-900"><i class="fa-solid fa-circle-check mr-2 text-emerald-600" aria-hidden="true"></i>Healthy monitoring baseline</h3>
+                    </div>
+                    <figure>
+                        <img src="assets/tomato-healthy-example.jpg" alt="Tomato plant with green, intact foliage, several plump red tomatoes, and one developing green tomato." class="block h-auto w-full">
+                        <figcaption class="px-4 pt-2 text-xs text-slate-500">Healthy example image provided for this demo.</figcaption>
+                    </figure>
+                    <ul class="space-y-2 p-4 text-sm text-slate-700">
+                        <li><i class="fa-solid fa-leaf mr-2 text-emerald-600" aria-hidden="true"></i>AI can track leaf color and canopy coverage as a growth baseline.</li>
+                        <li><i class="fa-solid fa-chart-line mr-2 text-emerald-600" aria-hidden="true"></i>Consistent readings over time can support a healthy-growth status.</li>
+                        <li><i class="fa-solid fa-bell mr-2 text-emerald-600" aria-hidden="true"></i>Routine monitoring helps identify changes early for grower review.</li>
+                    </ul>
+                </section>
+
+                <section class="overflow-hidden rounded-xl border border-amber-200 bg-white" aria-labelledby="stressed-plant-heading">
+                    <div class="border-b border-amber-100 bg-amber-50 px-4 py-3">
+                        <h3 id="stressed-plant-heading" class="font-bold text-amber-900"><i class="fa-solid fa-triangle-exclamation mr-2 text-amber-600" aria-hidden="true"></i>Potential stress alert scenario</h3>
+                    </div>
+                    <figure>
+                        <img src="assets/tomato-stress-example.jpg" alt="Tomato plant with curled, browning foliage and fewer, smaller-looking fruit, including damaged fruit." class="block h-auto w-full">
+                        <figcaption class="px-4 pt-2 text-xs text-slate-500">Stress example image provided for this demo.</figcaption>
+                    </figure>
+                    <ul class="space-y-2 p-4 text-sm text-slate-700">
+                        <li><i class="fa-solid fa-triangle-exclamation mr-2 text-amber-600" aria-hidden="true"></i>AI may flag yellowing foliage, reduced canopy coverage, or changes in fruit set.</li>
+                        <li><i class="fa-solid fa-bell mr-2 text-amber-600" aria-hidden="true"></i>An alert can prompt checks of water, light, nutrients, and pests.</li>
+                        <li><i class="fa-solid fa-user-check mr-2 text-amber-600" aria-hidden="true"></i>A grower should verify any alert; AI monitoring supports review, not diagnosis.</li>
+                    </ul>
+                </section>
+            </div>
+            <p class="rounded-lg border border-sage-200 bg-white p-3 text-xs leading-relaxed text-slate-600"><strong class="text-sage-900">Demo note:</strong> These images illustrate healthy and stress scenarios. AI monitoring can flag visible changes for grower review, but cannot diagnose their cause. This preview does not analyze a live camera feed; a grower should inspect the plant and its growing conditions.</p>
+        </div>
+    </dialog>
+
     <!-- Footer -->
     <footer class="bg-white border-t border-sage-200 mt-12 py-8 text-center text-xs text-slate-500">
-        <p>© 2026 SMART Greenhouse Project Team. Prepared for Client Presentation & Review.</p>
+        <p>2026 SMART Greenhouse</p>
+        <p class="mt-2">Disclaimer: AI was used to create this website.</p>
     </footer>
 
     <!-- JavaScript Logic -->
@@ -1844,6 +1945,59 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function showSolarPhonePage(page, focusPhone = false) {
+            const showConnections = page === 'connections';
+            document.getElementById('solar-phone-page-overview').hidden = showConnections;
+            document.getElementById('solar-phone-page-connections').hidden = !showConnections;
+
+            const arrow = document.getElementById('solar-phone-page-arrow');
+            const arrowIcon = document.getElementById('solar-phone-page-arrow-icon');
+            const arrowLabel = showConnections ? 'Return to solar overview' : 'Open panel connection sensing';
+            arrow.setAttribute('aria-label', arrowLabel);
+            arrow.title = arrowLabel;
+            arrowIcon.className = showConnections ? 'fa-solid fa-chevron-left' : 'fa-solid fa-chevron-right';
+
+            if (!showConnections) dismissSolarPanelStatus();
+            if (focusPhone) {
+                document.getElementById('solar-phone').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        function toggleSolarPhonePage() {
+            const connectionsPage = document.getElementById('solar-phone-page-connections');
+            showSolarPhonePage(connectionsPage.hidden ? 'connections' : 'overview');
+        }
+
+        function showSolarPanelStatus(panelButton) {
+            const status = panelButton.dataset.status;
+            const panelName = panelButton.dataset.panelName;
+            const messages = {
+                working: `${panelName}: Working normally. Connection is stable.`,
+                warning: `${panelName}: Warning - intermittent connection; inspect the panel and wiring.`,
+                offline: `${panelName}: Not working - no connection detected.`
+            };
+            const icons = {
+                working: 'fa-solid fa-circle-check',
+                warning: 'fa-solid fa-triangle-exclamation',
+                offline: 'fa-solid fa-circle-xmark'
+            };
+            const bubble = document.getElementById('solar-panel-status');
+            bubble.dataset.status = status;
+            document.getElementById('solar-panel-status-icon').className = icons[status];
+            document.getElementById('solar-panel-status-message').textContent = messages[status];
+            bubble.hidden = false;
+            document.querySelectorAll('#solar-panel-grid .solar-panel-tile').forEach(tile => {
+                tile.setAttribute('aria-pressed', String(tile === panelButton));
+            });
+        }
+
+        function dismissSolarPanelStatus() {
+            document.getElementById('solar-panel-status').hidden = true;
+            document.querySelectorAll('#solar-panel-grid .solar-panel-tile').forEach(tile => {
+                tile.setAttribute('aria-pressed', 'false');
+            });
+        }
+
         if (window.location.hash === '#tab-dashboard') {
             switchTab('dashboard');
         }
@@ -1913,9 +2067,22 @@
             document.getElementById('soil-threshold-val').innerText = val + '%';
         }
 
+        const aiDemoDialog = document.getElementById('ai-demo-dialog');
+
         function runAiDiagnostic() {
-            showToast('AI demo previewed. No live camera feed or AI model is connected.');
+            aiDemoDialog.showModal();
         }
+
+        aiDemoDialog.addEventListener('click', event => {
+            if (event.target === event.currentTarget) event.currentTarget.close();
+        });
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && aiDemoDialog.open) {
+                event.preventDefault();
+                aiDemoDialog.close();
+            }
+        });
 
         const riskRecords = riskData.map(([id, event, probability, impact, cost, response, notes]) => ({
             id,

@@ -18,8 +18,14 @@
 #tab-solar .demo-toolbar p { color: var(--muted); font-size: 12px; margin-top: 5px; }
 #tab-solar .dashboard { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 28px; align-items: start; }
 #tab-solar .phone-column { display: flex; flex-direction: column; align-items: center; }
-#tab-solar .phone { width: 100%; max-width: 350px; padding: 11px; border: 3px solid #35443b; border-radius: 43px; background: #16231c; box-shadow: 0 15px 32px #243d3021; }
+#tab-solar .phone { position: relative; width: 100%; max-width: 350px; padding: 11px; border: 3px solid #35443b; border-radius: 43px; background: #16231c; box-shadow: 0 15px 32px #243d3021; }
 #tab-solar .phone-screen { border: 1px solid #32443a; border-radius: 30px; background: #0e1e16; color: #f4f8f2; overflow: hidden; }
+#tab-solar .phone-page[hidden] { display: none; }
+#tab-solar #solar-phone-page-connections { display: flex; flex-direction: column; min-height: 620px; }
+#tab-solar #solar-phone-page-connections[hidden] { display: none; }
+#tab-solar .phone-page-arrow { position: absolute; z-index: 2; top: 50%; right: -14px; display: grid; width: 38px; height: 48px; place-items: center; transform: translateY(-50%); border: 1px solid #ffffff47; border-radius: 14px; background: #ffffff20; color: #ffffffbd; backdrop-filter: blur(5px); cursor: pointer; }
+#tab-solar .phone-page-arrow:hover { background: #ffffff38; color: #fff; }
+#tab-solar .phone-page-arrow:focus-visible { outline: 2px solid #f1d58a; outline-offset: 2px; }
 #tab-solar .phone-status { display: flex; justify-content: space-between; align-items: center; height: 34px; padding: 0 20px; background: #172a1e; color: #d1dfd1; font-size: 9px; font-weight: 600; }
 #tab-solar .status-icons { display: flex; gap: 6px; }
 #tab-solar .status-icons .icon { width: 12px; height: 12px; }
@@ -28,6 +34,31 @@
 #tab-solar .app-header p { color: #adc3b1; font-size: 10px; margin-top: 3px; }
 #tab-solar .app-header > .icon { width: 25px; height: 25px; color: #e4be6c; }
 #tab-solar .phone-body { padding: 15px; }
+#tab-solar .panel-page-body { padding: 14px; }
+#tab-solar #solar-phone-page-connections .panel-page-body { display: flex; flex: 1; flex-direction: column; }
+#tab-solar .panel-summary { display: grid; gap: 4px; padding: 10px; border: 1px solid #304734; border-radius: 10px; background: #172a1e; }
+#tab-solar .panel-summary span { color: #b6cab8; font-size: 9px; }
+#tab-solar .panel-summary strong { color: #edf5eb; font-size: 10px; }
+#tab-solar .solar-panel-grid { display: grid; flex: 1; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(58px, 1fr)); gap: 8px; margin-top: 12px; }
+#tab-solar .solar-panel-tile { display: flex; min-width: 0; min-height: 58px; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 6px; border: 1px solid #43845c; border-radius: 10px; background: #173a29; color: #5dde87; cursor: pointer; }
+#tab-solar .solar-panel-tile .icon { width: 25px; height: 23px; }
+#tab-solar .solar-panel-tile span { font-size: 8px; font-weight: 700; line-height: 1; }
+#tab-solar .solar-panel-tile.is-warning { border-color: #c99a3f; background: #3a301a; color: #ffd166; }
+#tab-solar .solar-panel-tile.is-offline { border-color: #cb5555; background: #422224; color: #ff7777; }
+#tab-solar .solar-panel-tile:hover { filter: brightness(1.2); }
+#tab-solar .solar-panel-tile:focus-visible { outline: 2px solid #f1d58a; outline-offset: 2px; }
+#tab-solar .panel-grid-legend { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin-top: 10px; color: #b6cab8; font-size: 8px; }
+#tab-solar .panel-grid-legend span { display: inline-flex; align-items: center; gap: 4px; }
+#tab-solar .panel-legend-dot { width: 7px; height: 7px; border-radius: 50%; background: #5dde87; }
+#tab-solar .panel-legend-dot.is-warning { background: #ffd166; }
+#tab-solar .panel-legend-dot.is-offline { background: #ff7777; }
+#tab-solar .panel-status-bubble { position: relative; display: flex; align-items: flex-start; gap: 7px; margin-top: 11px; padding: 10px 28px 10px 11px; border: 1px solid #4b7653; border-radius: 10px; background: #1d3828; color: #d8f0db; font-size: 9px; line-height: 1.5; }
+#tab-solar .panel-status-bubble[hidden] { display: none; }
+#tab-solar .panel-status-bubble[data-status="warning"] { border-color: #c99a3f; background: #3a301a; color: #ffe2a0; }
+#tab-solar .panel-status-bubble[data-status="offline"] { border-color: #cb5555; background: #422224; color: #ffc0c0; }
+#tab-solar .panel-status-bubble > i { margin-top: 1px; }
+#tab-solar .panel-status-bubble > button { position: absolute; top: 7px; right: 7px; border: 0; background: transparent; color: inherit; cursor: pointer; }
+#tab-solar .panel-status-bubble > button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
 #tab-solar .generation { text-align: center; padding: 3px 0 12px; }
 #tab-solar .generation-label { display: inline-flex; align-items: center; gap: 6px; color: #d0e0d0; font-size: 10px; }
 #tab-solar .dot { width: 6px; height: 6px; border-radius: 50%; background: #e8c773; display: inline-block; flex-shrink: 0; }
@@ -76,6 +107,11 @@
 #tab-solar .load-row:nth-of-type(4) .load-track span { background: #b5c8a9; }
 #tab-solar .load-total { display: flex; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 12px; font-weight: 700; }
 #tab-solar .load-footnote { margin-top: 10px; color: var(--muted); font-size: 10px; }
+#tab-solar .connection-sensing-copy { margin-bottom: 14px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+#tab-solar .connection-sensing-button { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #354f39; border-radius: 9px; background: #243d30; color: #fff; font-size: 11px; font-weight: 700; cursor: pointer; }
+#tab-solar .connection-sensing-button:hover { background: #365a40; }
+#tab-solar .connection-sensing-button:focus-visible { outline: 2px solid #6c956f; outline-offset: 2px; }
+#tab-solar .connection-sensing-button .icon { width: 17px; height: 17px; }
 #tab-solar .benefits { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 #tab-solar .benefit { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #edf2e8; }
 #tab-solar .benefit .icon { color: var(--green); margin-bottom: 8px; }
