@@ -675,67 +675,175 @@
                 <div>
                     <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Damita George</span>
                     <h2 class="text-3xl font-extrabold text-sage-900">AI Plant Health Monitoring</h2>
-                    <p class="text-slate-600 text-sm mt-1">Camera-based visual review can help flag possible signs of plant stress for a grower to assess.</p>
+                    <p class="text-slate-600 text-sm mt-1">Camera-based visual review helps flag possible signs of plant stress for a grower to assess.</p>
                 </div>
                 <button type="button" onclick="runAiDiagnostic()" aria-haspopup="dialog" aria-controls="ai-demo-dialog" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
                     <span>Preview AI Demo</span>
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-1">
-                    <h3 class="text-xl font-bold text-sage-900">Camera Image Analysis Feed</h3>
-                    <div class="space-y-3">
-                        <div class="p-3.5 rounded-xl bg-purple-50 border border-purple-200 flex justify-between items-center">
-                            <div>
-                                <p class="text-xs text-purple-700 font-semibold">Visual Stress Cues</p>
-                                <p class="text-sm font-bold text-purple-900">For grower review</p>
-                            </div>
-                            <i class="fa-solid fa-eye text-2xl text-purple-600"></i>
+            <section aria-labelledby="ai-how-heading" class="space-y-4">
+                <h3 id="ai-how-heading" class="text-xl font-bold text-sage-900">How it works</h3>
+                <div class="flex flex-col gap-3 md:flex-row md:items-center">
+                    <article class="flex flex-1 gap-4 rounded-2xl border border-green-300 bg-green-100 p-5 shadow-sm">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-200 font-extrabold text-green-900">1</span>
+                        <div>
+                            <h4 class="font-bold text-sage-900">Daily photo</h4>
+                            <p class="mt-1 text-sm leading-relaxed text-slate-600">A camera photographs each plant bed every day.</p>
                         </div>
-                        <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 flex justify-between items-center">
-                            <div>
-                                <p class="text-xs text-amber-700 font-semibold">Pest Risk Analysis</p>
-                                <p class="text-sm font-bold text-amber-900">Future enhancement</p>
-                            </div>
-                            <i class="fa-solid fa-bug text-2xl text-amber-600"></i>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-sage-50 border border-sage-200 flex justify-between items-center">
-                            <div>
-                                <p class="text-xs text-sage-700 font-semibold">Current Demo</p>
-                                <p class="text-sm font-bold text-sage-900">No live camera connected</p>
-                            </div>
-                            <i class="fa-solid fa-camera text-2xl text-sage-600"></i>
-                        </div>
+                    </article>
+                    <div class="flex justify-center text-green-700 md:shrink-0" aria-hidden="true">
+                        <i class="fa-solid fa-arrow-down md:hidden"></i>
+                        <i class="fa-solid fa-arrow-right hidden md:inline"></i>
                     </div>
-                    <p class="text-xs leading-relaxed text-slate-500">Camera images may show visible signs of stress, but cannot measure nutrients. This presentation does not analyze a live camera feed.</p>
+                    <article class="flex flex-1 gap-4 rounded-2xl border border-green-300 bg-green-100 p-5 shadow-sm">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-200 font-extrabold text-green-900">2</span>
+                        <div>
+                            <h4 class="font-bold text-sage-900">Visual flags</h4>
+                            <p class="mt-1 text-sm leading-relaxed text-slate-600">AI flags visible cues such as yellowing, wilting, spots, or possible pest damage.</p>
+                        </div>
+                    </article>
+                    <div class="flex justify-center text-green-700 md:shrink-0" aria-hidden="true">
+                        <i class="fa-solid fa-arrow-down md:hidden"></i>
+                        <i class="fa-solid fa-arrow-right hidden md:inline"></i>
+                    </div>
+                    <article class="flex flex-1 gap-4 rounded-2xl border border-green-300 bg-green-100 p-5 shadow-sm">
+                        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-200 font-extrabold text-green-900">3</span>
+                        <div>
+                            <h4 class="font-bold text-sage-900">Early alert</h4>
+                            <p class="mt-1 text-sm leading-relaxed text-slate-600">An alert appears on the dashboard so the grower can check the plant sooner.</p>
+                        </div>
+                    </article>
                 </div>
+            </section>
 
-                <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-6 lg:col-span-2">
-                    <h3 class="text-xl font-bold text-sage-900">How AI Supports Growers</h3>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Camera imagery can help bring visible plant changes to a grower’s attention. It is an aid for human review, not a way to measure nutrients or replace hands-on assessment.
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-2">
-                            <div class="w-8 h-8 rounded-lg bg-sage-200 text-sage-800 flex items-center justify-center font-bold">1</div>
-                            <h4 class="font-bold text-sage-900 text-sm">Visible Stress Cues</h4>
-                            <p class="text-xs text-slate-600">Camera review may flag visible changes such as leaf discoloration or wilting for a grower to inspect.</p>
+            <div class="grid grid-cols-1 gap-6 xl:grid-cols-3">
+                <section aria-labelledby="ai-feed-heading" class="space-y-4 rounded-2xl border border-sage-200 bg-white p-5 shadow-sm xl:col-span-1">
+                        <div>
+                            <h3 id="ai-feed-heading" class="text-xl font-bold text-sage-900">Camera Image Analysis Feed</h3>
+                            <p class="mt-1 text-sm text-slate-600">Visible changes are flags for grower review, not diagnoses.</p>
                         </div>
-                        <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-2">
-                            <div class="w-8 h-8 rounded-lg bg-sage-200 text-sage-800 flex items-center justify-center font-bold">2</div>
-                            <h4 class="font-bold text-sage-900 text-sm">Grower Review</h4>
-                            <p class="text-xs text-slate-600">Visual observations can guide a closer check, but do not confirm a plant’s underlying condition or nutrient levels.</p>
+                        <div class="grid grid-cols-1 gap-3">
+                            <div class="flex items-center justify-between gap-3 rounded-xl border border-purple-200 bg-purple-50 p-3.5">
+                                <div>
+                                    <p class="text-xs font-semibold text-purple-700">Visual stress cues</p>
+                                    <p class="text-sm font-bold text-purple-900">For grower review</p>
+                                </div>
+                                <i class="fa-solid fa-eye text-2xl text-purple-600" aria-hidden="true"></i>
+                            </div>
+                            <div class="flex items-center justify-between gap-3 rounded-xl border border-sage-200 bg-sage-50 p-3.5">
+                                <div>
+                                    <p class="text-xs font-semibold text-sage-700">Current demo</p>
+                                    <p class="text-sm font-bold text-sage-900">Demo mode: sample images</p>
+                                </div>
+                                <i class="fa-solid fa-camera text-2xl text-sage-600" aria-hidden="true"></i>
+                            </div>
                         </div>
-                        <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 space-y-2">
-                            <span class="inline-flex rounded-full bg-amber-200 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">Future enhancement</span>
-                            <h4 class="font-bold text-amber-900 text-sm">Harvest Forecasting</h4>
-                            <p class="text-xs text-amber-800">Yield estimates (including the example ~120 kg/cycle) and harvest-window predictions are future enhancements, not current capabilities.</p>
+                        <p class="text-sm leading-relaxed text-slate-700">Camera images may show visible signs of stress but cannot measure nutrients. This presentation does not analyze a live camera feed.</p>
+                    </section>
+
+                <section aria-labelledby="ai-flags-heading" class="space-y-4 rounded-2xl border border-sage-200 bg-white p-6 shadow-sm xl:col-span-2">
+                        <div>
+                            <h3 id="ai-flags-heading" class="text-xl font-bold text-sage-900">What it can flag</h3>
+                            <p class="mt-1 text-sm text-slate-600">Possible visible cues for a grower to check.</p>
                         </div>
-                    </div>
-                </div>
+                        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                            <article class="rounded-xl border border-red-300 bg-red-100 p-4">
+                                <i class="fa-solid fa-leaf text-red-700" aria-hidden="true"></i>
+                                <h4 class="mt-2 text-sm font-bold text-red-900">Yellowing leaves</h4>
+                            </article>
+                            <article class="rounded-xl border border-red-300 bg-red-100 p-4">
+                                <i class="fa-solid fa-water text-red-700" aria-hidden="true"></i>
+                                <h4 class="mt-2 text-sm font-bold text-red-900">Wilting</h4>
+                            </article>
+                            <article class="rounded-xl border border-red-300 bg-red-100 p-4">
+                                <i class="fa-solid fa-circle-exclamation text-red-700" aria-hidden="true"></i>
+                                <h4 class="mt-2 text-sm font-bold text-red-900">Possible disease signs</h4>
+                                <p class="mt-1 text-xs text-red-800">Spots or discoloration</p>
+                            </article>
+                            <article class="rounded-xl border border-red-300 bg-red-100 p-4">
+                                <i class="fa-solid fa-bug text-red-700" aria-hidden="true"></i>
+                                <h4 class="mt-2 text-sm font-bold text-red-900">Possible pest damage</h4>
+                            </article>
+                            <article class="rounded-xl border border-red-300 bg-red-100 p-4">
+                                <i class="fa-solid fa-seedling text-red-700" aria-hidden="true"></i>
+                                <h4 class="mt-2 text-sm font-bold text-red-900">Possible nutrient stress</h4>
+                                <p class="mt-1 text-xs text-red-800">Suggested from visible cues, not measured.</p>
+                            </article>
+                        </div>
+                    </section>
+
+                <section aria-labelledby="ai-plant-review-heading" class="rounded-2xl border border-sage-200 bg-white p-5 shadow-sm xl:col-span-1">
+                    <h3 id="ai-plant-review-heading" class="text-lg font-bold text-sage-900">Plant health review</h3>
+                    <p class="mt-1 text-sm text-slate-600">Check for discoloration, plant damage, and possible pest signs.</p>
+                    <svg viewBox="0 0 360 190" role="img" aria-labelledby="ai-plant-diagram-title ai-plant-diagram-desc" class="mt-3 w-full">
+                        <title id="ai-plant-diagram-title">Plant inspection diagram</title>
+                        <desc id="ai-plant-diagram-desc">A plant illustration highlights leaf discoloration, visible plant damage, and a pest on a leaf as cues for grower review.</desc>
+                        <path d="M180 158V64M180 125C163 109 147 99 129 91M180 110C198 95 215 84 231 75M180 141C159 137 142 131 122 122" fill="none" stroke="#4d7c0f" stroke-linecap="round" stroke-width="5"/>
+                        <ellipse cx="145" cy="82" rx="23" ry="12" transform="rotate(32 145 82)" fill="#86b879"/>
+                        <path d="M129 91l22-8" fill="none" stroke="#4d7c0f" stroke-width="2"/>
+                        <path d="M136 79c5-7 11-6 15-2-2 6-7 8-13 6z" fill="#facc15"/>
+                        <circle cx="142" cy="80" r="2" fill="#ca8a04"/>
+                        <ellipse cx="215" cy="82" rx="23" ry="12" transform="rotate(-32 215 82)" fill="#86b879"/>
+                        <path d="M231 75l-23 8" fill="none" stroke="#4d7c0f" stroke-width="2"/>
+                        <ellipse cx="171" cy="62" rx="21" ry="11" transform="rotate(58 171 62)" fill="#a3c991"/>
+                        <ellipse cx="190" cy="61" rx="21" ry="11" transform="rotate(-58 190 61)" fill="#a3c991"/>
+                        <ellipse cx="139" cy="133" rx="22" ry="11" transform="rotate(20 139 133)" fill="#86b879"/>
+                        <path d="M122 122l24 10" fill="none" stroke="#4d7c0f" stroke-width="2"/>
+                        <path d="M120 126l8 2-4 4 7 3-11 0-3-4z" fill="#78350f"/>
+                        <g transform="translate(217 82)" fill="none" stroke="#451a03" stroke-linecap="round" stroke-width="1.5">
+                            <ellipse cx="0" cy="0" rx="4" ry="6" fill="#78350f"/>
+                            <circle cx="0" cy="-8" r="3" fill="#78350f"/>
+                            <path d="M-2-10l-3-4m7 4 3-4M-4-3l-6-3m6 7-6 3M4-3l6-3m-6 7 6 3"/>
+                        </g>
+                        <path d="M78 164H282" stroke="#cbd5c0" stroke-linecap="round" stroke-width="3"/>
+                        <path d="M180 158c-9 5-15 5-22 6m22-6c8 5 15 5 22 6" fill="none" stroke="#6b8f55" stroke-linecap="round" stroke-width="3"/>
+                        <path d="M98 35L128 75M258 33L222 78M98 144l24-17" stroke="#94a3b8" stroke-dasharray="3 3" stroke-width="1.5"/>
+                        <g font-family="sans-serif" font-size="10" font-weight="600" text-anchor="middle">
+                            <rect x="7" y="21" width="92" height="25" rx="12" fill="#fef3c7" stroke="#facc15"/>
+                            <text x="53" y="37" fill="#92400e">Discoloration</text>
+                            <rect x="258" y="21" width="94" height="25" rx="12" fill="#fef3c7" stroke="#facc15"/>
+                            <text x="305" y="37" fill="#92400e">Pest detection</text>
+                            <rect x="7" y="132" width="92" height="25" rx="12" fill="#fef3c7" stroke="#facc15"/>
+                            <text x="53" y="148" fill="#92400e">Plant damage</text>
+                        </g>
+                    </svg>
+                    <p class="mt-2 text-xs leading-relaxed text-slate-600">These signs are prompts for inspection, not a diagnosis.</p>
+                </section>
+
+                <section aria-labelledby="ai-why-heading" class="rounded-2xl border border-sage-200 bg-white p-6 shadow-sm xl:col-span-1">
+                    <h3 id="ai-why-heading" class="text-lg font-bold text-sage-900">Why it matters</h3>
+                    <ul class="mt-3 space-y-2 text-sm text-slate-700">
+                        <li class="flex gap-2"><i class="fa-solid fa-check mt-1 text-sage-600" aria-hidden="true"></i><span>Catches problems earlier</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check mt-1 text-sage-600" aria-hidden="true"></i><span>Reduces plant loss</span></li>
+                        <li class="flex gap-2"><i class="fa-solid fa-check mt-1 text-sage-600" aria-hidden="true"></i><span>Saves time on daily plant checks</span></li>
+                    </ul>
+                </section>
+                <section aria-labelledby="ai-team-heading" class="rounded-2xl border border-sage-200 bg-white p-6 shadow-sm xl:col-span-1">
+                    <h3 id="ai-team-heading" class="text-lg font-bold text-sage-900">Connects to the team</h3>
+                    <ul class="mt-3 space-y-2 text-sm leading-relaxed text-slate-700">
+                        <li>Alerts appear in the <button type="button" onclick="switchTab('dashboard')" class="font-semibold text-sage-800 underline decoration-sage-400 underline-offset-2">Mobile App Dashboard</button>.</li>
+                        <li>Pest flags link to <a href="#pest-detection-enhancement" class="font-semibold text-sage-800 underline decoration-sage-400 underline-offset-2">Pest Detection &amp; Smart Response</a>.</li>
+                        <li>Nutrient-related flags can point growers to <strong>Smart Nutrient Dosing</strong>.</li>
+                    </ul>
+                </section>
+
+                    <section aria-labelledby="ai-future-heading" class="space-y-4 xl:col-span-3">
+                        <h3 id="ai-future-heading" class="text-xl font-bold text-sage-900">Future enhancements</h3>
+                        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                            <article id="pest-detection-enhancement" class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                                <span class="inline-flex rounded-full bg-amber-200 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">Future enhancement</span>
+                                <h4 class="mt-2 font-bold text-amber-950">Pest Risk Analysis</h4>
+                                <p class="mt-1 text-sm leading-relaxed text-amber-900">Future analysis could flag possible pest activity and help growers decide what to inspect.</p>
+                            </article>
+                            <article class="rounded-2xl border border-amber-200 bg-amber-50 p-5">
+                                <span class="inline-flex rounded-full bg-amber-200 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-amber-900">Future enhancement</span>
+                                <h4 class="mt-2 font-bold text-amber-950">Harvest Forecasting</h4>
+                                <p class="mt-1 text-sm leading-relaxed text-amber-900">Yield and harvest-window predictions are future enhancements, not current capabilities.</p>
+                            </article>
+                        </div>
+                    </section>
             </div>
         </div>
 
@@ -994,13 +1102,107 @@
 
         <!-- ================= 8. STAKEHOLDER MATRIX TAB ================= -->
         <div id="tab-stakeholders" class="tab-content space-y-8">
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8">
-                <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Stakeholder Management</span>
-                <h2 class="text-3xl font-extrabold text-sage-900">Stakeholder Chart</h2>
-                <p class="text-slate-600 text-sm mt-1">Stakeholder power, interests, communication preferences, relationship actions, and success criteria.</p>
+            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Stakeholder Management</span>
+                    <h2 class="text-3xl font-extrabold text-sage-900">Stakeholder Chart</h2>
+                    <p class="text-slate-600 text-sm mt-1">Ordered by estimated impact on project delivery, with approvals and core resources first.</p>
+                </div>
+                <button id="stakeholder-view-toggle" type="button" onclick="toggleStakeholderView()" aria-controls="stakeholder-full-details" aria-expanded="false" class="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-sage-300 bg-sage-50 px-4 py-2.5 text-sm font-bold text-sage-800 transition-colors hover:bg-sage-100 focus:outline-none focus:ring-2 focus:ring-sage-500 focus:ring-offset-2">
+                    <i id="stakeholder-view-toggle-icon" class="fa-solid fa-expand" aria-hidden="true"></i>
+                    <span id="stakeholder-view-toggle-label">Show full details</span>
+                </button>
             </div>
 
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
+            <div id="stakeholder-summary-view" class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden" aria-hidden="false">
+                <div class="overflow-x-auto" role="region" aria-label="Stakeholder summary" tabindex="0">
+                    <table class="w-full min-w-[900px] text-left border-separate border-spacing-0 text-sm">
+                        <thead>
+                            <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
+                                <th scope="col" class="sticky left-0 z-20 min-w-[160px] border-r border-sage-200 bg-sage-100 p-4 align-top">Stakeholder</th>
+                                <th scope="col" class="p-4 align-top">Role</th>
+                                <th scope="col" class="p-4 align-top">Objective</th>
+                                <th scope="col" class="p-4 align-top">Influence / Interest</th>
+                                <th scope="col" class="p-4 align-top">Engagement</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-sage-100 text-slate-700">
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Land Owner</th>
+                                <td class="p-4 align-top">Provide or lease the project site.</td>
+                                <td class="p-4 align-top">Get the best sale price or steady lease income.</td>
+                                <td class="p-4 align-top">Controls site availability and terms; interest is mainly financial.</td>
+                                <td class="p-4 align-top">Discuss terms in person and explain the planned community use.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Local Community</th>
+                                <td class="p-4 align-top">Support the project and connect residents with it.</td>
+                                <td class="p-4 align-top">Youth education, local produce, healthy eating, and a gathering place.</td>
+                                <td class="p-4 align-top">Can support or oppose the project; directly affected.</td>
+                                <td class="p-4 align-top">Gather community input and share project updates.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Grocery Store</th>
+                                <td class="p-4 align-top">Potential competitor or alliance partner.</td>
+                                <td class="p-4 align-top">Increase profit.</td>
+                                <td class="p-4 align-top">Could compete on crop prices; likely low interest.</td>
+                                <td class="p-4 align-top">Discuss a mutually beneficial partnership early.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">AI Company</th>
+                                <td class="p-4 align-top">Provide AI services.</td>
+                                <td class="p-4 align-top">Sell its product.</td>
+                                <td class="p-4 align-top">Can restrict service use; interest may be low for a small program.</td>
+                                <td class="p-4 align-top">Explain intended use and confirm a support contact.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Funder (government)</th>
+                                <td class="p-4 align-top">Provide project funding.</td>
+                                <td class="p-4 align-top">Ensure the investment benefits the community.</td>
+                                <td class="p-4 align-top">Decides whether to fund; high interest.</td>
+                                <td class="p-4 align-top">Lead with community impact and provide timely updates.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Funder (private)</th>
+                                <td class="p-4 align-top">Provide project funding.</td>
+                                <td class="p-4 align-top">Support broader goals and possibly influence outcomes.</td>
+                                <td class="p-4 align-top">Can influence design and outcomes; high interest.</td>
+                                <td class="p-4 align-top">Share the project plan and progress updates.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Local Farms</th>
+                                <td class="p-4 align-top">Advise on crops and local growing conditions.</td>
+                                <td class="p-4 align-top">Share knowledge and support student education.</td>
+                                <td class="p-4 align-top">Provides local expertise; participation interest may vary.</td>
+                                <td class="p-4 align-top">Invite input during planning and connect with local farm groups.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Water Utility</th>
+                                <td class="p-4 align-top">Approve and guide water access and use.</td>
+                                <td class="p-4 align-top">Conserve water and generate service revenue.</td>
+                                <td class="p-4 align-top">Regulates water access and usage.</td>
+                                <td class="p-4 align-top">Review the plan with utility staff and discuss sponsorship.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Government</th>
+                                <td class="p-4 align-top">Issue permits and authorize construction.</td>
+                                <td class="p-4 align-top">Ensure the building is safe and nonhazardous.</td>
+                                <td class="p-4 align-top">Controls permits; may require detailed plans.</td>
+                                <td class="p-4 align-top">Confirm requirements and submit complete materials.</td>
+                            </tr>
+                            <tr class="hover:bg-sage-50/50">
+                                <th scope="row" class="sticky left-0 z-10 min-w-[160px] border-r border-sage-200 bg-white p-4 align-top font-bold text-sage-800">Local Schools</th>
+                                <td class="p-4 align-top">Use the greenhouse for lessons and field trips.</td>
+                                <td class="p-4 align-top">Support student learning.</td>
+                                <td class="p-4 align-top">Influences student participation; high interest.</td>
+                                <td class="p-4 align-top">Contact school leaders to plan educational use.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="stakeholder-full-details" class="hidden bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden" aria-hidden="true">
                 <div class="overflow-x-auto" role="region" aria-label="Stakeholder management chart" tabindex="0">
                     <table class="w-full min-w-[2400px] text-left border-separate border-spacing-0 text-sm">
                         <thead>
@@ -1163,7 +1365,7 @@
                 <p class="text-slate-600 text-sm mt-1">Identifying possible risks, impact levels, and proactive mitigation strategies.</p>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-5 gap-8">
+            <div class="grid grid-cols-1 items-start xl:grid-cols-5 gap-8">
                 <section class="xl:col-span-3 bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 space-y-5" aria-labelledby="risk-plot-heading">
                     <div>
                         <h3 id="risk-plot-heading" class="text-xl font-bold text-sage-900">Probability vs. Impact</h3>
@@ -1196,23 +1398,13 @@
                 </section>
             </div>
 
-            <div class="bg-white rounded-2xl border border-sage-200 shadow-sm overflow-hidden">
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                        <thead>
-                            <tr class="bg-sage-100 text-sage-900 font-bold border-b border-sage-200">
-                                <th class="p-4">Risk Number</th>
-                                <th class="p-4">Event</th>
-                                <th class="p-4">Probability</th>
-                                <th class="p-4">Impact</th>
-                                <th class="p-4">Priority</th>
-                                <th class="p-4">Mitigation</th>
-                            </tr>
-                        </thead>
-                        <tbody id="risk-table-body" class="divide-y divide-sage-100 text-slate-700"></tbody>
-                    </table>
+            <section aria-labelledby="risk-categories-heading" class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 space-y-4">
+                <div>
+                    <h3 id="risk-categories-heading" class="text-xl font-bold text-sage-900">Risk Register by Feature</h3>
+                    <p class="mt-1 text-sm text-slate-600">Expand a feature category to review its risks.</p>
                 </div>
-            </div>
+                <div id="risk-category-list" class="space-y-3" role="group" aria-label="Risks grouped by feature category"></div>
+            </section>
         </div>
 
         <!-- ================= 11. RESOURCE & BUDGET TAB ================= -->
@@ -1349,51 +1541,93 @@
 
     </main>
 
-    <dialog id="ai-demo-dialog" aria-labelledby="ai-demo-title" class="w-[min(96vw,1100px)] max-h-[90vh] overflow-y-auto rounded-2xl border border-sage-200 p-0 text-slate-800 shadow-2xl">
-        <div class="flex items-start justify-between gap-4 border-b border-sage-200 bg-white p-5 sm:p-7">
-            <div>
-                <span class="text-xs font-bold uppercase tracking-widest text-sage-600">Plant Health Demo</span>
-                <h2 id="ai-demo-title" class="mt-1 text-2xl font-extrabold text-sage-900">AI Plant Monitoring: Healthy vs. Stress</h2>
-                <p class="mt-1 text-sm text-slate-600">AI monitoring can track plant changes over time and flag signs that may need a grower’s attention.</p>
+    <dialog id="ai-demo-dialog" aria-labelledby="ai-demo-title" aria-describedby="ai-demo-subtitle" aria-modal="true" class="w-[min(96vw,1100px)] max-h-[90vh] overflow-y-auto overscroll-contain rounded-2xl border border-sage-200 p-0 text-slate-800 shadow-2xl">
+        <header class="sticky top-0 z-20 border-b border-sage-200 bg-white">
+            <div class="relative flex items-start gap-4 p-5 pr-16 sm:p-7 sm:pr-20">
+                <div class="min-w-0">
+                    <span class="text-xs font-bold uppercase tracking-widest text-sage-600">Plant Health Demo</span>
+                    <h2 id="ai-demo-title" class="mt-1 text-2xl font-extrabold text-sage-900">AI Plant Monitoring: Healthy vs. Stress</h2>
+                    <p id="ai-demo-subtitle" class="mt-1 text-sm text-slate-600">AI monitoring can track plant changes over time and flag signs that may need a grower's attention.</p>
+                </div>
+                <button id="ai-demo-dialog-close" type="button" onclick="aiDemoDialog.close()" aria-label="Close plant health demo" class="absolute right-3 top-3 z-10 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-sage-200 bg-white text-slate-600 shadow-sm hover:bg-sage-100 hover:text-sage-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-600 sm:right-4 sm:top-4">
+                    <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
+                </button>
             </div>
-            <button type="button" onclick="document.getElementById('ai-demo-dialog').close()" aria-label="Close plant health demo" class="shrink-0 rounded-lg p-2 text-slate-500 hover:bg-sage-100 hover:text-sage-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-600">
-                <i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i>
-            </button>
-        </div>
-        <div class="space-y-5 bg-sage-50 p-5 sm:p-7">
-            <p class="text-xs text-slate-600 lg:hidden">On smaller screens, the photos are stacked vertically. Scroll down to view both examples.</p>
+        </header>
+        <div class="space-y-5 bg-sage-50 p-4 sm:p-7">
             <div class="grid grid-cols-1 gap-5 lg:grid-cols-2">
                 <section class="overflow-hidden rounded-xl border border-emerald-200 bg-white" aria-labelledby="healthy-plant-heading">
-                    <div class="border-b border-emerald-100 bg-emerald-50 px-4 py-3">
+                    <div class="flex items-center justify-between gap-3 border-b border-emerald-100 bg-emerald-50 px-4 py-3">
                         <h3 id="healthy-plant-heading" class="font-bold text-emerald-900"><i class="fa-solid fa-circle-check mr-2 text-emerald-600" aria-hidden="true"></i>Healthy monitoring baseline</h3>
+                        <span class="shrink-0 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-emerald-800">Day 1</span>
                     </div>
+                    <div aria-hidden="true" class="hidden h-[57px] border-b border-slate-100 lg:block"></div>
                     <figure>
-                        <img src="assets/tomato-healthy-example.jpg" alt="Tomato plant with green, intact foliage, several plump red tomatoes, and one developing green tomato." class="block h-auto w-full">
-                        <figcaption class="px-4 pt-2 text-xs text-slate-500">Healthy example image provided for this demo.</figcaption>
+                        <img src="assets/tomato-healthy-example.jpg" alt="Healthy tomato plant with full green leaves and several ripe tomatoes, shown as a visual Day 1 baseline." class="block h-auto w-full">
+                        <figcaption class="px-4 pt-2 text-xs text-slate-700">Healthy example image provided for this demo.</figcaption>
                     </figure>
                     <ul class="space-y-2 p-4 text-sm text-slate-700">
                         <li><i class="fa-solid fa-leaf mr-2 text-emerald-600" aria-hidden="true"></i>AI can track leaf color and canopy coverage as a growth baseline.</li>
-                        <li><i class="fa-solid fa-chart-line mr-2 text-emerald-600" aria-hidden="true"></i>Consistent readings over time can support a healthy-growth status.</li>
-                        <li><i class="fa-solid fa-bell mr-2 text-emerald-600" aria-hidden="true"></i>Routine monitoring helps identify changes early for grower review.</li>
+                        <li><i class="fa-solid fa-chart-line mr-2 text-emerald-600" aria-hidden="true"></i>Consistent readings over time support a healthy-growth status.</li>
+                        <li><i class="fa-solid fa-bell mr-2 text-emerald-600" aria-hidden="true"></i>Routine monitoring helps catch changes early for grower review.</li>
                     </ul>
                 </section>
 
                 <section class="overflow-hidden rounded-xl border border-amber-200 bg-white" aria-labelledby="stressed-plant-heading">
-                    <div class="border-b border-amber-100 bg-amber-50 px-4 py-3">
+                    <div class="flex items-center justify-between gap-3 border-b border-amber-100 bg-amber-50 px-4 py-3">
                         <h3 id="stressed-plant-heading" class="font-bold text-amber-900"><i class="fa-solid fa-triangle-exclamation mr-2 text-amber-600" aria-hidden="true"></i>Potential stress alert scenario</h3>
+                        <span class="shrink-0 rounded-full bg-white px-2.5 py-1 text-xs font-bold text-amber-900">Day 14</span>
+                    </div>
+                    <div class="flex items-center justify-between gap-3 border-b border-slate-100 px-4 py-3">
+                        <span class="text-sm font-semibold text-slate-700">Show AI flags</span>
+                        <button id="ai-flags-toggle" type="button" onclick="toggleAiFlags()" aria-controls="ai-stress-flags" aria-pressed="true" class="inline-flex items-center gap-2 rounded-full p-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2">
+                            <span class="sr-only">Show AI flags</span>
+                            <span id="ai-flags-switch-track" class="relative h-6 w-11 rounded-full bg-amber-500 transition-colors" aria-hidden="true">
+                                <span id="ai-flags-switch-knob" class="absolute left-1 top-1 h-4 w-4 translate-x-5 rounded-full bg-white shadow transition-transform"></span>
+                            </span>
+                        </button>
                     </div>
                     <figure>
-                        <img src="assets/tomato-stress-example.jpg" alt="Tomato plant with curled, browning foliage and fewer, smaller-looking fruit, including damaged fruit." class="block h-auto w-full">
-                        <figcaption class="px-4 pt-2 text-xs text-slate-500">Stress example image provided for this demo.</figcaption>
+                        <div class="relative">
+                            <img src="assets/tomato-stress-example.jpg" alt="Tomato plant with browning leaves, dried foliage, and shriveled fruit, shown as a sample Day 14 stress scenario." class="block h-auto w-full">
+                            <div id="ai-stress-flags" class="pointer-events-none absolute inset-0" aria-hidden="false">
+                                <div class="absolute left-[8%] top-[14%] h-[19%] w-[38%] border-2 border-yellow-400 bg-yellow-300/10">
+                                    <span class="absolute -top-3 left-1 whitespace-nowrap rounded bg-yellow-300 px-2 py-0.5 text-[10px] font-bold text-slate-900">Browning leaves</span>
+                                </div>
+                                <div class="absolute right-[8%] top-[21%] h-[22%] w-[32%] border-2 border-yellow-400 bg-yellow-300/10">
+                                    <span class="absolute -top-3 right-1 whitespace-nowrap rounded bg-yellow-300 px-2 py-0.5 text-[10px] font-bold text-slate-900">Dried foliage</span>
+                                </div>
+                                <div class="absolute left-[35%] top-[58%] h-[18%] w-[38%] border-2 border-yellow-400 bg-yellow-300/10">
+                                    <span class="absolute -top-3 left-1 whitespace-nowrap rounded bg-yellow-300 px-2 py-0.5 text-[10px] font-bold text-slate-900">Shriveled fruit</span>
+                                </div>
+                            </div>
+                        </div>
+                        <figcaption class="px-4 pt-2 text-xs text-slate-700">Stress example image provided for this demo.</figcaption>
                     </figure>
+                    <article class="mx-4 mt-3 flex gap-3 rounded-xl border border-amber-300 bg-amber-50 p-4">
+                        <i class="fa-solid fa-bell mt-0.5 text-amber-700" aria-hidden="true"></i>
+                        <div>
+                            <p class="text-sm font-semibold leading-relaxed text-amber-950">Bed 3: leaf browning detected. Check water, light, and pests today.</p>
+                            <p class="mt-1 text-xs text-amber-800">Sample alert shown on the dashboard.</p>
+                        </div>
+                    </article>
                     <ul class="space-y-2 p-4 text-sm text-slate-700">
-                        <li><i class="fa-solid fa-triangle-exclamation mr-2 text-amber-600" aria-hidden="true"></i>AI may flag yellowing foliage, reduced canopy coverage, or changes in fruit set.</li>
-                        <li><i class="fa-solid fa-bell mr-2 text-amber-600" aria-hidden="true"></i>An alert can prompt checks of water, light, nutrients, and pests.</li>
-                        <li><i class="fa-solid fa-user-check mr-2 text-amber-600" aria-hidden="true"></i>A grower should verify any alert; AI monitoring supports review, not diagnosis.</li>
+                        <li><i class="fa-solid fa-triangle-exclamation mr-2 text-amber-600" aria-hidden="true"></i>AI may flag browning or yellowing leaves, reduced canopy coverage, or changes in fruit.</li>
+                        <li><i class="fa-solid fa-bell mr-2 text-amber-600" aria-hidden="true"></i>An alert can prompt a grower to check water, light, nutrients, and pests.</li>
+                        <li><i class="fa-solid fa-user-check mr-2 text-amber-600" aria-hidden="true"></i>A grower should verify any alert. AI monitoring supports review, not diagnosis.</li>
                     </ul>
                 </section>
             </div>
-            <p class="rounded-lg border border-sage-200 bg-white p-3 text-xs leading-relaxed text-slate-600"><strong class="text-sage-900">Demo note:</strong> These images illustrate healthy and stress scenarios. AI monitoring can flag visible changes for grower review, but cannot diagnose their cause. This preview does not analyze a live camera feed; a grower should inspect the plant and its growing conditions.</p>
+
+            <section aria-label="AI monitoring process" class="grid grid-cols-1 items-center gap-3 rounded-xl border border-sage-200 bg-white p-4 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
+                <p class="rounded-lg bg-sage-50 p-3 text-center text-sm font-semibold text-sage-900">Camera takes a daily photo</p>
+                <i class="fa-solid fa-arrow-right rotate-90 text-center text-sage-500 md:rotate-0" aria-hidden="true"></i>
+                <p class="rounded-lg bg-sage-50 p-3 text-center text-sm font-semibold text-sage-900">AI flags visible changes</p>
+                <i class="fa-solid fa-arrow-right rotate-90 text-center text-sage-500 md:rotate-0" aria-hidden="true"></i>
+                <p class="rounded-lg bg-sage-50 p-3 text-center text-sm font-semibold text-sage-900">Grower gets an alert and checks the plant.</p>
+            </section>
+
+            <p class="rounded-xl border border-sage-200 bg-white p-4 text-sm leading-relaxed text-slate-700"><strong class="text-sage-900">Demo note:</strong> These images illustrate healthy and stress scenarios. AI monitoring can flag visible changes for grower review, but cannot diagnose their cause. This preview does not analyze a live camera feed; a grower should inspect the plant and its growing conditions.</p>
         </div>
     </dialog>
 
@@ -1917,6 +2151,53 @@
         renderGantt();
         window.addEventListener('resize', renderGantt);
 
+        const stakeholderImpactOrder = [
+            'Government',
+            'Funder (government)',
+            'Land Owner',
+            'Water Utility',
+            'Local Community',
+            'Funder (private)',
+            'AI Company',
+            'Local Farms',
+            'Local Schools',
+            'Grocery Store'
+        ];
+
+        function orderStakeholdersByImpact() {
+            const impactRank = new Map(stakeholderImpactOrder.map((name, index) => [name, index]));
+            document.querySelectorAll('#stakeholder-summary-view tbody, #stakeholder-full-details tbody').forEach(tbody => {
+                Array.from(tbody.rows)
+                    .sort((rowA, rowB) => {
+                        const nameA = rowA.querySelector('th[scope="row"]').textContent.trim();
+                        const nameB = rowB.querySelector('th[scope="row"]').textContent.trim();
+                        const rankA = impactRank.has(nameA) ? impactRank.get(nameA) : stakeholderImpactOrder.length;
+                        const rankB = impactRank.has(nameB) ? impactRank.get(nameB) : stakeholderImpactOrder.length;
+                        return rankA - rankB;
+                    })
+                    .forEach(row => tbody.appendChild(row));
+            });
+        }
+
+        orderStakeholdersByImpact();
+
+        function toggleStakeholderView() {
+            const fullDetails = document.getElementById('stakeholder-full-details');
+            const summary = document.getElementById('stakeholder-summary-view');
+            const toggle = document.getElementById('stakeholder-view-toggle');
+            const label = document.getElementById('stakeholder-view-toggle-label');
+            const icon = document.getElementById('stakeholder-view-toggle-icon');
+            const showFullDetails = fullDetails.classList.contains('hidden');
+
+            fullDetails.classList.toggle('hidden', !showFullDetails);
+            summary.classList.toggle('hidden', showFullDetails);
+            fullDetails.setAttribute('aria-hidden', String(!showFullDetails));
+            summary.setAttribute('aria-hidden', String(showFullDetails));
+            toggle.setAttribute('aria-expanded', String(showFullDetails));
+            label.textContent = showFullDetails ? 'Show concise view' : 'Show full details';
+            icon.className = showFullDetails ? 'fa-solid fa-compress' : 'fa-solid fa-expand';
+        }
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -2068,10 +2349,33 @@
         }
 
         const aiDemoDialog = document.getElementById('ai-demo-dialog');
+        let aiDemoTrigger;
 
         function runAiDiagnostic() {
+            aiDemoTrigger = document.activeElement;
             aiDemoDialog.showModal();
+            document.getElementById('ai-demo-dialog-close').focus();
         }
+
+        function toggleAiFlags() {
+            const toggle = document.getElementById('ai-flags-toggle');
+            const flags = document.getElementById('ai-stress-flags');
+            const track = document.getElementById('ai-flags-switch-track');
+            const knob = document.getElementById('ai-flags-switch-knob');
+            const showFlags = toggle.getAttribute('aria-pressed') !== 'true';
+
+            toggle.setAttribute('aria-pressed', String(showFlags));
+            flags.classList.toggle('hidden', !showFlags);
+            flags.setAttribute('aria-hidden', String(!showFlags));
+            track.classList.toggle('bg-amber-500', showFlags);
+            track.classList.toggle('bg-slate-300', !showFlags);
+            knob.classList.toggle('translate-x-5', showFlags);
+        }
+
+        aiDemoDialog.addEventListener('close', () => {
+            if (aiDemoTrigger && aiDemoTrigger.isConnected) aiDemoTrigger.focus();
+            aiDemoTrigger = null;
+        });
 
         aiDemoDialog.addEventListener('click', event => {
             if (event.target === event.currentTarget) event.currentTarget.close();
@@ -2084,15 +2388,26 @@
             }
         });
 
-        const riskRecords = riskData.map(([id, event, probability, impact, cost, response, notes]) => ({
-            id,
-            event,
-            probability,
-            impact,
-            cost,
-            response,
-            notes
-        }));
+        const riskFeatureCategories = [
+            { name: 'Define Greenhouse Requirements', ids: ['SAF-001', 'SAF-002', 'SAF-003', 'SAF-004'] },
+            { name: 'Design Greenhouse', ids: ['SAF-005', 'SAF-006', 'SAF-007', 'SAF-008', 'SAF-009', 'SAF-010', 'SAF-011'] },
+            { name: 'Greenhouse Construction', ids: ['SAF-012', 'SAF-013', 'SAF-014', 'SAF-015', 'SAF-016', 'SAF-017', 'SAF-018', 'SAF-019', 'SAF-020'] },
+            { name: 'Automated Irrigation System', ids: ['SAF-021', 'SAF-025', 'SAF-026', 'SAF-027', 'SAF-028', 'SAF-029'] },
+            { name: 'Mobile App Dashboard', ids: ['SAF-030', 'SAF-031', 'SAF-032', 'SAF-033', 'SAF-034'] },
+            { name: 'AI Plant Health Monitoring', ids: ['SAF-035', 'SAF-036', 'SAF-037', 'SAF-038', 'SAF-039'] },
+            { name: 'Solar Panels', ids: ['SAF-040', 'SAF-041', 'SAF-042', 'SAF-043'] },
+            { name: 'Project Budget', ids: ['SAF-044', 'SAF-045', 'SAF-046', 'SAF-047', 'SAF-048'] }
+        ];
+        const riskCategoryById = new Map();
+        riskFeatureCategories.forEach(category => {
+            category.ids.forEach(id => riskCategoryById.set(id, category.name));
+        });
+
+        const riskRecords = riskData.map(([id, event, probability, impact, cost, response, notes]) => {
+            const category = riskCategoryById.get(id);
+            if (!category) throw new Error(`Missing Feature (Goal) category for ${id} in the risk workbook.`);
+            return { id, event, probability, impact, cost, response, notes, category };
+        });
 
         const riskPriorityStyles = {
             low: { label: 'Low', point: '#10b981', badge: 'bg-emerald-100 text-emerald-800' },
@@ -2118,29 +2433,65 @@
         }
 
         function renderRiskTable() {
-            const tableBody = document.getElementById('risk-table-body');
-            tableBody.innerHTML = riskRecords.map((risk, index) => {
-                const priority = getRiskPriority(risk);
+            const categoryList = document.getElementById('risk-category-list');
+            const risksByCategory = new Map(riskFeatureCategories.map(category => [category.name, []]));
+            riskRecords.forEach((risk, index) => risksByCategory.get(risk.category).push({ risk, index }));
+
+            categoryList.innerHTML = riskFeatureCategories.map(category => {
+                const categoryRisks = risksByCategory.get(category.name);
                 return `
-                    <tr class="hover:bg-sage-50/50" data-risk-row="${index}">
-                        <td class="p-4">
-                            <button type="button" class="risk-select-button rounded-lg px-2.5 py-1 text-xs font-bold ${priority.badge} hover:ring-2 hover:ring-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-500" data-risk-index="${index}" aria-pressed="false" aria-label="View details for ${escapeRiskText(risk.id)}">
-                                ${escapeRiskText(risk.id)}
-                            </button>
-                        </td>
-                        <td class="p-4 font-semibold text-sage-800">${escapeRiskText(risk.event)}</td>
-                        <td class="p-4">${risk.probability} / 5</td>
-                        <td class="p-4">${risk.impact} / 5</td>
-                        <td class="p-4">
-                            <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold ${priority.badge}">
-                                ${priority.label}<span class="opacity-75">(${priority.score})</span>
-                            </span>
-                        </td>
-                        <td class="p-4 min-w-64">${escapeRiskText(risk.response || 'No mitigation plan provided in the workbook.')}</td>
-                    </tr>`;
+                    <details class="group overflow-hidden rounded-xl border border-sage-200 bg-white">
+                        <summary class="cursor-pointer list-none bg-sage-50 px-4 py-4 transition-colors hover:bg-sage-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-600">
+                            <div class="flex items-center justify-between gap-3">
+                                <div>
+                                    <h4 class="font-bold text-sage-900">${escapeRiskText(category.name)}</h4>
+                                    <p class="mt-1 text-xs text-slate-600">${categoryRisks.length} ${categoryRisks.length === 1 ? 'risk' : 'risks'}</p>
+                                </div>
+                                <i class="fa-solid fa-chevron-down shrink-0 text-sage-600 transition-transform group-open:rotate-180" aria-hidden="true"></i>
+                            </div>
+                        </summary>
+                        <div class="border-t border-sage-200">
+                            <div class="overflow-x-auto">
+                                <table class="w-full min-w-[760px] text-left text-sm">
+                                    <thead>
+                                        <tr class="border-b border-sage-200 bg-white text-xs font-bold uppercase tracking-wide text-slate-500">
+                                            <th scope="col" class="p-3">Risk Number</th>
+                                            <th scope="col" class="p-3">Event</th>
+                                            <th scope="col" class="p-3">Probability</th>
+                                            <th scope="col" class="p-3">Impact</th>
+                                            <th scope="col" class="p-3">Priority</th>
+                                            <th scope="col" class="p-3">Mitigation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-sage-100 text-slate-700">
+                                        ${categoryRisks.map(({ risk, index }) => {
+                                            const priority = getRiskPriority(risk);
+                                            return `
+                                                <tr class="hover:bg-sage-50/50" data-risk-row="${index}">
+                                                    <td class="p-3">
+                                                        <button type="button" class="risk-select-button rounded-lg px-2.5 py-1 text-xs font-bold ${priority.badge} hover:ring-2 hover:ring-sage-400 focus:outline-none focus:ring-2 focus:ring-sage-500" data-risk-index="${index}" aria-pressed="false" aria-label="View details for ${escapeRiskText(risk.id)}">
+                                                            ${escapeRiskText(risk.id)}
+                                                        </button>
+                                                    </td>
+                                                    <td class="p-3 font-semibold text-sage-800">${escapeRiskText(risk.event)}</td>
+                                                    <td class="p-3">${risk.probability} / 5</td>
+                                                    <td class="p-3">${risk.impact} / 5</td>
+                                                    <td class="p-3">
+                                                        <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold ${priority.badge}">
+                                                            ${priority.label}<span class="opacity-75">(${priority.score})</span>
+                                                        </span>
+                                                    </td>
+                                                    <td class="p-3 min-w-64">${escapeRiskText(risk.response || 'No mitigation plan provided in the workbook.')}</td>
+                                                </tr>`;
+                                        }).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </details>`;
             }).join('');
 
-            tableBody.addEventListener('click', event => {
+            categoryList.addEventListener('click', event => {
                 const button = event.target.closest('[data-risk-index]');
                 if (button) selectRisk(Number(button.dataset.riskIndex));
             });
