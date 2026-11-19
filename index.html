@@ -848,7 +848,7 @@
         </div>
 
         <!-- ================= 5. SOLAR PANELS TAB ================= -->
-        <div id="tab-solar" class="tab-content">
+        <div id="tab-solar" class="tab-content solar-expanded">
             <svg class="icon-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <symbol id="solar-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v2M12 21v2M1 12h2M21 12h2M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2"/></symbol>
@@ -862,20 +862,66 @@
                 </svg>
             <section class="hero" aria-labelledby="solar-title">
                 <div class="hero-copy">
-                    <p class="lead">Lead: Aiden Lee</p>
-                    <h1 id="solar-title">Solar Panels &amp; Renewable Energy</h1>
-                    <p>Solar panels help power <strong>irrigation, plant-health monitoring, and ventilation</strong></p>
-                    <span class="solar-pill"><svg class="icon" aria-hidden="true"><use href="#solar-sun"/></svg>Active Generation: 2.4 kW</span>
+                    <span class="solar-eyebrow"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i> Solar Panels &amp; Renewable Energy</span>
+                    <h1 id="solar-title">Put Sunlight to Work for Your Greenhouse.</h1>
+                    <p>Growing smarter means thinking about energy, too. Our proposed solar system would help power irrigation, plant-health monitoring, and ventilation, with battery storage to make surplus energy useful later.</p>
+                    <div class="solar-hero-highlights">
+                        <div><i class="fa-solid fa-sun" aria-hidden="true"></i><h3>Generate Locally</h3><p>Use sunlight where your crops grow.</p></div>
+                        <div><i class="fa-solid fa-battery-half" aria-hidden="true"></i><h3>Plan for Later</h3><p>Pair solar with suitable energy storage.</p></div>
+                        <div><i class="fa-solid fa-chart-line" aria-hidden="true"></i><h3>See the Balance</h3><p>Understand generation and demand.</p></div>
+                    </div>
+                    <a class="solar-link" href="#solar-how-it-works">See how it works <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+                    <p class="solar-project-credit">Project lead: Aiden Lee &middot; Proposed system concept</p>
                 </div>
                 <figure class="solar-photo">
                     <img src="assets/solar-panels-concept.png" alt="Concept illustration of solar panels in the foreground with a small crop-filled greenhouse behind them." width="1536" height="1024" fetchpriority="high">
                 </figure>
             </section>
 
+            <section id="solar-how-it-works" class="solar-section" aria-labelledby="solar-how-title">
+                <div class="solar-section-heading">
+                    <span class="solar-kicker">From sunlight to growing power</span>
+                    <h2 id="solar-how-title">How Our Solar System Would Work</h2>
+                    <p>A connected energy system designed around the equipment that keeps the greenhouse growing.</p>
+                </div>
+                <div class="solar-grid solar-grid-three">
+                    <article class="solar-info-card">
+                        <div class="solar-card-icon"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div>
+                        <span class="solar-kicker">Step 1</span>
+                        <h3>Capture Sunlight</h3>
+                        <p>Photovoltaic panels convert sunlight into direct-current electricity. The layout would be chosen around available space and sunlight, while keeping shade off the growing area.</p>
+                    </article>
+                    <article class="solar-info-card">
+                        <div class="solar-card-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
+                        <span class="solar-kicker">Step 2</span>
+                        <h3>Supply Greenhouse Systems</h3>
+                        <p>Compatible power electronics manage the supply. An inverter converts DC power to AC for equipment that needs it; the final design would match each greenhouse load.</p>
+                    </article>
+                    <article class="solar-info-card">
+                        <div class="solar-card-icon"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></div>
+                        <span class="solar-kicker">Step 3</span>
+                        <h3>Store Surplus &amp; Track Use</h3>
+                        <p>When generation exceeds demand, a compatible battery system could store the surplus. Monitoring would show generation, consumption, and battery status together.</p>
+                    </article>
+                </div>
+                <div class="solar-process">
+                    <h3>The energy journey at a glance</h3>
+                    <ol>
+                        <li><i class="fa-solid fa-sun" aria-hidden="true"></i><span>Capture sunlight</span></li>
+                        <li><i class="fa-solid fa-sliders" aria-hidden="true"></i><span>Manage power</span></li>
+                        <li><i class="fa-solid fa-seedling" aria-hidden="true"></i><span>Supply active loads</span></li>
+                        <li><i class="fa-solid fa-battery-half" aria-hidden="true"></i><span>Store available surplus</span></li>
+                    </ol>
+                    <p>A conceptual energy journey. Battery charging depends on available solar power, demand, and storage limits.</p>
+                </div>
+            </section>
+
+            <section id="solar-demo" class="solar-section" aria-labelledby="solar-demo-title">
             <div class="demo-toolbar">
                 <div>
-                    <h2>Your greenhouse energy, at a glance.</h2>
-                    <p>A sample solar app home screen showing generation and greenhouse energy use on a sunny day.</p>
+                    <span class="solar-kicker">Interactive demonstration</span>
+                    <h2 id="solar-demo-title">Your Greenhouse Energy, at a Glance</h2>
+                    <p>Explore a sample sunny-day snapshot. Use the phone's side arrow or “View panel connections” to explore panel status, then select a panel for details.</p>
                 </div>
             </div>
 
@@ -985,7 +1031,7 @@
                             <span class="flow-arrow" aria-hidden="true" id="solar-battery-arrow">&rarr;</span>
                             <div class="energy-node"><svg class="icon" aria-hidden="true"><use href="#solar-battery"/></svg><div><strong id="solar-flow-battery">1.0 kW</strong><span id="solar-flow-battery-label">To battery</span></div></div>
                         </div>
-                        <p class="flow-explainer" id="solar-flow-explainer">2.4 kW generated = 1.4 kW for greenhouse systems + 1.0 kW to battery storage.</p>
+                        <p class="flow-explainer" id="solar-flow-explainer">2.4 kW generated = 1.4 kW for greenhouse systems + 1.0 kW to battery storage. This simplified balance omits conversion losses and charging limits.</p>
                     </section>
 
                     <section class="card" aria-labelledby="solar-loads-title">
@@ -1011,28 +1057,88 @@
                             <h2 id="solar-panel-sensing-title">Solar panel connection sensing</h2>
                             <span class="scenario-badge">Phone demo</span>
                         </div>
-                        <p class="connection-sensing-copy">Monitor each panel's connection to spot offline panels or unstable connections quickly.</p>
+                        <p class="connection-sensing-copy">Explore examples of working, warning, and offline panels. Individual panel monitoring would require compatible monitoring hardware in the final installation.</p>
                         <button type="button" class="connection-sensing-button" onclick="showSolarPhonePage('connections', true)">
                             <svg class="icon" aria-hidden="true"><use href="#solar-panel"/></svg>
                             View panel connections
                         </button>
                     </section>
 
-                    <div class="benefits">
-                        <article class="benefit">
-                            <svg class="icon" aria-hidden="true"><use href="#solar-battery"/></svg>
-                            <h3>Store energy for later</h3>
-                            <p>Battery storage could save surplus solar energy for use after sunset. Runtime depends on battery capacity and greenhouse demand.</p>
-                        </article>
-                        <article class="benefit">
-                            <svg class="icon" aria-hidden="true"><use href="#solar-book"/></svg>
-                            <h3>Make energy a learning opportunity</h3>
-                            <p>Help students and community members see how sunlight can support irrigation, AI monitoring, and sustainable agriculture.</p>
-                        </article>
-                    </div>
                 </div>
             </div>
             <p class="concept-note">Design concept only. All readings are simulated, not live telemetry. Battery storage is shown as a proposed capability; final capacity and power coverage would require engineering validation.</p>
+            </section>
+
+            <section class="solar-section" aria-labelledby="solar-benefits-title">
+                <div class="solar-section-heading">
+                    <span class="solar-kicker">Energy with a purpose</span>
+                    <h2 id="solar-benefits-title">Key Benefits</h2>
+                    <p>Planned capabilities that connect renewable energy to everyday greenhouse needs.</p>
+                </div>
+                <div class="solar-grid solar-grid-four">
+                    <article class="solar-info-card"><div class="solar-card-icon"><i class="fa-solid fa-leaf" aria-hidden="true"></i></div><h3>Use Renewable Energy</h3><p>Supply designated equipment with locally generated solar power when sunlight is available.</p></article>
+                    <article class="solar-info-card"><div class="solar-card-icon"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></div><h3>Make Surplus Useful</h3><p>Store available energy for later use, within the battery's capacity and power limits.</p></article>
+                    <article class="solar-info-card"><div class="solar-card-icon"><i class="fa-solid fa-chart-column" aria-hidden="true"></i></div><h3>Understand Demand</h3><p>Compare generation with pumps, sensors, and ventilation to see how equipment affects energy use.</p></article>
+                    <article class="solar-info-card"><div class="solar-card-icon"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div><h3>Learn by Exploring</h3><p>Give schools and community groups a practical way to explore energy storage and sustainable growing.</p></article>
+                </div>
+            </section>
+
+            <section class="solar-section" aria-labelledby="solar-conditions-title">
+                <div class="solar-section-heading">
+                    <span class="solar-kicker">Designed for changing conditions</span>
+                    <h2 id="solar-conditions-title">Sunlight Changes. Energy Needs Continue.</h2>
+                    <p>The proposed system must balance available generation, stored energy, and greenhouse demand throughout the day.</p>
+                </div>
+                <div class="solar-grid solar-grid-three">
+                    <article class="solar-info-card solar-weather-card"><div class="solar-card-icon"><i class="fa-solid fa-sun" aria-hidden="true"></i></div><h3>Sunny Conditions</h3><p>Solar can supply active equipment. Available surplus could charge the battery, subject to its charge rate and remaining capacity.</p></article>
+                    <article class="solar-info-card solar-weather-card"><div class="solar-card-icon"><i class="fa-solid fa-cloud-sun" aria-hidden="true"></i></div><h3>Clouds or Shade</h3><p>Lower sunlight can reduce generation. Stored energy could cover some of the gap if the battery has enough charge and output capacity.</p></article>
+                    <article class="solar-info-card solar-weather-card"><div class="solar-card-icon"><i class="fa-solid fa-moon" aria-hidden="true"></i></div><h3>After Sunset</h3><p>Panels no longer generate from sunlight. Equipment would need stored energy or another supply; overnight coverage has not been established.</p></article>
+                </div>
+                <div class="solar-reading-guide">
+                    <div><span class="solar-kicker">Read the dashboard</span><h3>Power, Energy &amp; Battery Level</h3><p>These readings answer different questions about your system.</p></div>
+                    <dl>
+                        <div><dt>kW &middot; Power now</dt><dd>The rate of generation or consumption at a particular moment, like the demo's 2.4 kW output.</dd></div>
+                        <div><dt>kWh &middot; Energy over time</dt><dd>Energy generated, used, or stored. A steady 1 kW load running for 1 hour uses 1 kWh.</dd></div>
+                        <div><dt>% &middot; Battery charge</dt><dd>The demo's 94% is a charge level, not a runtime. Runtime also depends on usable capacity, losses, and connected loads.</dd></div>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="solar-section" aria-labelledby="solar-components-title">
+                <div class="solar-section-heading">
+                    <span class="solar-kicker">System overview</span>
+                    <h2 id="solar-components-title">The Components Behind the Power</h2>
+                    <p>A conceptual equipment overview. Product models, panel count, battery capacity, and electrical specifications have not been finalized.</p>
+                </div>
+                <div class="solar-grid solar-grid-four">
+                    <article class="solar-info-card solar-component"><div class="solar-card-icon"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i></div><h3>Panels &amp; Mounting</h3><p>Capture sunlight on a suitable structure. Placement would account for shading, access, and the greenhouse layout.</p></article>
+                    <article class="solar-info-card solar-component"><div class="solar-card-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></div><h3>Power Electronics</h3><p>Compatible inverter and charge-control equipment would manage power conversion, distribution, and battery charging.</p></article>
+                    <article class="solar-info-card solar-component"><div class="solar-card-icon"><i class="fa-solid fa-battery-half" aria-hidden="true"></i></div><h3>Battery Storage</h3><p>Stores energy for later use. Usable capacity and output rating would be selected around designated loads and operating needs.</p></article>
+                    <article class="solar-info-card solar-component"><div class="solar-card-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div><h3>Metering &amp; Monitoring</h3><p>Measures generation and consumption for the dashboard. Panel-level status depends on the monitoring equipment selected.</p></article>
+                </div>
+            </section>
+
+            <section class="solar-section" aria-labelledby="solar-faq-title">
+                <div class="solar-section-heading">
+                    <span class="solar-kicker">Common questions</span>
+                    <h2 id="solar-faq-title">Solar, Explained Simply</h2>
+                </div>
+                <div class="solar-faq">
+                    <details><summary>Will solar power the entire greenhouse?</summary><p>The goal is to support designated systems such as irrigation, monitoring, and ventilation. Whole-greenhouse coverage, including any heating or supplemental lighting, has not been established. It depends on a load assessment, local sunlight, and the equipment selected.</p></details>
+                    <details><summary>How long could the battery keep equipment running?</summary><p>No battery capacity or backup runtime has been specified. An estimate would need usable energy in kWh, equipment demand, conversion losses, and the battery's discharge limits. The sample 94% charge reading alone cannot tell us how many hours remain.</p></details>
+                    <details><summary>Does installing solar automatically provide outage backup?</summary><p>Backup operation is a separate design requirement. The project has not confirmed grid connection or outage behavior. The final system would need equipment and controls designed to supply selected loads safely during an interruption.</p></details>
+                    <details><summary>What would owners need to monitor and maintain?</summary><p>Owners would check generation trends, battery status, and equipment alerts, and arrange inspections according to the selected manufacturers' guidance. Shading, dirt, and connection issues can affect output. Maintenance procedures and responsibilities would be included in the handover guide.</p></details>
+                    <details><summary>Are the readings and panel alerts on this page real?</summary><p>All readings are fixed examples. The 12-panel grid demonstrates status messages and does not specify the installed panel count. No live sensors, electrical controls, or battery system are connected to this website.</p></details>
+                </div>
+                <p class="solar-sources">Explore the science: U.S. Department of Energy &mdash; <a href="https://www.energy.gov/cmei/systems/solar-photovoltaic-technology-basics" target="_blank" rel="noopener noreferrer">Photovoltaic technology basics</a> and <a href="https://www.energy.gov/cmei/systems/solar-integration-solar-energy-and-storage-basics" target="_blank" rel="noopener noreferrer">Solar energy and storage basics</a> (open in new tabs).</p>
+            </section>
+
+            <section class="solar-closing" aria-labelledby="solar-closing-title">
+                <span class="solar-kicker">SMART Greenhouse</span>
+                <h2 id="solar-closing-title">Grow Smarter. Make Every Ray Count.</h2>
+                <p>Connect renewable energy with the systems that help your community grow.</p>
+                <a class="solar-link" href="#solar-demo">Explore the solar demo <i class="fa-solid fa-arrow-up" aria-hidden="true"></i></a>
+            </section>
         </div>
 
         <!-- ================= 7.  TIMELINE TAB ================= -->
