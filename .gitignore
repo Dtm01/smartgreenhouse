@@ -1,0 +1,23 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Local tooling (not used by the site, but keeps the repo clean if added later)
+node_modules/
+__pycache__/
+*.log
+
+# Local secrets and environment files
+.env
+.env.*
+
+# Temporary and backup files
+*.tmp
+*.bak

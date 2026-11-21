@@ -283,28 +283,28 @@
         </div>
 
         <!-- ================= 2. MOBILE APP DASHBOARD TAB ================= -->
-        <div id="tab-dashboard" class="tab-content space-y-8">
+        <div id="tab-dashboard" class="tab-content space-y-10">
             <div class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 sm:p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                     <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Lead: Stephanie Nguyen</span>
                     <h2 class="text-3xl font-extrabold text-sage-900">Mobile App Dashboard</h2>
-                    <p class="text-slate-600 text-sm mt-1">Real-time telemetry, remote actuator controls, and instant alerts for greenhouse operators.</p>
+                    <p class="text-slate-600 text-sm mt-1">Real-time telemetry, remote actuator controls, live cameras, energy, and instant alerts for greenhouse operators.</p>
                 </div>
-                <button onclick="triggerSimulatedAlert()" class="bg-sage-600 hover:bg-sage-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
-                    <i class="fa-solid fa-bell"></i>
+                <button type="button" onclick="triggerSimulatedAlert()" class="bg-sage-600 hover:bg-sage-700 text-white font-bold px-4 py-2.5 rounded-xl text-sm shadow-sm transition-all flex items-center space-x-2">
+                    <i class="fa-solid fa-bell" aria-hidden="true"></i>
                     <span>Test Push Notification</span>
                 </button>
             </div>
 
-            <!-- Simulated Phone Container -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Phone Mockup Frame -->
-                <div class="lg:col-span-1 flex justify-center">
-                    <div class="w-full max-w-sm bg-slate-900 rounded-[40px] p-4 shadow-2xl border-4 border-slate-700 relative">
-                        <!-- Phone Screen -->
-                        <div class="bg-slate-950 text-white rounded-[32px] overflow-hidden flex flex-col h-[640px] border border-slate-800">
-                            <!-- Phone Status Bar -->
-                            <div class="bg-slate-900 px-6 py-3 flex justify-between items-center text-xs font-semibold text-slate-400">
+            <!-- Phone + Overview row. On lg+ the Overview card stretches to the phone's height;
+                 the phone captions sit in a second grid row so they don't add to that height. -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                <!-- ===== Phone mockup (multi-screen app) ===== -->
+                <div class="flex justify-center items-start lg:col-start-1 lg:row-start-1">
+                    <div id="dash-phone" class="w-full max-w-sm bg-slate-900 rounded-[40px] p-4 shadow-2xl border-4 border-slate-700 relative scroll-mt-32" role="region" aria-label="Mobile app mockup">
+                        <div class="relative bg-slate-950 text-white rounded-[32px] overflow-hidden flex flex-col h-[640px] border border-slate-800">
+                            <!-- Status bar -->
+                            <div class="bg-slate-900 px-6 py-3 flex justify-between items-center text-xs font-semibold text-slate-400" aria-hidden="true">
                                 <span>9:41</span>
                                 <div class="flex space-x-2">
                                     <i class="fa-solid fa-signal"></i>
@@ -312,105 +312,475 @@
                                     <i class="fa-solid fa-battery-full text-emerald-400"></i>
                                 </div>
                             </div>
-                            <!-- App Header -->
+                            <!-- App header -->
                             <div class="px-6 py-4 bg-sage-900 border-b border-sage-800 flex justify-between items-center">
                                 <div>
                                     <p class="text-[10px] text-sage-400 uppercase tracking-wider">Connected Facility</p>
                                     <h4 class="font-bold text-sm">Greenhouse Zone A</h4>
                                 </div>
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true"></span>
                             </div>
-                            <!-- App Body Scrollable -->
-                            <div class="p-4 space-y-4 overflow-y-auto flex-grow text-xs">
-                                <!-- Live Metrics Card -->
-                                <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 space-y-2">
-                                    <div class="flex justify-between items-center text-sage-300 font-semibold">
-                                        <span>Environmental Telemetry</span>
-                                        <i class="fa-solid fa-chart-line"></i>
+
+                            <!-- Screens -->
+                            <div class="relative flex-grow min-h-0">
+
+                                <!-- HOME -->
+                                <div id="dash-screen-home" role="tabpanel" aria-labelledby="dash-tab-home" tabindex="-1" class="h-full overflow-y-auto p-4 space-y-4 text-xs focus:outline-none">
+                                    <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 space-y-2">
+                                        <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                            <span>Environmental Telemetry</span>
+                                            <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                                        </div>
+                                        <p class="text-[10px] text-slate-400 -mt-1"><i class="fa-regular fa-clock mr-1" aria-hidden="true"></i>Updated just now</p>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                                <p class="text-slate-400 text-[10px]">Temperature</p>
+                                                <p class="text-base font-bold text-emerald-400" id="phone-temp">24.5°C</p>
+                                            </div>
+                                            <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                                <p class="text-slate-400 text-[10px]">Humidity</p>
+                                                <p class="text-base font-bold text-blue-400" id="phone-hum">68%</p>
+                                            </div>
+                                            <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                                <p class="text-slate-400 text-[10px]">Soil Moisture</p>
+                                                <p class="text-base font-bold text-amber-400" id="phone-soil">42%</p>
+                                            </div>
+                                            <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                                <p class="text-slate-400 text-[10px]">Solar Gen</p>
+                                                <p class="text-base font-bold text-yellow-400" id="phone-solar">1.8 kW</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="grid grid-cols-2 gap-2">
-                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
-                                            <p class="text-slate-400 text-[10px]">Temperature</p>
-                                            <p class="text-base font-bold text-emerald-400" id="phone-temp">24.5°C</p>
+
+                                    <!-- System status row -->
+                                    <ul class="grid grid-cols-2 gap-2" aria-label="System status">
+                                        <li class="flex items-center gap-2 bg-slate-900 px-2.5 py-2 rounded-lg border border-slate-800">
+                                            <i class="fa-solid fa-droplet text-sky-400 w-3.5 text-center" aria-hidden="true"></i>
+                                            <span class="min-w-0"><span class="block text-[10px] text-slate-400">Irrigation</span><span class="block font-bold text-[11px]">Auto</span></span>
+                                        </li>
+                                        <li class="flex items-center gap-2 bg-slate-900 px-2.5 py-2 rounded-lg border border-slate-800">
+                                            <i class="fa-solid fa-leaf text-emerald-400 w-3.5 text-center" aria-hidden="true"></i>
+                                            <span class="min-w-0"><span class="block text-[10px] text-slate-400">AI Monitoring</span><span class="block font-bold text-[11px]">Active</span></span>
+                                        </li>
+                                        <li class="flex items-center gap-2 bg-slate-900 px-2.5 py-2 rounded-lg border border-slate-800">
+                                            <i class="fa-solid fa-sun text-yellow-400 w-3.5 text-center" aria-hidden="true"></i>
+                                            <span class="min-w-0"><span class="block text-[10px] text-slate-400">Solar</span><span class="block font-bold text-[11px]">Generating</span></span>
+                                        </li>
+                                        <li class="flex items-center gap-2 bg-slate-900 px-2.5 py-2 rounded-lg border border-slate-800">
+                                            <i class="fa-solid fa-video text-sage-300 w-3.5 text-center" aria-hidden="true"></i>
+                                            <span class="min-w-0"><span class="block text-[10px] text-slate-400">Cameras</span><span class="block font-bold text-[11px]">2 online</span></span>
+                                        </li>
+                                    </ul>
+
+                                    <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 space-y-2">
+                                        <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                            <span>Quick Actuators</span>
+                                            <i class="fa-solid fa-sliders" aria-hidden="true"></i>
                                         </div>
-                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
-                                            <p class="text-slate-400 text-[10px]">Humidity</p>
-                                            <p class="text-base font-bold text-blue-400" id="phone-hum">68%</p>
+                                        <div class="space-y-2">
+                                            <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+                                                <span>Irrigation Pump</span>
+                                                <button type="button" onclick="toggleAppControl('pump')" id="btn-pump" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">AUTO</button>
+                                            </div>
+                                            <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+                                                <span>Roof Vents</span>
+                                                <button type="button" onclick="toggleAppControl('vents')" id="btn-vents" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">OPEN 30%</button>
+                                            </div>
+                                            <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
+                                                <span>AI Diagnostics</span>
+                                                <span class="text-emerald-400 font-bold">Active</span>
+                                            </div>
                                         </div>
-                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
-                                            <p class="text-slate-400 text-[10px]">Soil Moisture</p>
-                                            <p class="text-base font-bold text-amber-400" id="phone-soil">42%</p>
+                                    </div>
+
+                                    <div class="bg-emerald-950/40 p-3 rounded-xl border border-emerald-900/60 text-emerald-300">
+                                        <div class="flex items-center space-x-1.5 font-bold mb-1">
+                                            <i class="fa-solid fa-robot" aria-hidden="true"></i>
+                                            <span>AI Assistant Note</span>
                                         </div>
-                                        <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
-                                            <p class="text-slate-400 text-[10px]">Solar Gen</p>
-                                            <p class="text-base font-bold text-yellow-400" id="phone-solar">1.8 kW</p>
+                                        <p class="text-[11px] text-emerald-200">Tomato crop health score optimal (98%). No pest signatures detected in sector 2.</p>
+                                    </div>
+                                </div>
+
+                                <!-- CAMERAS -->
+                                <div id="dash-screen-cameras" role="tabpanel" aria-labelledby="dash-tab-cameras" tabindex="-1" class="h-full overflow-y-auto text-xs focus:outline-none" hidden>
+                                    <!-- Camera list -->
+                                    <div id="dash-cam-list" class="p-4 space-y-3">
+                                        <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                            <span>Live Cameras</span>
+                                            <i class="fa-solid fa-video" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="flex items-center gap-3 bg-slate-900 px-3 py-2.5 rounded-lg border border-slate-800">
+                                            <span class="w-8 h-8 shrink-0 rounded-md bg-sage-800 text-sage-200 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-video"></i></span>
+                                            <span class="flex-grow min-w-0">
+                                                <span class="block font-semibold truncate">Zone A - Cam 01 &middot; Tomatoes</span>
+                                                <span class="flex items-center gap-1.5 text-[10px] text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>Online</span>
+                                            </span>
+                                            <button type="button" data-dash-open="cam1" onclick="dashOpenCamera('cam1')" aria-label="View Zone A - Cam 01, Tomatoes" class="shrink-0 px-2.5 py-1 rounded bg-sage-600 hover:bg-sage-500 text-white font-bold text-[10px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white">View</button>
+                                        </div>
+                                        <div class="flex items-center gap-3 bg-slate-900 px-3 py-2.5 rounded-lg border border-slate-800">
+                                            <span class="w-8 h-8 shrink-0 rounded-md bg-sage-800 text-sage-200 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-video"></i></span>
+                                            <span class="flex-grow min-w-0">
+                                                <span class="block font-semibold truncate">Zone B - Cam 02 &middot; Carrots</span>
+                                                <span class="flex items-center gap-1.5 text-[10px] text-emerald-400"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true"></span>Online</span>
+                                            </span>
+                                            <button type="button" data-dash-open="cam2" onclick="dashOpenCamera('cam2')" aria-label="View Zone B - Cam 02, Carrots" class="shrink-0 px-2.5 py-1 rounded bg-sage-600 hover:bg-sage-500 text-white font-bold text-[10px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white">View</button>
+                                        </div>
+                                        <p class="text-[10px] text-slate-500">Sample feeds. This page does not connect to live greenhouse cameras.</p>
+                                    </div>
+
+                                    <!-- Camera feed (hidden until a camera is opened) -->
+                                    <div id="dash-cam-feed" hidden>
+                                        <div class="flex items-center gap-2 px-3 py-2 border-b border-slate-800 bg-slate-900">
+                                            <button type="button" id="dash-cam-back" onclick="dashCloseCamera()" aria-label="Back to camera list" class="w-8 h-8 shrink-0 rounded-lg hover:bg-slate-800 text-slate-200 flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                                                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                                            </button>
+                                            <p class="font-bold text-sm truncate" id="dash-cam-label" aria-live="polite">Zone A - Cam 01 &middot; Tomatoes</p>
+                                        </div>
+                                        <div class="relative bg-slate-900">
+                                            <!-- src is set by dashShowCamera() so the GIFs only load when a feed is opened -->
+                                            <img id="dash-cam-img" alt="" width="480" height="300" decoding="async" class="block w-full h-auto aspect-[8/5] object-cover">
+                                            <div id="dash-cam-flash" class="pointer-events-none absolute inset-0 bg-white opacity-0 transition-opacity duration-150 motion-reduce:transition-none" aria-hidden="true"></div>
+                                        </div>
+                                        <div class="p-4 space-y-3">
+                                            <div class="flex gap-2" role="group" aria-label="Choose camera">
+                                                <button type="button" data-dash-cam="cam1" onclick="dashShowCamera('cam1')" aria-pressed="true" class="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-700 font-bold text-[11px] bg-sage-600 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white">Cam 01</button>
+                                                <button type="button" data-dash-cam="cam2" onclick="dashShowCamera('cam2')" aria-pressed="false" class="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-700 font-bold text-[11px] bg-slate-900 text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">Cam 02</button>
+                                            </div>
+                                            <p class="text-[11px] text-slate-300"><i class="fa-solid fa-brain mr-1 text-sage-400" aria-hidden="true"></i>Daily snapshots feed the AI Plant Health model</p>
+                                            <button type="button" onclick="dashTakeSnapshot()" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-slate-100 hover:bg-white text-slate-900 font-bold text-[11px] focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-400">
+                                                <i class="fa-solid fa-camera" aria-hidden="true"></i><span>Snapshot</span>
+                                            </button>
+                                            <p class="text-[10px] text-slate-500">Sample mockup feed, not a live greenhouse camera.</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Remote Controls -->
-                                <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 space-y-2">
-                                    <div class="flex justify-between items-center text-sage-300 font-semibold">
-                                        <span>Quick Actuators</span>
-                                        <i class="fa-solid fa-sliders"></i>
+                                <!-- ENERGY -->
+                                <div id="dash-screen-energy" role="tabpanel" aria-labelledby="dash-tab-energy" tabindex="-1" class="h-full overflow-y-auto p-4 space-y-3 text-xs focus:outline-none" hidden>
+                                    <div class="grid grid-cols-2 gap-1 p-1 rounded-lg bg-slate-900 border border-slate-800" role="group" aria-label="Energy view">
+                                        <button type="button" data-dash-energy="overview" onclick="dashShowEnergyPage('overview')" aria-pressed="true" class="px-2 py-1.5 rounded-md font-bold text-[11px] bg-sage-600 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white">Overview</button>
+                                        <button type="button" data-dash-energy="panels" onclick="dashShowEnergyPage('panels')" aria-pressed="false" class="px-2 py-1.5 rounded-md font-bold text-[11px] text-slate-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-white">Panels</button>
                                     </div>
-                                    <div class="space-y-2">
-                                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
-                                            <span>Irrigation Pump</span>
-                                            <button onclick="toggleAppControl('pump')" id="btn-pump" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">AUTO</button>
+
+                                    <!-- Energy overview page -->
+                                    <div id="dash-energy-overview" class="space-y-3">
+                                        <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80 text-center">
+                                            <p class="flex items-center justify-center gap-1.5 text-sage-300 font-semibold"><span class="w-2 h-2 rounded-full bg-yellow-400" aria-hidden="true"></span>Generating solar power</p>
+                                            <div class="mx-auto mt-3 w-36 h-36 p-1.5 rounded-full" style="background: conic-gradient(from 220deg, #facc15 0deg 255deg, #1e293b 255deg 360deg);">
+                                                <div class="w-full h-full rounded-full bg-slate-950 flex flex-col items-center justify-center">
+                                                    <i class="fa-solid fa-sun text-yellow-400 text-lg" aria-hidden="true"></i>
+                                                    <p class="mt-1 text-3xl font-extrabold tracking-tight leading-none">2.4 <span class="text-sm font-semibold text-slate-300 tracking-normal">kW</span></p>
+                                                    <p class="mt-1 text-[10px] text-slate-400">Solar generation now</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
-                                            <span>Roof Vents</span>
-                                            <button onclick="toggleAppControl('vents')" id="btn-vents" class="px-2.5 py-1 rounded bg-emerald-600 text-white font-bold text-[10px]">OPEN 30%</button>
+                                        <div class="grid grid-cols-2 gap-2">
+                                            <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                                <p class="text-[10px] text-slate-400">Greenhouse using</p>
+                                                <p class="text-base font-bold">1.4 kW</p>
+                                                <p class="text-[10px] text-emerald-400">Supplied by solar</p>
+                                            </div>
+                                            <div class="bg-slate-900 p-2.5 rounded-lg border border-slate-800">
+                                                <p class="text-[10px] text-slate-400">Battery level</p>
+                                                <p class="text-base font-bold">94%</p>
+                                                <p class="text-[10px] text-emerald-400">Charging &middot; 1.0 kW</p>
+                                                <div class="mt-1.5 h-1 rounded-full bg-slate-800 overflow-hidden" aria-hidden="true"><div class="h-full w-[94%] bg-emerald-400"></div></div>
+                                            </div>
                                         </div>
-                                        <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-lg border border-slate-800">
-                                            <span>AI Diagnostics</span>
-                                            <span class="text-emerald-400 font-bold">Active</span>
+                                        <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                                            <p class="font-semibold text-slate-200">Typical solar output <span class="font-normal text-slate-400">(kW)</span></p>
+                                            <svg viewBox="0 0 260 78" class="mt-2 w-full h-auto" role="img" aria-labelledby="dash-chart-title dash-chart-desc">
+                                                <title id="dash-chart-title">Illustrative daily solar generation</title>
+                                                <desc id="dash-chart-desc">Solar output rises from zero in the morning, peaks around midday, and returns to zero at sunset. This is a sample curve, not measured data.</desc>
+                                                <defs><linearGradient id="dash-chart-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#facc15" stop-opacity=".3"/><stop offset="100%" stop-color="#facc15" stop-opacity="0"/></linearGradient></defs>
+                                                <path d="M0 74H260M0 39H260M0 4H260" stroke="#1e293b" stroke-width="1"/>
+                                                <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74V78H0Z" fill="url(#dash-chart-fill)"/>
+                                                <path d="M0 74 20 73 40 65 60 48 80 27 100 12 120 5 140 10 160 25 180 43 200 60 220 71 240 74 260 74" fill="none" stroke="#facc15" stroke-width="2.5" stroke-linejoin="round"/>
+                                            </svg>
+                                            <div class="mt-1 flex justify-between text-[10px] text-slate-500" aria-hidden="true"><span>6 AM</span><span>Noon</span><span>6 PM</span></div>
+                                        </div>
+                                        <div class="bg-emerald-950/40 p-3 rounded-xl border border-emerald-900/60 flex gap-2 text-emerald-200">
+                                            <i class="fa-solid fa-leaf text-emerald-400 mt-0.5" aria-hidden="true"></i>
+                                            <p class="text-[11px]">Solar is meeting the greenhouse's current demand. Extra energy is charging the battery.</p>
                                         </div>
                                     </div>
+
+                                    <!-- Panel connections page -->
+                                    <div id="dash-energy-panels" class="space-y-3" hidden>
+                                        <div class="bg-sage-900/60 p-3.5 rounded-xl border border-sage-800/80">
+                                            <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                                <span>Panel Connections</span>
+                                                <i class="fa-solid fa-solar-panel" aria-hidden="true"></i>
+                                            </div>
+                                            <p class="text-[10px] text-slate-400">12-panel array</p>
+                                            <p class="mt-2 text-[10px] text-slate-400">Connection status</p>
+                                            <p class="font-bold text-sm">10 working &middot; 1 warning &middot; 1 offline</p>
+                                        </div>
+                                        <div id="dash-panel-grid" class="grid grid-cols-4 gap-2" role="group" aria-label="Solar panel connection status"></div>
+                                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-[10px] text-slate-300" aria-label="Panel status legend">
+                                            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400" aria-hidden="true"></span>Working</span>
+                                            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-amber-400" aria-hidden="true"></span>Warning</span>
+                                            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-400" aria-hidden="true"></span>Offline</span>
+                                        </div>
+                                        <div role="status" aria-live="polite">
+                                            <div id="dash-panel-status" hidden>
+                                                <div id="dash-panel-status-box" class="relative flex items-start gap-2 rounded-lg border px-3 py-2.5 pr-8 text-[11px] leading-snug">
+                                                    <i id="dash-panel-status-icon" class="fa-solid fa-circle-info mt-0.5" aria-hidden="true"></i>
+                                                    <span id="dash-panel-status-message"></span>
+                                                    <button type="button" onclick="dashDismissPanelStatus()" aria-label="Dismiss panel status" class="absolute top-1.5 right-1.5 w-6 h-6 rounded flex items-center justify-center hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p class="text-[10px] text-slate-500">Sample data - see the <button type="button" onclick="switchTab('solar')" class="font-semibold text-sage-300 underline underline-offset-2 hover:text-white">Solar Panels tab</button> for details</p>
                                 </div>
 
-                                <!-- AI Alerts Stream -->
-                                <div class="bg-emerald-950/40 p-3 rounded-xl border border-emerald-900/60 text-emerald-300">
-                                    <div class="flex items-center space-x-1.5 font-bold mb-1">
-                                        <i class="fa-solid fa-robot"></i>
-                                        <span>AI Assistant Note</span>
+                                <!-- ALERTS -->
+                                <div id="dash-screen-alerts" role="tabpanel" aria-labelledby="dash-tab-alerts" tabindex="-1" class="h-full overflow-y-auto p-4 space-y-3 text-xs focus:outline-none" hidden>
+                                    <div class="flex justify-between items-center text-sage-300 font-semibold">
+                                        <span>Recent Alerts</span>
+                                        <i class="fa-solid fa-bell" aria-hidden="true"></i>
                                     </div>
-                                    <p class="text-[11px] text-emerald-200">Tomato crop health score optimal (98%). No pest signatures detected in sector 2.</p>
+                                    <ul id="dash-alert-list" class="space-y-2">
+                                        <li class="flex gap-3 bg-slate-900 p-3 rounded-lg border border-slate-800 border-l-4 border-l-rose-500">
+                                            <span class="w-7 h-7 shrink-0 rounded-full bg-rose-500/15 text-rose-400 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-solar-panel"></i></span>
+                                            <div class="min-w-0">
+                                                <p class="font-semibold text-slate-100">Panel 9 offline</p>
+                                                <p class="mt-0.5 text-[10px] text-slate-400"><span class="font-bold text-rose-400">Critical</span> &middot; Solar &middot; 9:32 AM</p>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-3 bg-slate-900 p-3 rounded-lg border border-slate-800 border-l-4 border-l-amber-500">
+                                            <span class="w-7 h-7 shrink-0 rounded-full bg-amber-500/15 text-amber-400 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-leaf"></i></span>
+                                            <div class="min-w-0">
+                                                <p class="font-semibold text-slate-100">Possible leaf yellowing detected on Tomato 4</p>
+                                                <p class="mt-0.5 text-[10px] text-slate-400"><span class="font-bold text-amber-400">Warning</span> &middot; AI Plant Health &middot; 9:15 AM</p>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-3 bg-slate-900 p-3 rounded-lg border border-slate-800 border-l-4 border-l-sky-500">
+                                            <span class="w-7 h-7 shrink-0 rounded-full bg-sky-500/15 text-sky-400 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-wind"></i></span>
+                                            <div class="min-w-0">
+                                                <p class="font-semibold text-slate-100">Roof vents opened to 30% - temp above 27°C</p>
+                                                <p class="mt-0.5 text-[10px] text-slate-400"><span class="font-bold text-sky-400">Info</span> &middot; Climate &middot; 8:47 AM</p>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-3 bg-slate-900 p-3 rounded-lg border border-slate-800 border-l-4 border-l-sky-500">
+                                            <span class="w-7 h-7 shrink-0 rounded-full bg-sky-500/15 text-sky-400 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-droplet"></i></span>
+                                            <div class="min-w-0">
+                                                <p class="font-semibold text-slate-100">Soil moisture low in Bed 2 - irrigation started automatically</p>
+                                                <p class="mt-0.5 text-[10px] text-slate-400"><span class="font-bold text-sky-400">Info</span> &middot; Irrigation &middot; 8:20 AM</p>
+                                            </div>
+                                        </li>
+                                        <li class="flex gap-3 bg-slate-900 p-3 rounded-lg border border-slate-800 border-l-4 border-l-sky-500">
+                                            <span class="w-7 h-7 shrink-0 rounded-full bg-sky-500/15 text-sky-400 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-camera"></i></span>
+                                            <div class="min-w-0">
+                                                <p class="font-semibold text-slate-100">Daily snapshots saved for Zone A and Zone B</p>
+                                                <p class="mt-0.5 text-[10px] text-slate-400"><span class="font-bold text-sky-400">Info</span> &middot; Cameras &middot; 7:58 AM</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <p class="text-[10px] text-slate-500">Sample alerts. Use "Test Push Notification" above to add one.</p>
                                 </div>
+
+                                <!-- In-phone toast -->
+                                <div id="dash-phone-toast" role="status" aria-live="polite" class="pointer-events-none absolute left-4 right-4 bottom-4 rounded-xl bg-emerald-600 text-white text-xs font-bold px-3 py-2.5 shadow-lg flex items-center gap-2 opacity-0 translate-y-2 transition-all duration-200 motion-reduce:transition-none"></div>
+                            </div>
+
+                            <!-- Bottom tab bar -->
+                            <div id="dash-tabbar" role="tablist" aria-label="App screens" class="grid grid-cols-4 border-t border-slate-800 bg-slate-900">
+                                <button type="button" role="tab" id="dash-tab-home" data-dash-screen="home" aria-controls="dash-screen-home" aria-selected="true" tabindex="0" class="relative flex flex-col items-center gap-1 py-2.5 text-[10px] font-semibold text-sage-300 bg-sage-900/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-300">
+                                    <i class="fa-solid fa-house text-sm" aria-hidden="true"></i><span>Home</span>
+                                </button>
+                                <button type="button" role="tab" id="dash-tab-cameras" data-dash-screen="cameras" aria-controls="dash-screen-cameras" aria-selected="false" tabindex="-1" class="relative flex flex-col items-center gap-1 py-2.5 text-[10px] font-semibold text-slate-400 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-300">
+                                    <i class="fa-solid fa-video text-sm" aria-hidden="true"></i><span>Cameras</span>
+                                </button>
+                                <button type="button" role="tab" id="dash-tab-energy" data-dash-screen="energy" aria-controls="dash-screen-energy" aria-selected="false" tabindex="-1" class="relative flex flex-col items-center gap-1 py-2.5 text-[10px] font-semibold text-slate-400 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-300">
+                                    <i class="fa-solid fa-solar-panel text-sm" aria-hidden="true"></i><span>Energy</span>
+                                </button>
+                                <button type="button" role="tab" id="dash-tab-alerts" data-dash-screen="alerts" aria-controls="dash-screen-alerts" aria-selected="false" tabindex="-1" class="relative flex flex-col items-center gap-1 py-2.5 text-[10px] font-semibold text-slate-400 hover:text-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-sage-300">
+                                    <i class="fa-solid fa-bell text-sm" aria-hidden="true"></i><span>Alerts</span>
+                                    <span id="dash-alert-badge" class="absolute top-1.5 left-1/2 ml-1.5 min-w-[16px] h-4 px-1 rounded-full bg-rose-500 text-white text-[9px] font-bold leading-4 text-center" hidden></span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Dashboard Feature Description -->
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="bg-white p-8 rounded-2xl border border-sage-200 shadow-sm space-y-4">
-                        <h3 class="text-2xl font-bold text-sage-900">Dashboard Capabilities</h3>
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            The Mobile App Dashboard acts as the primary control nexus for operators, agricultural educators, and community members. Built with responsive cross-platform architecture, it aggregates multi-sensor telemetry in real-time and transmits push notifications directly to authorized users.
+                <!-- Phone captions (row 2 under the phone on lg+, directly under the phone when stacked) -->
+                <div class="flex flex-col items-center gap-3 lg:col-start-1 lg:row-start-2 lg:-mt-5">
+                    <p class="text-sm text-slate-600 text-center max-w-sm">Tap the tabs at the bottom of the phone to explore each screen.</p>
+                    <p class="text-xs text-slate-500 text-center max-w-sm">All readings are simulated. This page does not connect to live sensors, equipment, or cameras.</p>
+                </div>
+
+                <!-- ===== Overview ===== -->
+                <section class="bg-white p-6 sm:p-8 lg:p-6 xl:p-8 rounded-2xl border border-sage-200 shadow-sm flex flex-col gap-6 lg:gap-4 xl:gap-6 lg:h-full lg:justify-between lg:col-start-2 lg:col-span-2 lg:row-start-1" aria-labelledby="dash-overview-heading">
+                    <div class="space-y-4">
+                        <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Overview</span>
+                        <h2 id="dash-overview-heading" class="text-3xl font-extrabold text-sage-900">The Whole Greenhouse in One App</h2>
+                        <p class="text-slate-600 leading-relaxed">
+                            The mobile app is the one place where growers, educators, and community members check on the whole greenhouse: plant health, watering, energy, and live cameras.
+                            It is an Android app (Android 10 and newer) with 2 kinds of accounts. Operators can control equipment, while visitors from school and community groups get view-only access.
                         </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
-                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
-                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-bolt text-sage-600 mr-2"></i>Real-Time Telemetry</h4>
-                                <p class="text-xs text-slate-600">Monitors temperature, humidity, soil moisture, solar output, and tank water levels continuously.</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
-                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-hand-pointer text-sage-600 mr-2"></i>Remote Override</h4>
-                                <p class="text-xs text-slate-600">Allows manual or automated toggling of irrigation valves, roof vents, and LED supplemental lighting.</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
-                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-triangle-exclamation text-sage-600 mr-2"></i>Instant Push Alerts</h4>
-                                <p class="text-xs text-slate-600">Immediate warnings sent to stakeholders when thresholds (e.g., soil moisture &lt; 30%) are breached.</p>
-                            </div>
-                            <div class="p-4 rounded-xl bg-sage-50 border border-sage-200 space-y-1">
-                                <h4 class="font-bold text-sage-800 text-sm"><i class="fa-solid fa-graduation-cap text-sage-600 mr-2"></i>STEM Learning Mode</h4>
-                                <p class="text-xs text-slate-600">Simplified educational interface view designed specifically for student and community workshops.</p>
-                            </div>
+                        <ul class="flex flex-wrap gap-2 pt-1" aria-label="Key facts">
+                            <li class="inline-flex items-center gap-2 rounded-full bg-sage-50 border border-sage-200 px-3 py-1 text-xs font-bold text-sage-800"><i class="fa-brands fa-android text-sage-600" aria-hidden="true"></i>Android 10+</li>
+                            <li class="inline-flex items-center gap-2 rounded-full bg-sage-50 border border-sage-200 px-3 py-1 text-xs font-bold text-sage-800"><i class="fa-solid fa-user-gear text-sage-600" aria-hidden="true"></i>Operators: control</li>
+                            <li class="inline-flex items-center gap-2 rounded-full bg-sage-50 border border-sage-200 px-3 py-1 text-xs font-bold text-sage-800"><i class="fa-solid fa-eye text-sage-600" aria-hidden="true"></i>Visitors: view-only</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 id="dash-inside-heading" class="text-xs font-bold uppercase tracking-widest text-slate-500">Inside the app</h3>
+                        <div class="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3" role="group" aria-labelledby="dash-inside-heading">
+                            <button type="button" data-dash-goto="home" onclick="dashShowScreen('home'); dashRevealPhone()" aria-controls="dash-screen-home" aria-pressed="true" class="text-left flex items-start gap-3 rounded-xl border p-3.5 lg:p-3 xl:p-3.5 transition-colors border-sage-500 bg-sage-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500">
+                                <span class="w-9 h-9 shrink-0 rounded-lg bg-white border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-house"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Home</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Live readings, system status, and quick controls.</span></span>
+                            </button>
+                            <button type="button" data-dash-goto="cameras" onclick="dashShowScreen('cameras'); dashRevealPhone()" aria-controls="dash-screen-cameras" aria-pressed="false" class="text-left flex items-start gap-3 rounded-xl border p-3.5 lg:p-3 xl:p-3.5 transition-colors border-sage-200 bg-sage-50 hover:border-sage-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500">
+                                <span class="w-9 h-9 shrink-0 rounded-lg bg-white border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-video"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Cameras</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Live feeds from Zone A and Zone B, plus snapshots.</span></span>
+                            </button>
+                            <button type="button" data-dash-goto="energy" onclick="dashShowScreen('energy'); dashRevealPhone()" aria-controls="dash-screen-energy" aria-pressed="false" class="text-left flex items-start gap-3 rounded-xl border p-3.5 lg:p-3 xl:p-3.5 transition-colors border-sage-200 bg-sage-50 hover:border-sage-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500">
+                                <span class="w-9 h-9 shrink-0 rounded-lg bg-white border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-solar-panel"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Energy</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Solar output, battery level, and panel status.</span></span>
+                            </button>
+                            <button type="button" data-dash-goto="alerts" onclick="dashShowScreen('alerts'); dashRevealPhone()" aria-controls="dash-screen-alerts" aria-pressed="false" class="text-left flex items-start gap-3 rounded-xl border p-3.5 lg:p-3 xl:p-3.5 transition-colors border-sage-200 bg-sage-50 hover:border-sage-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-500">
+                                <span class="w-9 h-9 shrink-0 rounded-lg bg-white border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-bell"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Alerts</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Warnings from irrigation, plant health, and solar.</span></span>
+                            </button>
                         </div>
                     </div>
-                </div>
+
+                    <div class="pt-5 lg:pt-4 xl:pt-5 border-t border-sage-200">
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-slate-500">Who it's for</h3>
+                        <ul class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-3 xl:gap-4">
+                            <li class="flex items-start gap-3">
+                                <span class="w-9 h-9 shrink-0 rounded-full bg-sage-50 border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-seedling"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Growers</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Check and adjust the greenhouse from anywhere.</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-9 h-9 shrink-0 rounded-full bg-sage-50 border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-chalkboard-user"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Educators</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Use live data and Learning Mode in lessons.</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="w-9 h-9 shrink-0 rounded-full bg-sage-50 border border-sage-200 text-sage-700 flex items-center justify-center" aria-hidden="true"><i class="fa-solid fa-people-group"></i></span>
+                                <span><span class="block text-sm font-bold text-sage-900">Community members</span><span class="block mt-0.5 text-xs leading-snug text-slate-600">Follow plant growth with view-only access.</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
             </div>
+
+            <!-- ===== Functions ===== -->
+            <section class="space-y-6" aria-labelledby="dash-functions-heading">
+                <div class="max-w-3xl">
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Functions</span>
+                    <h2 id="dash-functions-heading" class="mt-2 text-3xl font-extrabold text-sage-900">What the App Does</h2>
+                    <p class="mt-2 text-slate-600">Six core functions bring sensor data, controls, alerts, cameras, and energy together in one place.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <article class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl" aria-hidden="true"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3 class="mt-4 text-lg font-bold text-sage-900">Live Telemetry</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Temperature, humidity, soil moisture, and solar output in one view. Each reading shows a "last updated" time and an offline warning if a sensor stops reporting.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl" aria-hidden="true"><i class="fa-solid fa-sliders"></i></div>
+                        <h3 class="mt-4 text-lg font-bold text-sage-900">Remote Controls</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Operators can switch irrigation, vents, and lighting between Auto and manual. Each command needs a confirmation, shows when the greenhouse controller acknowledges it, and stays within safety limits. A physical manual override remains in the greenhouse.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl" aria-hidden="true"><i class="fa-solid fa-bell"></i></div>
+                        <h3 class="mt-4 text-lg font-bold text-sage-900">Smart Alerts</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Push notifications for problems such as dry soil, high temperature, possible plant disease, or an offline panel. Alerts have warning and critical levels, and critical alerts also go out by backup email.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl" aria-hidden="true"><i class="fa-solid fa-video"></i></div>
+                        <h3 class="mt-4 text-lg font-bold text-sage-900">Live Cameras</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">View each zone's camera on demand and save snapshots.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl" aria-hidden="true"><i class="fa-solid fa-solar-panel"></i></div>
+                        <h3 class="mt-4 text-lg font-bold text-sage-900">Energy Monitoring</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Solar generation, greenhouse usage, battery level, and panel status, from the Solar system.</p>
+                    </article>
+                    <article class="bg-white rounded-2xl border border-sage-200 shadow-sm p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg">
+                        <div class="w-12 h-12 rounded-xl bg-sage-100 text-sage-700 flex items-center justify-center text-xl" aria-hidden="true"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <h3 class="mt-4 text-lg font-bold text-sage-900">Roles and Learning Mode</h3>
+                        <p class="mt-2 text-sm leading-relaxed text-slate-600">Role-based access (operator vs. visitor), plus a simplified STEM Learning Mode for student and community workshops.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ===== How data flows ===== -->
+            <section class="rounded-2xl border border-sage-200 bg-white p-5 sm:p-7 shadow-sm" aria-labelledby="dash-flow-heading">
+                <h3 id="dash-flow-heading" class="text-sm font-bold text-sage-900 text-center mb-5">How data flows</h3>
+                <ol class="grid grid-cols-1 sm:grid-cols-7 items-center gap-3 text-center">
+                    <li class="rounded-xl bg-sage-50 p-4">
+                        <i class="fa-solid fa-satellite-dish text-2xl text-sage-600" aria-hidden="true"></i>
+                        <p class="mt-2 text-sm font-bold text-sage-900">Sensors and Cameras</p>
+                    </li>
+                    <li aria-hidden="true"><i class="fa-solid fa-arrow-right rotate-90 sm:rotate-0 text-sage-400"></i></li>
+                    <li class="rounded-xl bg-sage-50 p-4">
+                        <i class="fa-solid fa-microchip text-2xl text-sage-600" aria-hidden="true"></i>
+                        <p class="mt-2 text-sm font-bold text-sage-900">Greenhouse Controller</p>
+                    </li>
+                    <li aria-hidden="true"><i class="fa-solid fa-arrow-right rotate-90 sm:rotate-0 text-sage-400"></i></li>
+                    <li class="rounded-xl bg-sage-50 p-4">
+                        <i class="fa-solid fa-cloud text-2xl text-sage-600" aria-hidden="true"></i>
+                        <p class="mt-2 text-sm font-bold text-sage-900">Cloud Database</p>
+                    </li>
+                    <li aria-hidden="true"><i class="fa-solid fa-arrow-right rotate-90 sm:rotate-0 text-sage-400"></i></li>
+                    <li class="rounded-xl bg-sage-50 p-4">
+                        <i class="fa-solid fa-mobile-screen-button text-2xl text-sage-600" aria-hidden="true"></i>
+                        <p class="mt-2 text-sm font-bold text-sage-900">Mobile App</p>
+                    </li>
+                </ol>
+                <p class="mt-5 text-xs text-slate-500 text-center">This is the proposed data flow. All readings on this page are simulated; it does not connect to live sensors or cameras.</p>
+            </section>
+
+            <!-- ===== FAQ ===== -->
+            <section class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-1">
+                    <span class="text-xs font-bold text-sage-600 uppercase tracking-widest">Good to know</span>
+                    <h2 class="mt-2 text-3xl font-extrabold text-sage-900">Frequently Asked Questions</h2>
+                    <p class="mt-2 text-slate-600">Answers reflect the project design and the functionality currently shown in this presentation.</p>
+                </div>
+                <div id="dash-faq" class="lg:col-span-2 space-y-3 scroll-mt-32">
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Do I need to be at the greenhouse to use the app?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">No. The app works anywhere with an internet connection, so growers can check conditions, view cameras, and adjust equipment from home or school.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">What's the difference between an operator and a visitor account?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Operators can view everything and control equipment such as irrigation and vents. Visitor accounts, used by school and community groups, can view data, cameras, and alerts but can't change any settings.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">What happens if I tap a control by mistake?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Every remote command asks for confirmation first, and the app shows when the greenhouse controller has received it. Built-in safety limits block unsafe settings, such as running irrigation for too long.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">How quickly will I be notified about a problem?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Alerts are sent as push notifications as soon as a reading crosses a set threshold or the AI flags a plant. Critical alerts also go out by email in case a notification is missed.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">What happens if the greenhouse loses internet?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">The app shows the last known readings with an "offline" warning so no one acts on outdated data. The irrigation, vents, and other systems keep running on their local automatic settings, and the manual override still works.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Are the camera feeds private?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">Yes. Cameras can only be viewed by logged-in users, and all connections are encrypted. The feeds on this page are sample mockups.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Does the app work on iPhone?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">The first release targets Android 10 and newer. An iPhone version could be added in a later phase.</p>
+                    </details>
+                    <details class="group bg-white rounded-xl border border-sage-200 shadow-sm">
+                        <summary class="cursor-pointer list-none p-5 font-semibold text-sage-900 flex items-center justify-between gap-4">Where does the app's data come from?<i class="fa-solid fa-chevron-down text-sage-500 transition-transform group-open:rotate-180" aria-hidden="true"></i></summary>
+                        <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600">The app combines data from the other 3 systems: soil moisture and watering from Automated Irrigation, plant health scores and photos from AI Plant Health, and generation and battery levels from Solar Panels.</p>
+                    </details>
+                </div>
+            </section>
         </div>
 
         <!-- ================= 3. AUTOMATED IRRIGATION TAB ================= -->
@@ -2422,6 +2792,7 @@
 
         function triggerSimulatedAlert() {
             showToast('Push Notification Sent: Soil moisture nominal in Sector A.');
+            dashAddAlert('Test notification: soil moisture nominal in Sector A', 'info', 'Irrigation', 'fa-droplet');
         }
 
         function toggleAppControl(control) {
@@ -2772,6 +3143,244 @@
         }
 
         initializeRiskRegister();
+
+        // ================= Mobile App Dashboard: multi-screen phone mockup =================
+        // All IDs and functions here use the dash- / dash prefix so they never collide with the Solar tab.
+        const dashScreens = ['home', 'cameras', 'energy', 'alerts'];
+        let dashUnreadAlerts = 0;
+
+        function dashShowScreen(screen, focusTab = false) {
+            dashScreens.forEach(name => {
+                const isActive = name === screen;
+                const tab = document.getElementById('dash-tab-' + name);
+                document.getElementById('dash-screen-' + name).hidden = !isActive;
+                tab.setAttribute('aria-selected', String(isActive));
+                tab.tabIndex = isActive ? 0 : -1;
+                tab.classList.toggle('text-sage-300', isActive);
+                tab.classList.toggle('bg-sage-900/60', isActive);
+                tab.classList.toggle('text-slate-400', !isActive);
+                tab.classList.toggle('hover:text-slate-200', !isActive);
+                if (isActive && focusTab) tab.focus();
+            });
+            // Keep the Overview card's "Inside the app" tiles in sync with the phone.
+            document.querySelectorAll('[data-dash-goto]').forEach(tile => {
+                const isActive = tile.dataset.dashGoto === screen;
+                tile.setAttribute('aria-pressed', String(isActive));
+                tile.classList.toggle('border-sage-500', isActive);
+                tile.classList.toggle('bg-sage-100', isActive);
+                tile.classList.toggle('border-sage-200', !isActive);
+                tile.classList.toggle('bg-sage-50', !isActive);
+                tile.classList.toggle('hover:border-sage-400', !isActive);
+            });
+            if (screen !== 'cameras') dashCloseCamera(false);
+            if (screen === 'alerts') {
+                dashUnreadAlerts = 0;
+                document.getElementById('dash-alert-badge').hidden = true;
+                document.getElementById('dash-tab-alerts').removeAttribute('aria-label');
+            }
+            dashHidePhoneToast();
+        }
+
+        // When the phone is off screen (e.g. stacked above the Overview card on mobile), bring it into view.
+        function dashRevealPhone() {
+            const rect = document.getElementById('dash-phone').getBoundingClientRect();
+            if (rect.bottom < 160 || rect.top > window.innerHeight - 160) {
+                document.getElementById('dash-phone').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        const dashTabbar = document.getElementById('dash-tabbar');
+        dashTabbar.addEventListener('click', event => {
+            const tab = event.target.closest('[data-dash-screen]');
+            if (tab) dashShowScreen(tab.dataset.dashScreen);
+        });
+        dashTabbar.addEventListener('keydown', event => {
+            const current = dashScreens.indexOf(document.activeElement?.dataset?.dashScreen);
+            if (current === -1) return;
+            let next = null;
+            if (event.key === 'ArrowRight') next = (current + 1) % dashScreens.length;
+            else if (event.key === 'ArrowLeft') next = (current - 1 + dashScreens.length) % dashScreens.length;
+            else if (event.key === 'Home') next = 0;
+            else if (event.key === 'End') next = dashScreens.length - 1;
+            if (next !== null) {
+                event.preventDefault();
+                dashShowScreen(dashScreens[next], true);
+            }
+        });
+
+        // ----- In-phone toast -----
+        let dashToastTimer;
+        function dashShowPhoneToast(message) {
+            const toast = document.getElementById('dash-phone-toast');
+            clearTimeout(dashToastTimer);
+            toast.innerHTML = '<i class="fa-solid fa-circle-check" aria-hidden="true"></i><span></span>';
+            toast.querySelector('span').textContent = message;
+            toast.classList.remove('opacity-0', 'translate-y-2');
+            dashToastTimer = setTimeout(dashHidePhoneToast, 2200);
+        }
+        function dashHidePhoneToast() {
+            const toast = document.getElementById('dash-phone-toast');
+            clearTimeout(dashToastTimer);
+            toast.classList.add('opacity-0', 'translate-y-2');
+            toast.textContent = '';
+        }
+
+        // ----- Cameras screen -----
+        const dashCameras = {
+            cam1: { label: 'Zone A - Cam 01 · Tomatoes', src: 'assets/garden-live-cam.gif', alt: 'Sample camera feed of the Zone A tomato bed, greyscale with a LIVE badge' },
+            cam2: { label: 'Zone B - Cam 02 · Carrots', src: 'assets/carrot-live-cam.gif', alt: 'Sample camera feed of the Zone B carrot bed, greyscale with a LIVE badge' }
+        };
+        let dashActiveCamera = 'cam1';
+
+        function dashShowCamera(camId) {
+            const camera = dashCameras[camId];
+            if (!camera) return;
+            dashActiveCamera = camId;
+            const img = document.getElementById('dash-cam-img');
+            // Lazy-load: the GIF src is only set once a feed is opened.
+            if (img.getAttribute('src') !== camera.src) img.src = camera.src;
+            img.alt = camera.alt;
+            document.getElementById('dash-cam-label').textContent = camera.label;
+            document.querySelectorAll('[data-dash-cam]').forEach(button => {
+                const isActive = button.dataset.dashCam === camId;
+                button.setAttribute('aria-pressed', String(isActive));
+                button.classList.toggle('bg-sage-600', isActive);
+                button.classList.toggle('text-white', isActive);
+                button.classList.toggle('bg-slate-900', !isActive);
+                button.classList.toggle('text-slate-300', !isActive);
+            });
+        }
+
+        function dashOpenCamera(camId) {
+            dashShowCamera(camId);
+            document.getElementById('dash-cam-list').hidden = true;
+            document.getElementById('dash-cam-feed').hidden = false;
+            document.getElementById('dash-screen-cameras').scrollTop = 0;
+            document.getElementById('dash-cam-back').focus({ preventScroll: true });
+        }
+
+        function dashCloseCamera(restoreFocus = true) {
+            const feed = document.getElementById('dash-cam-feed');
+            if (feed.hidden) return;
+            feed.hidden = true;
+            document.getElementById('dash-cam-list').hidden = false;
+            // Stop decoding the GIF while no feed is open.
+            document.getElementById('dash-cam-img').removeAttribute('src');
+            dashHidePhoneToast();
+            if (restoreFocus) {
+                const rowButton = document.querySelector(`[data-dash-open="${dashActiveCamera}"]`);
+                if (rowButton) rowButton.focus({ preventScroll: true });
+            }
+        }
+
+        function dashTakeSnapshot() {
+            const flash = document.getElementById('dash-cam-flash');
+            flash.classList.replace('opacity-0', 'opacity-90');
+            setTimeout(() => flash.classList.replace('opacity-90', 'opacity-0'), 150);
+            dashShowPhoneToast('Snapshot saved');
+        }
+
+        document.getElementById('dash-cam-feed').addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                dashCloseCamera();
+            }
+        });
+
+        // ----- Energy screen (dashboard copy of the Solar tab's phone pages) -----
+        function dashShowEnergyPage(page) {
+            const showPanels = page === 'panels';
+            document.getElementById('dash-energy-overview').hidden = showPanels;
+            document.getElementById('dash-energy-panels').hidden = !showPanels;
+            document.querySelectorAll('[data-dash-energy]').forEach(button => {
+                const isActive = button.dataset.dashEnergy === page;
+                button.setAttribute('aria-pressed', String(isActive));
+                button.classList.toggle('bg-sage-600', isActive);
+                button.classList.toggle('text-white', isActive);
+                button.classList.toggle('text-slate-300', !isActive);
+            });
+            if (!showPanels) dashDismissPanelStatus();
+        }
+
+        const dashPanelStyles = {
+            working: { tile: 'border-emerald-700 bg-emerald-950/40 text-emerald-300', box: 'border-emerald-700 bg-emerald-950/70 text-emerald-100', icon: 'fa-solid fa-circle-check', label: 'working' },
+            warning: { tile: 'border-amber-600 bg-amber-950/50 text-amber-300', box: 'border-amber-600 bg-amber-950/80 text-amber-100', icon: 'fa-solid fa-triangle-exclamation', label: 'warning' },
+            offline: { tile: 'border-rose-600 bg-rose-950/50 text-rose-300', box: 'border-rose-600 bg-rose-950/80 text-rose-100', icon: 'fa-solid fa-circle-xmark', label: 'not working' }
+        };
+        // Same sample statuses and messages as the Solar tab (Panel 6 warning, Panel 9 offline).
+        const dashPanelMessages = {
+            working: name => `${name}: Working normally. Connection is stable.`,
+            warning: name => `${name}: Warning - intermittent connection; inspect the panel and wiring.`,
+            offline: name => `${name}: Not working - no connection detected.`
+        };
+
+        function dashRenderPanelGrid() {
+            const grid = document.getElementById('dash-panel-grid');
+            grid.innerHTML = Array.from({ length: 12 }, (_, i) => {
+                const number = i + 1;
+                const status = number === 6 ? 'warning' : number === 9 ? 'offline' : 'working';
+                const style = dashPanelStyles[status];
+                return `<button type="button" data-status="${status}" data-panel-name="Panel ${number}" aria-label="Panel ${number}, ${style.label}" aria-pressed="false" onclick="dashShowPanelStatus(this)" class="flex flex-col items-center gap-1 rounded-lg border py-2 text-[10px] font-bold ${style.tile} focus:outline-none focus-visible:ring-2 focus-visible:ring-white"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i><span>${String(number).padStart(2, '0')}</span></button>`;
+            }).join('');
+        }
+
+        function dashShowPanelStatus(tile) {
+            const status = tile.dataset.status;
+            const style = dashPanelStyles[status];
+            const box = document.getElementById('dash-panel-status-box');
+            box.className = `relative flex items-start gap-2 rounded-lg border px-3 py-2.5 pr-8 text-[11px] leading-snug ${style.box}`;
+            document.getElementById('dash-panel-status-icon').className = `${style.icon} mt-0.5`;
+            document.getElementById('dash-panel-status-message').textContent = dashPanelMessages[status](tile.dataset.panelName);
+            document.getElementById('dash-panel-status').hidden = false;
+            document.querySelectorAll('#dash-panel-grid [data-status]').forEach(other => {
+                const isSelected = other === tile;
+                other.setAttribute('aria-pressed', String(isSelected));
+                other.classList.toggle('ring-2', isSelected);
+                other.classList.toggle('ring-white', isSelected);
+            });
+        }
+
+        function dashDismissPanelStatus() {
+            document.getElementById('dash-panel-status').hidden = true;
+            document.getElementById('dash-panel-status-message').textContent = '';
+            document.querySelectorAll('#dash-panel-grid [data-status]').forEach(tile => {
+                tile.setAttribute('aria-pressed', 'false');
+                tile.classList.remove('ring-2', 'ring-white');
+            });
+        }
+
+        // ----- Alerts screen -----
+        const dashAlertStyles = {
+            info: { border: 'border-l-sky-500', icon: 'bg-sky-500/15 text-sky-400', text: 'text-sky-400', label: 'Info' },
+            warning: { border: 'border-l-amber-500', icon: 'bg-amber-500/15 text-amber-400', text: 'text-amber-400', label: 'Warning' },
+            critical: { border: 'border-l-rose-500', icon: 'bg-rose-500/15 text-rose-400', text: 'text-rose-400', label: 'Critical' }
+        };
+
+        function dashAddAlert(message, severity = 'info', source = 'System', icon = 'fa-bell') {
+            const style = dashAlertStyles[severity] || dashAlertStyles.info;
+            const item = document.createElement('li');
+            item.className = `flex gap-3 bg-slate-900 p-3 rounded-lg border border-slate-800 border-l-4 ${style.border}`;
+            item.innerHTML = `
+                <span class="w-7 h-7 shrink-0 rounded-full ${style.icon} flex items-center justify-center" aria-hidden="true"><i class="fa-solid ${icon}"></i></span>
+                <div class="min-w-0">
+                    <p class="font-semibold text-slate-100"></p>
+                    <p class="mt-0.5 text-[10px] text-slate-400"><span class="font-bold ${style.text}">${style.label}</span> &middot; <span></span> &middot; Just now</p>
+                </div>`;
+            item.querySelector('p').textContent = message;
+            item.querySelector('p + p span:last-child').textContent = source;
+            document.getElementById('dash-alert-list').prepend(item);
+
+            const alertsOpen = !document.getElementById('dash-screen-alerts').hidden;
+            if (!alertsOpen) {
+                dashUnreadAlerts += 1;
+                const badge = document.getElementById('dash-alert-badge');
+                badge.textContent = String(dashUnreadAlerts);
+                badge.hidden = false;
+                document.getElementById('dash-tab-alerts').setAttribute('aria-label', `Alerts, ${dashUnreadAlerts} new`);
+            }
+        }
+
+        dashRenderPanelGrid();
     </script>
 </body>
 </html>
